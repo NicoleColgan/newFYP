@@ -5,7 +5,23 @@ body {
   height: 100vh;
   margin: 0;
 }
-
-.loginForm{
-  background-color: white;
+.box {
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr)
+}
+.column{
+  text-align: center;
+  height: auto;
+}
+.loginComponent {
+  
+}
+.submitRegistrationButton{
+  background-color: #4da6ff;
+  color: white;
+  padding: 5px 66px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
