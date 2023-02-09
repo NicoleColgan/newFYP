@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+
+import "./App.css";
+import SignUp from "./component/SignUp";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import SignIn from "./component/SignIn";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid className="box " style={{ width: "100%", justifyContent: "flex-end" }}>
+    <Col md={5} sm={5} className="column justify-content-center d-flex">
+      <div className="">
+        <h1 
+        style={{
+          color: "#1a8cff",
+          fontSize: "60px",
+          fontWeight: 500
+          }}>THE GUT DIARY</h1>
+        <h4 
+        style={{
+          color: "#1a8cff",
+          fontWeight: 500}}>Information about the app and our goals go here</h4>
+      </div>        
+    </Col>
+    <Col md={3} sm={3} className="column">
+      <SignUp />
+    </Col>
+</Container>
   );
 }
 
