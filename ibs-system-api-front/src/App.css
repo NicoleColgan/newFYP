@@ -5,17 +5,17 @@ body {
   height: 100vh;
   margin: 0;
 }
+
 .box {
   display: flex;
   display: grid;
-  grid-template-columns: repeat(2, 1fr)
+  /*might want to change this to account for smaller screens*/
+  grid-template-columns: 65% 35%
 }
 .column{
   text-align: center;
-  height: auto;
-}
-.loginComponent {
-  
+  height: 100%;
+  padding-top: 20%;
 }
 .submitRegistrationButton{
   background-color: #4da6ff;
