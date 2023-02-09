@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useState } from 'react'
+import UserService from "../services/UserService";
 
 function SignUp() {
 
@@ -51,10 +52,24 @@ function SignUp() {
       //eventually set a pop up
       setError({...error,errorCode: 1,errorMessage: "Please fill out all fields"});
     }
-    
+    //-------------------------------------------------------------------
+
+
     //then check if the email is already in the database
+
+    //-------------------------------------------------------------------
     
     //if its not already in the db, and its in the correct format, and password is ok, then add this user to the db
+    if(error.errorCode===0){
+      //everything went ok
+      UserService.saveUser(newUser).then((response) => {
+        console.log("response");
+        console.log(response);
+        console.log(newUser);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
   };
 
   return (
