@@ -49,14 +49,23 @@ function SignUp() {
       //basic password auth checks that its 5 characters long
       setError({...error, errorCode: 3, errorMessage: "Password must be longer than 5 characters"})
     }
-    else {  //everything went ok, so save data
-      UserService.saveUser(newUser).then((response) => {
-        console.log("response");
-        console.log(response);
-        console.log(newUser);
-      }).catch((err) => {
-        console.log(err);
-      });
+    else {  //everything went ok - but still need to check if user is already in the db
+      UserService.checkUserExists(newUser.email).then(data => {
+        console.log(data);
+        if(data){
+          //user is already in db - so we dont want to add them
+          setError({...error, errorCode: 4, errorMessage: "Email Address already registered"})
+        }
+        else{ //able to save user to db
+            UserService.saveUser(newUser).then((response) => {
+          console.log("response");
+          console.log(response);
+          console.log(newUser);
+        }).catch((err) => {
+          console.log(err);
+        });
+          }
+        });
     }
     //-------------------------------------------------------------------
 
@@ -66,6 +75,16 @@ function SignUp() {
     //-------------------------------------------------------------------
     
     //if its not already in the db, and its in the correct format, and password is ok, then add this user to the db
+    UserService.checkUserExists(newUser.email).then(data => {
+      console.log(data);
+    });
+    
+    // if(booleanRsp===true){
+    //   console.log("response\n");
+    // }
+    // else{
+    //   console.log("response\n");
+    // }
     console.log("error code: ",error.errorCode);
   };
 

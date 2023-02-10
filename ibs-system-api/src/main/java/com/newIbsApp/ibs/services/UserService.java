@@ -1,6 +1,7 @@
 package com.newIbsApp.ibs.services;
 
 import com.newIbsApp.ibs.model.User;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface UserService {
 
     User getUserById(Long id);
 
+    User getUserByEmail(String email);
 }

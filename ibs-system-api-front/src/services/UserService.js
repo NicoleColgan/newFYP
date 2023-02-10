@@ -9,5 +9,28 @@ class UserService {
         //post request to url to save entire user
         return axios.post(USER_API_URL, newUser);
     }
+
+    async checkUserExists(email) {
+        try {
+          const response = await axios.get(USER_API_URL + "/email/" + email);
+          if (response.status === 200) {
+            console.log("User already in db");
+            return true;
+          } else if (response.status === 400) {
+            console.log("User not found in db");
+            return false;
+          } else {
+            console.log("Some other error occured: ", response.status);
+            return false;
+          }
+        } catch (error) {
+          console.error(error);
+          return false;
+        }
+      }
+      
+    getUsers(){
+        return axios.get(USER_API_URL);
+    }
 }
 export default new UserService();
