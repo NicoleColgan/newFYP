@@ -28,6 +28,22 @@ class UserService {
           return false;
         }
       }
+
+      async authenticateUser (email, password){
+        try {
+            const response = await axios.get(USER_API_URL + "/auth/email/" + email+"/password/"+ password);
+            if (response.status === 200) {
+              console.log("Authenticated");
+              return true;
+            } else {
+              console.log("Some other error occured: ", response.status);
+              return false;
+            }
+          } catch (error) {
+            console.error(error);
+            return false;
+          }
+      }
       
     getUsers(){
         return axios.get(USER_API_URL);

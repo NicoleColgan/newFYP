@@ -59,5 +59,14 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/users/auth/email/{email}/password/{password}")
+    public ResponseEntity<User> authenticateUser(@PathVariable String email, @PathVariable String password) {
+        User user = null;
+        user = userService.authenticateUser(email, password);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(user);
+    }
 
 }

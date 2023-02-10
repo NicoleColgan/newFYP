@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useState } from 'react'
+import UserService from "../services/UserService";
 
 function SignIn() {
     const [user, setUser] = useState({
@@ -27,25 +28,36 @@ function SignIn() {
       function handleSubmit(e){
         //prevent page from refreshing and messing up data (which might affect the db)
         e.preventDefault();
-        //this function should first check that the email is in the correct format
-        
-        //check everything isnt null
+
+
+        //reset error
+        setError({ errorCode: 0, errorMessage: "" });
+
+        //check both arent null
         if(user.email!=="" && user.password!==""){
+
+          //make sure email is in correct format
           //regular expression pattern for a valid email address
           const pattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-          if(!user.email.match(pattern)){
-            setError({...error,errorCode: 2,errorMessage: "Invalid email format"});
-          } else {
-            setError({...error,errorCode: 0,errorMessage: null});
+          if(!user.email.match(pattern)){ //do not proceed if email is invalid
+            setError({errorCode: 2,errorMessage: "Invalid email format"});
           }
-        } else {
-          //eventually set a pop up
-          setError({...error,errorCode: 1,errorMessage: "Please fill out all fields"});
+          else {
+            //everything is fine, check against values in db
+            UserService.authenticateUser(user.email,user.password).then(data => {
+              console.log("User");
+              console.log(data);
+              if(data===false){
+                setError({errorCode: 2,errorMessage: "Incorrect username or password"});
+              } else {
+                setError({errorCode: 0, errorMessage: "Logged in"});
+              }
+            })
+          }
+        } 
+        else {
+          setError({errorCode: 1, errorMessage: "Please fill out all fields"})
         }
-        
-        //then check if the email is already in the database
-        //basic password auth checks that its 5 characters long
-        //if its not already in the db, and its in the correct format, and password is ok, then add this user to the db
       };
     
       return (
@@ -119,15 +131,10 @@ function SignIn() {
             className="px-6">
             
     <button className="submitRegistrationButton" style={{borderRadius: "25px"}} type="submit">Submit</button>
-          </div>
-          {error.errorCode===1 ? <p
+          </div><p
           style={{color: "#ff0000",
           paddingRight: "50px",
-          fontSize: "12px"}}>Please fill out all fields</p> : null}
-          {error.errorCode===2 ? <p
-          style={{color: "#ff0000",
-          paddingRight: "50px",
-          fontSize: "12px"}}>Invalid email</p> : null}
+          fontSize: "12px"}}>{error.errorMessage}</p>
           </form>
         </div>
       );
