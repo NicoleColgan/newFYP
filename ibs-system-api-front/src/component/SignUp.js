@@ -34,23 +34,29 @@ function SignUp() {
     //prevent page from refreshing and messing up data (which might affect the db)
     e.preventDefault();
     //this function should first check that the email is in the correct format
-    
-    //check everything isnt null
-    if(newUser.firstName!=="" && newUser.lastName!=="" && newUser.email!=="" && newUser.password!==""){
-      //regular expression pattern for a valid email address
-      const pattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-      if(!newUser.email.match(pattern)){
-        setError({...error,errorCode: 2,errorMessage: "Invalid email format"});
-      } else {
-        setError({...error,errorCode: 0,errorMessage: null});
-      }
-      if(newUser.password.length<5){
-        //basic password auth checks that its 5 characters long
-        setError({...error, errorCode: 3, errorMessage: "Password must be longer than 5 characters"})
-      }
-    } else {
-      //eventually set a pop up
+
+    //regular expression pattern for a valid email address
+    const pattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    //do not proceed if there are emtpy fields
+    if(newUser.firstName==="" || newUser.lastName==="" || newUser.email==="" || newUser.password===""){
       setError({...error,errorCode: 1,errorMessage: "Please fill out all fields"});
+    }
+    else if(!newUser.email.match(pattern)){  //do not proceed if email is invalid
+      setError({...error,errorCode: 2,errorMessage: "Invalid email format"});
+    } 
+    else if(newUser.password.length<5){  //do not proceed if password doesnt match constraints
+      //basic password auth checks that its 5 characters long
+      setError({...error, errorCode: 3, errorMessage: "Password must be longer than 5 characters"})
+    }
+    else {  //everything went ok, so save data
+      UserService.saveUser(newUser).then((response) => {
+        console.log("response");
+        console.log(response);
+        console.log(newUser);
+      }).catch((err) => {
+        console.log(err);
+      });
     }
     //-------------------------------------------------------------------
 
@@ -60,16 +66,7 @@ function SignUp() {
     //-------------------------------------------------------------------
     
     //if its not already in the db, and its in the correct format, and password is ok, then add this user to the db
-    if(error.errorCode===0){
-      //everything went ok
-      UserService.saveUser(newUser).then((response) => {
-        console.log("response");
-        console.log(response);
-        console.log(newUser);
-      }).catch((err) => {
-        console.log(err);
-      });
-    }
+    console.log("error code: ",error.errorCode);
   };
 
   return (
