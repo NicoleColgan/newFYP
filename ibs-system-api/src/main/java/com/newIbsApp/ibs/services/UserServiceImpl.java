@@ -4,6 +4,7 @@ import com.newIbsApp.ibs.entity.UserEntity;
 import com.newIbsApp.ibs.model.User;
 import com.newIbsApp.ibs.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,6 +53,26 @@ public class UserServiceImpl implements UserService{
         User user = new User();
         BeanUtils.copyProperties(userEntity, user);
         return user;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        List<UserEntity> userEntities = userRepository.findAll();
+        List<User> users = userEntities.stream().map(u -> new User(
+                        u.getId(),
+                        u.getFirstName(),
+                        u.getLastName(),
+                        u.getEmail(),
+                        u.getPassword()))
+                .collect(Collectors.toList());
+        for(User u: users){
+            if(u.getEmail().equals(email)) {
+                User user = new User();
+                BeanUtils.copyProperties(u, user);
+                return user;
+            }
+        }
+        return null;
     }
 
 }

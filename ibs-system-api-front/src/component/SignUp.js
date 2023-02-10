@@ -35,38 +35,44 @@ function SignUp() {
     e.preventDefault();
     //this function should first check that the email is in the correct format
 
+    
+    //reset error
+    setError({ errorCode: 0, errorMessage: "" });
+
     //regular expression pattern for a valid email address
     const pattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     //do not proceed if there are emtpy fields
     if(newUser.firstName==="" || newUser.lastName==="" || newUser.email==="" || newUser.password===""){
-      setError({...error,errorCode: 1,errorMessage: "Please fill out all fields"});
+      setError({errorCode: 1,errorMessage: "Please fill out all fields"});
     }
     else if(!newUser.email.match(pattern)){  //do not proceed if email is invalid
-      setError({...error,errorCode: 2,errorMessage: "Invalid email format"});
+      setError({errorCode: 2,errorMessage: "Invalid email format"});
     } 
     else if(newUser.password.length<5){  //do not proceed if password doesnt match constraints
       //basic password auth checks that its 5 characters long
-      setError({...error, errorCode: 3, errorMessage: "Password must be longer than 5 characters"})
+      setError({errorCode: 3, errorMessage: "Password must be longer than 5 characters"});
     }
-    else {  //everything went ok, so save data
-      UserService.saveUser(newUser).then((response) => {
-        console.log("response");
-        console.log(response);
-        console.log(newUser);
-      }).catch((err) => {
-        console.log(err);
-      });
+    else {  //everything went ok - but still need to check if user is already in the db
+      UserService.checkUserExists(newUser.email).then(data => {
+        console.log(data);
+        if(data){
+          //user is already in db - so we dont want to add them
+          setError({errorCode: 4, errorMessage: "Email Address already registered"});
+        }
+        else{ //able to save user to db
+            UserService.saveUser(newUser).then((response) => {
+          console.log("response");
+          console.log(response);
+          console.log(newUser);
+          setError({errorCode: 0, errorMessage: ""});
+        }).catch((err) => {
+          console.log(err);
+        });
+          }
+        });
     }
-    //-------------------------------------------------------------------
-
-
-    //then check if the email is already in the database
-
-    //-------------------------------------------------------------------
-    
-    //if its not already in the db, and its in the correct format, and password is ok, then add this user to the db
-    console.log("error code: ",error.errorCode);
+    //console.log("error code: ",error.errorCode);
   };
 
   return (
@@ -188,7 +194,7 @@ function SignUp() {
       style={{color: "#ff0000",
       paddingRight: "52px",
       fontSize: "12px"}}>{error.errorMessage}</p> : null}
-      {error.errorCode===2 || error.errorCode===3? <p
+      {error.errorCode===2 || error.errorCode===3 || error.errorCode===4? <p
       style={{color: "#ff0000",
       paddingRight: "50px",
       fontSize: "12px"}}>{error.errorMessage}</p> : null}
