@@ -75,4 +75,28 @@ public class UserServiceImpl implements UserService{
         return null;
     }
 
+    @Override
+    public User authenticateUser(String email, String password) {
+        List<UserEntity> userEntities = userRepository.findAll();
+        List<User> users = userEntities.stream().map(u -> new User(
+                        u.getId(),
+                        u.getFirstName(),
+                        u.getLastName(),
+                        u.getEmail(),
+                        u.getPassword()))
+                .collect(Collectors.toList());
+        for(User u: users){
+            //if a user exists with this email
+            if(u.getEmail().equals(email)) {
+                //check if their password is the same
+                if(u.getPassword().equals(password)) {
+                    User user = new User();
+                    BeanUtils.copyProperties(u, user);
+                    return user;
+                }
+            }
+        }
+        return null;
+    }
+
 }
