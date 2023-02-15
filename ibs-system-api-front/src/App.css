@@ -6,12 +6,44 @@ body {
   margin: 0;
 }
 
+.loggingBox {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr; /* spans the full width of the container */
+  grid-template-rows: 50% 60%;
+  padding: 2%; 
+}
 .box {
   display: flex;
   display: grid;
   /*might want to change this to account for smaller screens*/
-  grid-template-columns: 65% 35%
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 60% 40%;
 }
+.loggingButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.loggingButton {
+  margin-bottom: 10px;
+}
+.buttonSpace {
+  margin: 0 27px;
+}
+
+.loggingButton {
+  background-color: white;
+  border-radius: 25px;
+  width: 90vh;
+  height: 13.5vh;
+  font-size: larger;
+  border-color: white;
+  font-weight: bold;
+}
+
+
 .column{
   text-align: center;
   height: 100%;
