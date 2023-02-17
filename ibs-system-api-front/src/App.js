@@ -1,31 +1,23 @@
+import './App.css';
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import Landing from './component/Landing';
+import Logging from './component/Logging';
 
-import "./App.css";
-import SignUp from "./component/SignUp";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import SignIn from "./component/SignIn";
-
+//components (App) are used to render
+//you can only return one parent so if you wrap them in empty tags, you can return more than 1
+//The way routing works is that you show different components based on the different routes that you have defined
+//i want to show the nav bar at all times so keep that outside the routes that were defining
+//index is default page
 function App() {
   return (
-    <Container fluid className="box " style={{ width: "100%", justifyContent: "flex-end" }}>
-    <Col md={5} sm={5} className="column justify-content-center d-flex">
-      <div className="">
-        <h1 
-        style={{
-          color: "#1a8cff",
-          fontSize: "60px",
-          fontWeight: 500
-          }}>THE GUT DIARY</h1>
-        <h4 
-        style={{
-          color: "#1a8cff",
-          fontWeight: 500}}>Information about the app and our goals go here</h4>
-      </div>        
-    </Col>
-    <Col md={3} sm={3} className="column">
-      <SignIn />
-    </Col>
-</Container>
+    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/landing" element={<Landing />}></Route>
+        <Route index element={<Logging />}></Route>
+      </Routes>
+    </BrowserRouter>
+    </>
   );
 }
 
