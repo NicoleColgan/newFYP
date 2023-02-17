@@ -14,7 +14,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/landing" element={<Landing />}></Route>
-        <Route index element={<Logging />}></Route>
+        <Route index element={<Landing />}></Route>
+        <Route path="/logging" element={<Logging />}></Route>
       </Routes>
     </BrowserRouter>
     </>

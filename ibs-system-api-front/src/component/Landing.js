@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import SignUp from "./SignUp"
 import SignIn from "./SignIn"
+import LoggingPhysicalSymptom from './LoggingPhysicalSymptom';
 
 
 const Landing = () => {
@@ -24,7 +25,7 @@ const Landing = () => {
       </div>        
     </Col>
     <Col md={3} sm={3} className="column">
-      <SignIn />
+      <LoggingPhysicalSymptom />
     </Col>
 </Container>
   )
