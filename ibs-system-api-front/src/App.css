@@ -22,7 +22,7 @@ body {
   display: flex;
   display: grid;
   /*might want to change this to account for smaller screens*/
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 60% 40%;
   grid-template-rows: 60% 40%;
 }
 
@@ -35,17 +35,17 @@ body {
   opacity: 80%
 }
 .circular {
-  width: 100px;
-  height: 100px;
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
   background-color: #4da6ff;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 24px;
-  color: white;
-  border-width: 10px;
+  font-size: 25px;
+  color: black;
+  border: 2px solid white;
   font-weight: bold;
 }
 .loggingButton {
