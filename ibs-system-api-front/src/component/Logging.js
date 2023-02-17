@@ -2,47 +2,51 @@ import React from "react";
 import { Col } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Calendar from 'react-calendar'
 
 const Logging = () => {
   return (
-    <Container fluid className="loggingBox">
-  <Row style={{ height: '20vh' }}>rowhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffffffffffffffffffffffffffffffffffff</Row>
-
-    <div style={{
-        height: '53.7vh',
-        backgroundColor: "#8CD9CF",
-        width: '212vh',
-        borderRadius: "25px", opacity: "80%" 
-    }}>
-  <Row className="loggingButtonsContainer">
-    <div style={{
-        paddingLeft: "10vh",
-        paddingTop: "5vh",
-        paddingRight: "10vh",
-        paddingBottom: "5vh",
-    }}className="loggingButtons">
-      <div>
-        <button className="loggingButton">Physical Symtom</button>
+    <div fluid className="loggingBox">
+    <div>
+      <Calendar className="react-calendar" />
+      <p style={{position: "absolute", top: "0", right: "25px"}} className="circular">N.C</p>
+        </div>
+<div style={{
+  marginBottom:"40px"
+}}></div>
+  <div style={{
+    position: "relative",
+    backgroundColor: "#8CD9CF",
+    opacity: "85%",
+    height: "248px",
+    borderRadius: "25px"
+  }}>
+    <div>
+      <div style={{
+        paddingLeft: "70px",
+        paddingTop: "13px"
+      }}>
+        <div>
+          <button className="loggingButton">Physical Symptom</button>
+          <span className="buttonSpace"></span>
+          <button className="loggingButton">Bowel Movements</button>
+        </div>
         <span className="buttonSpace"></span>
-        <button className="loggingButton">Bowel Movements</button>
-      </div>
-      <div >
-        <button className="loggingButton">Appetite</button>
+        <div>
+          <button className="loggingButton">Appetite</button>
+          <span className="buttonSpace"></span>
+          <button className="loggingButton">Wellbeing & Exercise</button>
+        </div>
         <span className="buttonSpace"></span>
-<button className="loggingButton">Wellbeing & Exercise</button>
-      </div>
-      <div>
-        <button className="loggingButton">Food & Supplements</button>
-        <span className="buttonSpace"></span>
-<button className="loggingButton">Other</button>
+        <div>
+          <button className="loggingButton">Food & Supplements</button>
+          <span className="buttonSpace"></span>
+          <button className="loggingButton">Other</button>
+        </div>
       </div>
     </div>
-  </Row>
   </div>
-</Container>
-
-
-
+</div>
   );
 };
 
