@@ -10,6 +10,14 @@ const LoggingPhysicalSymptom = () => {
     borderRadius: "25px"
   }}
 >
+<div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: "10px"
+    }}
+  >
   <h2
     style={{
       padding: "15px",
@@ -18,7 +26,15 @@ const LoggingPhysicalSymptom = () => {
   >
     Log a physical symptom
   </h2>
-
+<button style={{
+  borderRadius: "50%",
+  width: "40px",
+  height: "40px",
+  borderColor: "#1a8cff",
+  boxShadow: "none",
+  backgroundColor: "#1a8cff"
+}}>X</button>
+</div>
   <div
     style={{
       display: "flex",
