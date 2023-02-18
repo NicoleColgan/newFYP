@@ -5,7 +5,7 @@ const LoggingPhysicalSymptom = () => {
     <div
   style={{
     width: "400px",
-    height: "400px",
+    height: "470px",
     backgroundColor: "white",
     borderRadius: "25px"
   }}
@@ -26,14 +26,6 @@ const LoggingPhysicalSymptom = () => {
   >
     Log a physical symptom
   </h2>
-<button style={{
-  borderRadius: "50%",
-  width: "40px",
-  height: "40px",
-  borderColor: "#1a8cff",
-  boxShadow: "none",
-  backgroundColor: "#1a8cff"
-}}>X</button>
 </div>
   <div
     style={{
@@ -165,6 +157,27 @@ const LoggingPhysicalSymptom = () => {
     </div>
     
   </div>
+  <div style={{ 
+    paddingLeft: "160px"
+  }}>
+    <div style={{
+  borderRadius: "25px",
+  width: "70px",
+  height: "40px",
+  borderColor: "#1a8cff",
+  boxShadow: "none",
+  backgroundColor: "#1a8cff",
+  opacity: "75%",
+  color: "white",
+  
+}}>
+  <p style={{
+    position: "relative",
+    top: "7px",
+    cursor: "pointer"
+  }}>
+  Done</p></div>
+</div>
 </div>
 
   )
