@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
-const LoggingPhysicalSymptom = () => {
+const LoggingPhysicalSymptom = (props) => {
   
+
+  const handleCloseClick = () => {
+    props.onClose();
+  }
   const [button1Color, setButton1Color] = useState('#8CD9CF');  //green
 
   function handleSymptom1ButtonClicked(){
@@ -251,7 +255,9 @@ const LoggingPhysicalSymptom = () => {
   color: "white",
   
 }}>
-  <p style={{
+  <p 
+  onClick={handleCloseClick}
+  style={{
     position: "relative",
     top: "7px",
     left: "15px",
@@ -264,4 +270,4 @@ const LoggingPhysicalSymptom = () => {
   )
 }
 
-export default LoggingPhysicalSymptom
+export default LoggingPhysicalSymptom;

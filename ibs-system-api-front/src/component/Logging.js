@@ -12,11 +12,11 @@ const Logging = () => {
     setShowPhysicalSymptomPopup(true);
   }
   function handlePhysicalSymptomCloseButtonClick(){
-    setShowPhysicalSymptomPopup(true);
+    setShowPhysicalSymptomPopup(false);
   }
   return (
     <div fluid className="loggingBox">
-      {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} />}
+      {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick}/>}
     <div>
       <Calendar className="react-calendar" />
       <p style={{position: "absolute", top: "0", right: "25px"}} className="circular">N.C</p>
