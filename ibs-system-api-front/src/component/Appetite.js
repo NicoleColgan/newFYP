@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const LoggingPhysicalSymptom = (props) => {
+const Apetite = (props) => {
   
 
   const handleCloseClick = () => {
@@ -51,33 +51,13 @@ const LoggingPhysicalSymptom = (props) => {
     }
   }
 
-    const [button5Color, setButton5Color] = useState('#8CD9CF');  //green
 
-  function handleSymptom5ButtonClicked(){
-    if(button5Color==='#8CD9CF'){  //green
-      setButton5Color('#4da6ff');  //blue
-    } 
-    else {
-      setButton5Color('#8CD9CF')
-    }
-  }
-
-    const [button6Color, setButton6Color] = useState('#8CD9CF');  //green
-
-  function handleSymptom6ButtonClicked(){
-    if(button6Color==='#8CD9CF'){  //green
-      setButton6Color('#4da6ff');  //blue
-    } 
-    else {
-      setButton6Color('#8CD9CF')
-    }
-  }
   return (
     <div className=" Popup">
       <div className="Popup-overlay"></div>
       <div className="Popup-content"
   style={{
-    width: "400px",
+    width: "360px",
     height: "470px",
     backgroundColor: "white",
     borderRadius: "25px"
@@ -94,23 +74,29 @@ const LoggingPhysicalSymptom = (props) => {
   <h2
     style={{
       padding: "15px",
-      textDecoration: "underline"
+      textDecoration: "underline",
+      paddingBottom:"15px"
     }}
   >
-    Log a physical symptom
+    Apetite
   </h2>
-</div>
+</div >
   <div
     style={{
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      paddingTop: "10px"
+      paddingTop: "10px",
+      paddingRight: "10px"
     }}
-  >
+  ><div style={{
+    paddingRight: "20px"
+        }}>
     <div style={{
-      paddingRight: "30px"
+      paddingRight: "60px",
+      paddingLeft: "40px"
     }}>
+        
       <img
       onClick={handleSymptom1ButtonClicked}
         style={{
@@ -126,11 +112,16 @@ const LoggingPhysicalSymptom = (props) => {
         alt="Image description"
         width="50"
         height="50"
-      />
-      <p>Bloating</p>
+      /></div>
+      <p style={{
+        paddingLeft: "25px"
+      }}>Hunger levels</p>
     </div>
+
+    <div>
     <div style={{
-      paddingRight: "25px"
+      paddingRight: "25px",
+      paddingLeft: "25px"
     }}>
           <img
           onClick={handleSymptom2ButtonClicked}
@@ -148,9 +139,32 @@ const LoggingPhysicalSymptom = (props) => {
             width="50"
             height="50"
           />
-          <p>Headaches</p>
+          
         </div>
-    <div >
+        <p style={{
+            paddingLeft: "10px"
+        }}>Satiety levels</p>
+        </div>
+
+  </div>
+
+  
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: "10px",
+      paddingRight: "10px"
+    }}
+  >
+    <div style={{
+        paddingRight: "25px"
+    }}>
+    <div style={{
+      paddingRight: "65px",
+      paddingLeft: "65px"
+    }}>
       <img
       onClick={handleSymptom3ButtonClicked}
         style={{
@@ -162,56 +176,34 @@ const LoggingPhysicalSymptom = (props) => {
           backgroundColor: button3Color,
           paddingTop: "8px"
         }}
-        src="gas.png"
-        alt="Image description"
-        width="50"
-        height="50"
-      />
-      <p>Gas</p>
-    </div>
-    
-  </div>
-  <div
-    style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      paddingTop: "10px"
-    }}
-  >
-    <div style={{
-      paddingRight: "30px"
-    }}>
-      <img
-      onClick={handleSymptom4ButtonClicked}
-        style={{
-          cursor: "pointer",
-          width: "65px",
-          opacity: "80%",
-          height: "65px",
-          borderRadius: "50%",
-          backgroundColor: button4Color,
-          paddingTop: "8px"
-        }}
         src="acne.png"
         alt="Image description"
         width="50"
         height="50"
       />
-      <p>Acne</p>
+      
     </div>
+    <p style={{
+        paddingLeft: "30px"
+    }}>Number of meals</p>
+    </div>
+
     <div style={{
-      paddingRight: "25px"
+        paddingRight: "20px"
+    }}>
+    <div style={{
+        paddingLeft:"15px"
+
     }}>
           <img
-          onClick={handleSymptom5ButtonClicked}
+          onClick={handleSymptom4ButtonClicked}
             style={{
               cursor: "pointer",
               opacity: "80%",
               width: "65px",
               height: "65px",
               borderRadius: "50%",
-              backgroundColor: button5Color,
+              backgroundColor: button4Color,
               paddingTop: "8px"
             }}
             src="tired4.png"
@@ -219,26 +211,9 @@ const LoggingPhysicalSymptom = (props) => {
             width="40"
             height="40"
           />
-          <p>Low Energy</p>
+          
         </div>
-    <div >
-      <img
-      onClick={handleSymptom6ButtonClicked}
-        style={{
-          cursor: "pointer",
-          width: "65px",
-          opacity: "80%",
-          height: "65px",
-          borderRadius: "50%",
-          backgroundColor: button6Color,
-          paddingTop: "8px"
-        }}
-        src="stress.png"
-        alt="Image description"
-        width="45"
-        height="45"
-      />
-      <p>Stress</p>
+    <p>Meal Regularity</p>
     </div>
     
   </div>
@@ -265,10 +240,10 @@ const LoggingPhysicalSymptom = (props) => {
     cursor: "pointer"
   }} >
   Done</p></div>
-</div>
+  </div>
 </div>
 </div>
   )
 }
 
-export default LoggingPhysicalSymptom;
+export default Apetite;

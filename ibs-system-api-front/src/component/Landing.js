@@ -25,7 +25,7 @@ const Landing = () => {
       </div>        
     </Col>
     <Col md={3} sm={3} className="column">
-      <LoggingPhysicalSymptom />
+      <SignUp />
     </Col>
 </Container>
   )

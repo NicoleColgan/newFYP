@@ -3,6 +3,7 @@ import { Col, Modal } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Calendar from 'react-calendar'
+import Apetite from "./Appetite";
 import LoggingPhysicalSymptom from "./LoggingPhysicalSymptom";
 
 const Logging = () => {
@@ -14,9 +15,18 @@ const Logging = () => {
   function handlePhysicalSymptomCloseButtonClick(){
     setShowPhysicalSymptomPopup(false);
   }
+  const [showAppetitePopup, setShowAppetitePopup] = useState(false);
+  
+  function handleAppetiteButtonClick(){
+    setShowAppetitePopup(true);
+  }
+  function handleAppetiteCloseButtonClick(){
+    setShowAppetitePopup(false);
+  }
   return (
     <div fluid className="loggingBox">
       {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick}/>}
+      {showAppetitePopup && <Apetite onClose={handleAppetiteCloseButtonClick}/>}
     <div>
       <Calendar className="react-calendar" />
       <p style={{position: "absolute", top: "0", right: "25px"}} className="circular">N.C</p>
@@ -43,7 +53,7 @@ const Logging = () => {
         </div>
         <span className="buttonSpace"></span>
         <div>
-          <button className="loggingButton">Appetite</button>
+          <button onClick={handleAppetiteButtonClick} className="loggingButton">Appetite</button>
           <span className="buttonSpace"></span>
           <button className="loggingButton">Wellbeing & Exercise</button>
         </div>
