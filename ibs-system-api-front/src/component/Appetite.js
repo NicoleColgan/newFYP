@@ -9,13 +9,16 @@ const Apetite = (props) => {
   }
   const [button1Color, setButton1Color] = useState('#8CD9CF');  //green
 
-  function handleSymptom1ButtonClicked(){
+  function handleHungerButtonClick(){
     if(button1Color==='#8CD9CF'){  //green
-      setButton1Color('#4da6ff');  //blue
-    } 
-    else {
-      setButton1Color('#8CD9CF')
-    }
+        setButton1Color('#4da6ff');  //blue
+      } 
+      else {
+        setButton1Color('#8CD9CF')
+      }
+    //render new component
+    //when done change colour to say its logged
+    props.hungerButtonPressed();
   }
 
   const [button2Color, setButton2Color] = useState('#8CD9CF');  //green
@@ -57,8 +60,8 @@ const Apetite = (props) => {
       <div className="Popup-overlay"></div>
       <div className="Popup-content"
   style={{
-    width: "360px",
-    height: "470px",
+    width: "370px",
+    height: "460px",
     backgroundColor: "white",
     borderRadius: "25px"
   }}
@@ -73,7 +76,7 @@ const Apetite = (props) => {
   >
   <h2
     style={{
-      padding: "15px",
+      padding: "10px",
       textDecoration: "underline",
       paddingBottom:"15px"
     }}
@@ -98,7 +101,7 @@ const Apetite = (props) => {
     }}>
         
       <img
-      onClick={handleSymptom1ButtonClicked}
+      onClick={handleHungerButtonClick}
         style={{
           cursor: "pointer",
           width: "65px",
@@ -134,7 +137,7 @@ const Apetite = (props) => {
               backgroundColor: button2Color,
               paddingTop: "8px"
             }}
-            src="headaches.png"
+            src="satiety.png"
             alt="Image description"
             width="50"
             height="50"
@@ -155,15 +158,15 @@ const Apetite = (props) => {
       alignItems: "center",
       justifyContent: "center",
       paddingTop: "10px",
-      paddingRight: "10px"
+      paddingRight: "5px"
     }}
   >
     <div style={{
         paddingRight: "25px"
     }}>
     <div style={{
-      paddingRight: "65px",
-      paddingLeft: "65px"
+      paddingRight: "55px",
+      paddingLeft: "70px"
     }}>
       <img
       onClick={handleSymptom3ButtonClicked}
@@ -176,7 +179,7 @@ const Apetite = (props) => {
           backgroundColor: button3Color,
           paddingTop: "8px"
         }}
-        src="acne.png"
+        src="numbers.png"
         alt="Image description"
         width="50"
         height="50"
@@ -184,15 +187,15 @@ const Apetite = (props) => {
       
     </div>
     <p style={{
-        paddingLeft: "30px"
+        paddingLeft: "40px"
     }}>Number of meals</p>
     </div>
 
     <div style={{
-        paddingRight: "20px"
+        paddingRight: "30px"
     }}>
     <div style={{
-        paddingLeft:"15px"
+        paddingLeft:"25px"
 
     }}>
           <img
@@ -204,16 +207,18 @@ const Apetite = (props) => {
               height: "65px",
               borderRadius: "50%",
               backgroundColor: button4Color,
-              paddingTop: "8px"
+              paddingTop: "8px",
             }}
-            src="tired4.png"
+            src="time.png"
             alt="Image description"
             width="40"
             height="40"
           />
           
         </div>
-    <p>Meal Regularity</p>
+    <p style={{
+        paddingRight: "10px"
+    }}>Meal Regularity</p>
     </div>
     
   </div>
