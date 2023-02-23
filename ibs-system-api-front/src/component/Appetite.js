@@ -7,17 +7,15 @@ const Apetite = (props) => {
     //passed the function to this compopnent
     props.onClose();
   }
-  const [button1Color, setButton1Color] = useState('#8CD9CF');  //green
 
+  //if it was clicked, make it blue, if not, make it green
+  const [button1Color, setButton1Color] = useState(
+    props.hungerButtonClicked ? '#4da6ff' : '#8CD9CF'
+  );
+  
   function handleHungerButtonClick(){
-    if(button1Color==='#8CD9CF'){  //green
-        setButton1Color('#4da6ff');  //blue
-      } 
-      else {
-        setButton1Color('#8CD9CF')
-      }
-    //render new component
     //when done change colour to say its logged
+    setButton1Color('#4da6ff')
     props.hungerButtonPressed();
   }
 
@@ -127,7 +125,7 @@ const Apetite = (props) => {
       paddingLeft: "25px"
     }}>
           <img
-          onClick={handleSymptom2ButtonClicked}
+          onClick={handleSatietyButtonClick}
             style={{
               cursor: "pointer",
               width: "65px",

@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Calendar from 'react-calendar'
 import Hunger from "./Hunger";
+import Satiety from "./Satiety";
 import Apetite from "./Appetite";
 import LoggingPhysicalSymptom from "./LoggingPhysicalSymptom";
 
@@ -17,6 +18,7 @@ const Logging = () => {
     setShowPhysicalSymptomPopup(false);
   }
   const [showAppetitePopup, setShowAppetitePopup] = useState(false);
+
   
   function handleAppetiteButtonClick(){
     setShowAppetitePopup(true);
@@ -25,20 +27,40 @@ const Logging = () => {
     setShowAppetitePopup(false);
   }
 
+  const [hungerButtonClicked, setHungerButtonClicked] = useState(false);
+
   const [showHungerPopUp, setShowHungerPopUp] = useState(false);
   function handleHungerButtonClick(){
+    setHungerButtonClicked(true);
     setShowHungerPopUp(true);
     setShowAppetitePopup(false);
+    //want to set this colour to blue and stay like this
   }
   function handleHungerButtonCloseClick(){
     setShowHungerPopUp(false);
     setShowAppetitePopup(true);
   }
+
+  //satiety
+  const [satietyButtonClicked, setSatietyButtonClicked] = useState(false);
+  const [showSatietyPopUp, setShowSatietyPopUp] = useState(false);
+  function handleSatietyButtonClick(){
+    setSatietyButtonClicked(true);
+    setShowHungerPopUp(true);
+    setShowSatietyPopUp(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleSatietyButtonCloseClick(){
+    setShowHungerPopUp(false);
+    setShowSatietyPopUp(true);
+  }
   return (
     <div fluid className="loggingBox">
       {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} />}
-      {showAppetitePopup && <Apetite onClose={handleAppetiteCloseButtonClick} hungerButtonPressed={handleHungerButtonClick}/>}
+      {showAppetitePopup && <Apetite onClose={handleAppetiteCloseButtonClick} hungerButtonPressed={handleHungerButtonClick} hungerButtonClicked={hungerButtonClicked}/>}
       {showHungerPopUp && <Hunger onClose={handleHungerButtonCloseClick}/>}
+      {showSatietyPopUp && <Satiety onClose={handleSatietyButtonCloseClick}/>}
+
     <div>
       <Calendar className="react-calendar" />
       <p style={{position: "absolute", top: "0", right: "25px"}} className="circular">N.C</p>

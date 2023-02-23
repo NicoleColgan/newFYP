@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 
-const Hunger = (props) => {
+const Satiety = (props) => {
       
 
   const handleCloseClick = () => {
@@ -63,13 +63,13 @@ const Hunger = (props) => {
               paddingLeft: "200px"
             }}
           >
-            Hunger
+            Satiety
           </h2>
           <br/>
           <p style={{
               margin: "0 0 40px 0",
               textAlign: "center"
-            }}> Rate your hunger levels before and after a meal. Eating when your very hungry can worsen your symptoms and lead to overeating. If your less hungry than usual, it could be a sign that your digestion is not optimal.</p>
+            }}> Note how full you feel after meals and throughout the day. Eating until you're overly full or not eating enough can trigger IBS symptoms, so it's important to stop eating when you feel comfortably full</p>
         </div>
         
 
@@ -209,4 +209,4 @@ const Hunger = (props) => {
   )
 }
 
-export default Hunger
+export default Satiety
