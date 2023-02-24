@@ -6,6 +6,8 @@ import Calendar from 'react-calendar'
 import Hunger from "./Hunger";
 import Satiety from "./Satiety";
 import Apetite from "./Appetite";
+import NumMeals from "./NumMeals";
+import Reg from "./Reg"
 import LoggingPhysicalSymptom from "./LoggingPhysicalSymptom";
 
 const Logging = () => {
@@ -27,8 +29,8 @@ const Logging = () => {
     setShowAppetitePopup(false);
   }
 
+  //hunger button
   const [hungerButtonClicked, setHungerButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
-
   const [showHungerPopUp, setShowHungerPopUp] = useState(false);
   function handleHungerButtonClick(){
     setHungerButtonClicked(true); //method dependent
@@ -54,12 +56,41 @@ const Logging = () => {
     setShowSatietyPopUp(false);
     setShowAppetitePopup(true);
   }
+
+  //num meals button
+  const [numMealsButtonClicked, setNumMealsButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showNumMealsPopUp, setShowNumMealsPopUp] = useState(false);
+  function handleNumMealsButtonClick(){
+    setNumMealsButtonClicked(true); //method dependent
+    setShowNumMealsPopUp(true); //method dependent
+    setShowAppetitePopup(false);
+  }
+  function handleNumMealsButtonCloseClick(){
+    setShowNumMealsPopUp(false);  //method dependent
+    setShowAppetitePopup(true);
+  }
+
+  //Meal regularity
+  const [regButtonClicked, setRegButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showRegPopUp, setShowRegPopUp] = useState(false);
+  function handleRegButtonClick(){
+    setRegButtonClicked(true); //method dependent
+    setShowRegPopUp(true); //method dependent
+    setShowAppetitePopup(false);
+  }
+  function handleRegButtonCloseClick(){
+    setShowRegPopUp(false);  //method dependent
+    setShowAppetitePopup(true);
+  }
+
   return (
     <div fluid className="loggingBox">
       {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} />}
-      {showAppetitePopup && <Apetite onClose={handleAppetiteCloseButtonClick} hungerButtonPressed={handleHungerButtonClick} hungerButtonClicked={hungerButtonClicked} satietyButtonPressed={handleSatietyButtonClick} satietyButtonClicked={satietyButtonClicked}/>}
+      {showAppetitePopup && <Apetite onClose={handleAppetiteCloseButtonClick} hungerButtonPressed={handleHungerButtonClick} hungerButtonClicked={hungerButtonClicked} satietyButtonPressed={handleSatietyButtonClick} satietyButtonClicked={satietyButtonClicked} numMealsButtonPressed={handleNumMealsButtonClick} numMealsButtonClicked={numMealsButtonClicked} regButtonPressed={handleRegButtonClick} regButtonClicked={regButtonClicked}/>}
       {showHungerPopUp && <Hunger onClose={handleHungerButtonCloseClick}/>}
       {showSatietyPopUp && <Satiety onClose={handleSatietyButtonCloseClick}/>}
+      {showNumMealsPopUp && <NumMeals onClose={handleNumMealsButtonCloseClick}/>}
+      {showRegPopUp && <Reg onClose={handleRegButtonCloseClick}/>}
 
     <div>
       <Calendar className="react-calendar" />

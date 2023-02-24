@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 
-const Satiety = (props) => {
+const NumMeals = (props) => {
       
 
   const handleCloseClick = () => {
@@ -65,7 +65,7 @@ const Satiety = (props) => {
         className="Popup-content"
         style={{
           width: "500px",
-          height: "400px",
+          height: "380px",
           backgroundColor: "white",
           borderRadius: "25px",
         }}
@@ -78,21 +78,20 @@ const Satiety = (props) => {
             style={{
               textDecoration: "underline",
               margin: "0 0 0 0",
-              paddingLeft: "200px"
+              paddingLeft: "150px"
             }}
           >
-            Satiety
+            Number of meals
           </h2>
           <br/>
           <p style={{
               margin: "0 0 10px 0",
               textAlign: "center"
-            }}> Note how full you feel after meals and throughout the day. </p>
+            }}>Log the number of meals that you have eaten today.</p> 
             <p style={{
               margin: "0 0 30px 0",
               textAlign: "center"
-            }}>
-            Eating until you're overly full or not eating enough can trigger IBS symptoms, so it's important to stop eating when you feel comfortably full</p>
+            }}>Eating a consistent number of meals at a regular schedule can help to regulate your digestive system and reduce IBS symptoms.</p>
         </div>
         
 
@@ -104,11 +103,13 @@ const Satiety = (props) => {
             paddingTop: "10px",
           }}
         >
-         <div>  
+         <div style={{
+            paddingRight: "30px"
+         }}>  
           <div
             style={{
-              paddingRight: "20px",
-              paddingLeft: "8px"
+              paddingRight: "50px",
+              paddingLeft: "10px"
             }}
           >
             <img
@@ -122,24 +123,23 @@ const Satiety = (props) => {
                 backgroundColor: button1Color,
                 paddingTop: "8px",
               }}
-              src="x.png"
+              src="lessThanEqual.png"
               alt="Image description"
               width="50"
               height="50"
             />
             </div> 
-            <p>Low Satiety</p>
+            <p style={{
+                paddingLeft: "30px"
+            }}>0-3</p>
           </div>
 
           <div style={{
-            paddingLeft: "20px",
-            paddingRight: "30px"
+            paddingRight: "20px"
           }}>
           <div
             style={{
-              paddingRight: "20px",
-              paddingLeft: "20px",
-
+              paddingRight: "30px",
             }}
           >
             <img
@@ -153,21 +153,20 @@ const Satiety = (props) => {
                 backgroundColor: button2Color,
                 paddingTop: "8px",
               }}
-              src="questionMark.png"
+              src="tick.png"
               alt="Image description"
               width="50"
               height="50"
             />
-            </div>
             <p style={{
-            
-            }}>Normal satiety</p>
-            
+                paddingLeft: "19px"
+            }}>4-5</p>
+            </div>
           </div>
 
           <div>
           <div style={{
-            paddingLeft: "12px"
+            paddingLeft: "35px"
           }}>
             <img
             onClick={handleSymptom3ButtonClicked}
@@ -180,13 +179,15 @@ const Satiety = (props) => {
                 backgroundColor: button3Color,
                 paddingTop: "8px",
               }}
-              src="tick.png"
+              src="bigAmmount.png"
               alt="Image description"
               width="50"
               height="50"
             />
             </div>
-            <p>High satiety</p>
+            <p style={{
+                paddingLeft:"55px"
+            }}>5 +</p>
           </div>
         </div>
         <div
@@ -234,4 +235,4 @@ const Satiety = (props) => {
   )
 }
 
-export default Satiety
+export default NumMeals

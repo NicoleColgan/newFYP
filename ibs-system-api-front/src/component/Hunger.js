@@ -10,12 +10,19 @@ const Hunger = (props) => {
   }
   const [button1Color, setButton1Color] = useState('#8CD9CF');  //green
   function handleSymptom1ButtonClicked(){
+    //if any of the other buttons are clicked, turn them back to green
     if(button1Color==='#8CD9CF'){  //green
-      setButton1Color('#4da6ff');  //blue
-    } 
-    else {
-      setButton1Color('#8CD9CF')
-    }
+        setButton1Color('#4da6ff');  //blue
+      } 
+      else {
+        setButton1Color('#8CD9CF')
+      }
+  
+      if(button2Color==='#4da6ff')
+          setButton2Color('#8CD9CF');
+      if(button3Color==='#4da6ff')
+          setButton3Color('#8CD9CF');
+    
   }
 
   const [button2Color, setButton2Color] = useState('#8CD9CF');  //green
@@ -27,6 +34,12 @@ const Hunger = (props) => {
     else {
       setButton2Color('#8CD9CF')
     }
+
+    if(button1Color==='#4da6ff')
+        setButton1Color('#8CD9CF');
+    if(button3Color==='#4da6ff')
+        setButton3Color('#8CD9CF');
+    
   }
 
     const [button3Color, setButton3Color] = useState('#8CD9CF');  //green
@@ -38,6 +51,11 @@ const Hunger = (props) => {
     else {
       setButton3Color('#8CD9CF')
     }
+    if(button2Color==='#4da6ff')
+        setButton2Color('#8CD9CF');
+    if(button1Color==='#4da6ff')
+        setButton1Color('#8CD9CF');
+    
   }
 
   return (
@@ -67,9 +85,13 @@ const Hunger = (props) => {
           </h2>
           <br/>
           <p style={{
-              margin: "0 0 40px 0",
+              margin: "0 0 10px 0",
               textAlign: "center"
-            }}> Rate your hunger levels before and after a meal. Eating when your very hungry can worsen your symptoms and lead to overeating. If your less hungry than usual, it could be a sign that your digestion is not optimal.</p>
+            }}> Rate your hunger levels before and after a meal.</p> 
+            <p style={{
+              margin: "0 0 30px 0",
+              textAlign: "center"
+            }}>Eating when your very hungry can worsen your symptoms and lead to overeating. If your less hungry than usual, it could be a sign that your digestion is not optimal.</p>
         </div>
         
 

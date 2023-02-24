@@ -29,28 +29,25 @@ const Apetite = (props) => {
     props.satietyButtonPressed();
   }
 
+  //numMeals
+  const [button3Color, setButton3Color] = useState(
+    props.numMealsButtonClicked ? '#4da6ff' : '#8CD9CF'
+  );
+  function handleNumMealsButtonClick(){
+    //when done change colour to say its logged
+    setButton3Color('#4da6ff')
+    props.numMealsButtonPressed();
+  }
   
 
-    const [button3Color, setButton3Color] = useState('#8CD9CF');  //green
-
-  function handleSymptom3ButtonClicked(){
-    if(button3Color==='#8CD9CF'){  //green
-      setButton3Color('#4da6ff');  //blue
-    } 
-    else {
-      setButton3Color('#8CD9CF')
-    }
-  }
-
-    const [button4Color, setButton4Color] = useState('#8CD9CF');  //green
-
-  function handleSymptom4ButtonClicked(){
-    if(button4Color==='#8CD9CF'){  //green
-      setButton4Color('#4da6ff');  //blue
-    } 
-    else {
-      setButton4Color('#8CD9CF')
-    }
+  //meal regularity
+  const [button4Color, setButton4Color] = useState(
+    props.regButtonClicked ? '#4da6ff' : '#8CD9CF'
+  );
+  function handleRegButtonClick(){
+    //when done change colour to say its logged
+    setButton4Color('#4da6ff')
+    props.regButtonPressed();
   }
 
 
@@ -168,7 +165,7 @@ const Apetite = (props) => {
       paddingLeft: "70px"
     }}>
       <img
-      onClick={handleSymptom3ButtonClicked}
+      onClick={handleNumMealsButtonClick}
         style={{
           cursor: "pointer",
           width: "65px",
@@ -198,7 +195,7 @@ const Apetite = (props) => {
 
     }}>
           <img
-          onClick={handleSymptom4ButtonClicked}
+          onClick={handleRegButtonClick}
             style={{
               cursor: "pointer",
               opacity: "80%",

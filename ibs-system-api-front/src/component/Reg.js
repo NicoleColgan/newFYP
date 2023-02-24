@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 
-const Satiety = (props) => {
+const Reg = (props) => {
       
 
   const handleCloseClick = () => {
@@ -20,8 +20,6 @@ const Satiety = (props) => {
   
       if(button2Color==='#4da6ff')
           setButton2Color('#8CD9CF');
-      if(button3Color==='#4da6ff')
-          setButton3Color('#8CD9CF');
     
   }
 
@@ -37,26 +35,9 @@ const Satiety = (props) => {
 
     if(button1Color==='#4da6ff')
         setButton1Color('#8CD9CF');
-    if(button3Color==='#4da6ff')
-        setButton3Color('#8CD9CF');
     
   }
 
-    const [button3Color, setButton3Color] = useState('#8CD9CF');  //green
-
-  function handleSymptom3ButtonClicked(){
-    if(button3Color==='#8CD9CF'){  //green
-      setButton3Color('#4da6ff');  //blue
-    } 
-    else {
-      setButton3Color('#8CD9CF')
-    }
-    if(button2Color==='#4da6ff')
-        setButton2Color('#8CD9CF');
-    if(button1Color==='#4da6ff')
-        setButton1Color('#8CD9CF');
-    
-  }
 
   return (
     <div className=" Popup">
@@ -78,21 +59,20 @@ const Satiety = (props) => {
             style={{
               textDecoration: "underline",
               margin: "0 0 0 0",
-              paddingLeft: "200px"
+              paddingLeft: "160px"
             }}
           >
-            Satiety
+            Meal regularity
           </h2>
           <br/>
           <p style={{
               margin: "0 0 10px 0",
               textAlign: "center"
-            }}> Note how full you feel after meals and throughout the day. </p>
+            }}>Log whether or not you have eaten a consistent number of meals at consistent times to your usual schedule.</p> 
             <p style={{
               margin: "0 0 30px 0",
               textAlign: "center"
-            }}>
-            Eating until you're overly full or not eating enough can trigger IBS symptoms, so it's important to stop eating when you feel comfortably full</p>
+            }}>Eating a consistent number of meals at similar times every day can help to regulate your digestive system and reduce IBS symptoms.</p>
         </div>
         
 
@@ -104,11 +84,13 @@ const Satiety = (props) => {
             paddingTop: "10px",
           }}
         >
-         <div>  
+         <div style={{
+            paddingRight: "10px",
+            paddingLeft: "30px"
+         }}>  
           <div
             style={{
-              paddingRight: "20px",
-              paddingLeft: "8px"
+              paddingLeft: "60px"
             }}
           >
             <img
@@ -128,18 +110,14 @@ const Satiety = (props) => {
               height="50"
             />
             </div> 
-            <p>Low Satiety</p>
+            <p>Inconsistent meal patterns</p>
           </div>
 
           <div style={{
-            paddingLeft: "20px",
-            paddingRight: "30px"
-          }}>
+         }}>  
           <div
             style={{
-              paddingRight: "20px",
-              paddingLeft: "20px",
-
+              paddingLeft: "70px"
             }}
           >
             <img
@@ -153,40 +131,15 @@ const Satiety = (props) => {
                 backgroundColor: button2Color,
                 paddingTop: "8px",
               }}
-              src="questionMark.png"
-              alt="Image description"
-              width="50"
-              height="50"
-            />
-            </div>
-            <p style={{
-            
-            }}>Normal satiety</p>
-            
-          </div>
-
-          <div>
-          <div style={{
-            paddingLeft: "12px"
-          }}>
-            <img
-            onClick={handleSymptom3ButtonClicked}
-              style={{
-                cursor: "pointer",
-                width: "65px",
-                opacity: "80%",
-                height: "65px",
-                borderRadius: "50%",
-                backgroundColor: button3Color,
-                paddingTop: "8px",
-              }}
               src="tick.png"
               alt="Image description"
               width="50"
               height="50"
             />
+            <p style={{
+                paddingLeft: "5px"
+            }}>Consistent meal patterns</p>
             </div>
-            <p>High satiety</p>
           </div>
         </div>
         <div
@@ -234,4 +187,4 @@ const Satiety = (props) => {
   )
 }
 
-export default Satiety
+export default Reg
