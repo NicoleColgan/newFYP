@@ -81,13 +81,11 @@ const Satiety = (props) => {
             paddingTop: "10px",
           }}
         >
-         <div style={{
-            paddingRight: "30px"
-         }}>  
+         <div>  
           <div
             style={{
-              paddingRight: "50px",
-              paddingLeft: "10px"
+              paddingRight: "20px",
+              paddingLeft: "8px"
             }}
           >
             <img
@@ -107,15 +105,18 @@ const Satiety = (props) => {
               height="50"
             />
             </div> 
-            <p>Less hungry</p>
+            <p>Low Satiety</p>
           </div>
 
           <div style={{
-            paddingRight: "20px"
+            paddingLeft: "20px",
+            paddingRight: "30px"
           }}>
           <div
             style={{
-              paddingRight: "30px",
+              paddingRight: "20px",
+              paddingLeft: "20px",
+
             }}
           >
             <img
@@ -134,15 +135,16 @@ const Satiety = (props) => {
               width="50"
               height="50"
             />
-            <p style={{
-                paddingLeft: "5px"
-            }}>Normal</p>
             </div>
+            <p style={{
+            
+            }}>Normal satiety</p>
+            
           </div>
 
           <div>
           <div style={{
-            paddingLeft: "35px"
+            paddingLeft: "12px"
           }}>
             <img
             onClick={handleSymptom3ButtonClicked}
@@ -161,7 +163,7 @@ const Satiety = (props) => {
               height="50"
             />
             </div>
-            <p>Hungrier than usual</p>
+            <p>High satiety</p>
           </div>
         </div>
         <div

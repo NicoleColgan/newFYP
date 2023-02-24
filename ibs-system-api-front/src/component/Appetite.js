@@ -19,16 +19,17 @@ const Apetite = (props) => {
     props.hungerButtonPressed();
   }
 
-  const [button2Color, setButton2Color] = useState('#8CD9CF');  //green
-
-  function handleSymptom2ButtonClicked(){
-    if(button2Color==='#8CD9CF'){  //green
-      setButton2Color('#4da6ff');  //blue
-    } 
-    else {
-      setButton2Color('#8CD9CF')
-    }
+  //Satiety
+  const [button2Color, setButton2Color] = useState(
+    props.satietyButtonClicked ? '#4da6ff' : '#8CD9CF'
+  );
+  function handleSatietyButtonClick(){
+    //when done change colour to say its logged
+    setButton2Color('#4da6ff')
+    props.satietyButtonPressed();
   }
+
+  
 
     const [button3Color, setButton3Color] = useState('#8CD9CF');  //green
 

@@ -27,17 +27,17 @@ const Logging = () => {
     setShowAppetitePopup(false);
   }
 
-  const [hungerButtonClicked, setHungerButtonClicked] = useState(false);
+  const [hungerButtonClicked, setHungerButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
 
   const [showHungerPopUp, setShowHungerPopUp] = useState(false);
   function handleHungerButtonClick(){
-    setHungerButtonClicked(true);
-    setShowHungerPopUp(true);
+    setHungerButtonClicked(true); //method dependent
+    setShowHungerPopUp(true); //method dependent
     setShowAppetitePopup(false);
     //want to set this colour to blue and stay like this
   }
   function handleHungerButtonCloseClick(){
-    setShowHungerPopUp(false);
+    setShowHungerPopUp(false);  //method dependent
     setShowAppetitePopup(true);
   }
 
@@ -46,18 +46,18 @@ const Logging = () => {
   const [showSatietyPopUp, setShowSatietyPopUp] = useState(false);
   function handleSatietyButtonClick(){
     setSatietyButtonClicked(true);
-    setShowHungerPopUp(true);
-    setShowSatietyPopUp(false);
+    setShowSatietyPopUp(true);
+    setShowAppetitePopup(false);
     //want to set this colour to blue and stay like this
   }
   function handleSatietyButtonCloseClick(){
-    setShowHungerPopUp(false);
-    setShowSatietyPopUp(true);
+    setShowSatietyPopUp(false);
+    setShowAppetitePopup(true);
   }
   return (
     <div fluid className="loggingBox">
       {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} />}
-      {showAppetitePopup && <Apetite onClose={handleAppetiteCloseButtonClick} hungerButtonPressed={handleHungerButtonClick} hungerButtonClicked={hungerButtonClicked}/>}
+      {showAppetitePopup && <Apetite onClose={handleAppetiteCloseButtonClick} hungerButtonPressed={handleHungerButtonClick} hungerButtonClicked={hungerButtonClicked} satietyButtonPressed={handleSatietyButtonClick} satietyButtonClicked={satietyButtonClicked}/>}
       {showHungerPopUp && <Hunger onClose={handleHungerButtonCloseClick}/>}
       {showSatietyPopUp && <Satiety onClose={handleSatietyButtonCloseClick}/>}
 
