@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Apetite = (props) => {
+const FoodAndSupplements = (props) => {
   
 
   const handleCloseClick = () => {
@@ -10,33 +10,33 @@ const Apetite = (props) => {
 
   //if it was clicked, make it blue, if not, make it green
   const [button1Color, setButton1Color] = useState(
-    props.hungerButtonClicked ? '#4da6ff' : '#8CD9CF'
+    props.hydrationButtonClicked ? '#4da6ff' : '#8CD9CF'
   );
   
-  function handleHungerButtonClick(){
+  function handleHydrationButtonClick(){
     //when done change colour to say its logged
     setButton1Color('#4da6ff')
-    props.hungerButtonPressed();
+    props.hydrationButtonPressed();
   }
 
   //Satiety
   const [button2Color, setButton2Color] = useState(
-    props.satietyButtonClicked ? '#4da6ff' : '#8CD9CF'
+    props.triggerFoodButtonClicked ? '#4da6ff' : '#8CD9CF'
   );
-  function handleSatietyButtonClick(){
+  function handleTriggerFoodButtonClick(){
     //when done change colour to say its logged
     setButton2Color('#4da6ff')
-    props.satietyButtonPressed();
+    props.triggerFoodButtonPressed();
   }
 
   //numMeals
   const [button3Color, setButton3Color] = useState(
-    props.numMealsButtonClicked ? '#4da6ff' : '#8CD9CF'
+    props.fibreButtonClicked ? '#4da6ff' : '#8CD9CF'
   );
-  function handleNumMealsButtonClick(){
+  function handleFibreButtonClick(){
     //when done change colour to say its logged
     setButton3Color('#4da6ff')
-    props.numMealsButtonPressed();
+    props.fibreButtonPressed();
   }
   
 
@@ -77,7 +77,7 @@ const Apetite = (props) => {
       paddingBottom:"15px"
     }}
   >
-    Apetite
+    Food and supplements
   </h2>
 </div >
   <div
@@ -97,7 +97,7 @@ const Apetite = (props) => {
     }}>
         
       <img
-      onClick={handleHungerButtonClick}
+      onClick={handleHydrationButtonClick}
         style={{
           cursor: "pointer",
           width: "65px",
@@ -107,14 +107,14 @@ const Apetite = (props) => {
           backgroundColor: button1Color,
           paddingTop: "8px"
         }}
-        src="bloating.png"
+        src="drinking.png"
         alt="Image description"
         width="50"
         height="50"
       /></div>
       <p style={{
-        paddingLeft: "25px"
-      }}>Hunger levels</p>
+        paddingLeft: "35px"
+      }}>Hydration</p>
     </div>
 
     <div>
@@ -123,7 +123,7 @@ const Apetite = (props) => {
       paddingLeft: "25px"
     }}>
           <img
-          onClick={handleSatietyButtonClick}
+          onClick={handleTriggerFoodButtonClick}
             style={{
               cursor: "pointer",
               width: "65px",
@@ -142,7 +142,7 @@ const Apetite = (props) => {
         </div>
         <p style={{
             paddingLeft: "10px"
-        }}>Satiety levels</p>
+        }}>Trigger foods</p>
         </div>
 
   </div>
@@ -165,7 +165,7 @@ const Apetite = (props) => {
       paddingLeft: "70px"
     }}>
       <img
-      onClick={handleNumMealsButtonClick}
+      onClick={handleFibreButtonClick}
         style={{
           cursor: "pointer",
           width: "65px",
@@ -175,7 +175,7 @@ const Apetite = (props) => {
           backgroundColor: button3Color,
           paddingTop: "8px"
         }}
-        src="numbers.png"
+        src="fiber.png"
         alt="Image description"
         width="50"
         height="50"
@@ -183,8 +183,8 @@ const Apetite = (props) => {
       
     </div>
     <p style={{
-        paddingLeft: "40px"
-    }}>Number of meals</p>
+        paddingLeft: "60px"
+    }}>Fiber intake</p>
     </div>
 
     <div style={{
@@ -205,7 +205,7 @@ const Apetite = (props) => {
               backgroundColor: button4Color,
               paddingTop: "8px",
             }}
-            src="time.png"
+            src="supp.png"
             alt="Image description"
             width="40"
             height="40"
@@ -213,8 +213,9 @@ const Apetite = (props) => {
           
         </div>
     <p style={{
-        paddingRight: "10px"
-    }}>Meal Regularity</p>
+        paddingRight: "10px",
+        paddingLeft: "10px"
+    }}>Supplements</p>
     </div>
     
   </div>
@@ -247,4 +248,4 @@ const Apetite = (props) => {
   )
 }
 
-export default Apetite;
+export default FoodAndSupplements;
