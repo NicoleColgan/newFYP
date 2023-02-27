@@ -1,52 +1,12 @@
 import React from "react";
 import { useState } from "react";
 
-const TriggerFood = (props) => {
+const Consistency = (props) => {
   const handleCloseClick = () => {
     //passed the function to this compopnent
     props.onClose();
   };
-  const [button1Color, setButton1Color] = useState("#8CD9CF"); //green
-  function handleSymptom1ButtonClicked() {
-    //if any of the other buttons are clicked, turn them back to green
-    if (button1Color === "#8CD9CF") {
-      //green
-      setButton1Color("#4da6ff"); //blue
-    } else {
-      setButton1Color("#8CD9CF");
-    }
-
-    if (button2Color === "#4da6ff") setButton2Color("#8CD9CF");
-    if (button3Color === "#4da6ff") setButton3Color("#8CD9CF");
-  }
-
-  const [button2Color, setButton2Color] = useState("#8CD9CF"); //green
-
-  function handleSymptom2ButtonClicked() {
-    if (button2Color === "#8CD9CF") {
-      //green
-      setButton2Color("#4da6ff"); //blue
-    } else {
-      setButton2Color("#8CD9CF");
-    }
-
-    if (button1Color === "#4da6ff") setButton1Color("#8CD9CF");
-    if (button3Color === "#4da6ff") setButton3Color("#8CD9CF");
-  }
-
-  const [button3Color, setButton3Color] = useState("#8CD9CF"); //green
-
-  function handleSymptom3ButtonClicked() {
-    if (button3Color === "#8CD9CF") {
-      //green
-      setButton3Color("#4da6ff"); //blue
-    } else {
-      setButton3Color("#8CD9CF");
-    }
-    if (button2Color === "#4da6ff") setButton2Color("#8CD9CF");
-    if (button1Color === "#4da6ff") setButton1Color("#8CD9CF");
-  }
-
+  
   return (
     <div className=" Popup">
       <div className="Popup-overlay"></div>
@@ -54,7 +14,7 @@ const TriggerFood = (props) => {
         className="Popup-content"
         style={{
           width: "500px",
-          height: "420px",
+          height: "380px",
           backgroundColor: "white",
           borderRadius: "25px",
         }}
@@ -67,7 +27,7 @@ const TriggerFood = (props) => {
               paddingLeft: "175px",
             }}
           >
-            Supplements
+            Consistency
           </h2>
           <br />
           <p
@@ -76,7 +36,7 @@ const TriggerFood = (props) => {
               textAlign: "center",
             }}
           >
-            Log any supplements you are currently taking.
+            Log the consistency of your bowel movements.{" "}
           </p>
           <p
             style={{
@@ -84,8 +44,7 @@ const TriggerFood = (props) => {
               textAlign: "center",
             }}
           >
-            The correct supplement regime can help to manage digestive symptoms. People with digestive issues are at greater risk for nutrient deficiencies as the body is unable to process and break down food efficiently. Supplementation accompanied by a varied diet can help to improve digestion, regulate bowel movements, and improve physical symptoms and overall wellbeing.
-
+            Be as specific as possible when logging the shape and texture of your stool. You can use the Bristol Stool Chart to log a stool type 1 – 7. Having hard separate lumps that are hard to pass (type 1) indicate constipation, whereas watery stool (type 7) is diarrhoea.
           </p>
         </div>
 
@@ -143,4 +102,4 @@ const TriggerFood = (props) => {
   );
 };
 
-export default TriggerFood;
+export default Consistency;

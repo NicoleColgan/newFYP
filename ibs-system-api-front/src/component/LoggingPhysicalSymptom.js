@@ -77,7 +77,7 @@ const LoggingPhysicalSymptom = (props) => {
         className="Popup-content"
         style={{
           width: "400px",
-          height: "470px",
+          height: "490px",
           backgroundColor: "white",
           borderRadius: "25px",
         }}
@@ -92,11 +92,11 @@ const LoggingPhysicalSymptom = (props) => {
         >
           <h2
             style={{
-              padding: "15px",
+              paddingBottom: "20px",
               textDecoration: "underline",
             }}
           >
-            Log a physical symptom
+            Physical symptom
           </h2>
         </div>
         <div
@@ -104,9 +104,12 @@ const LoggingPhysicalSymptom = (props) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            paddingTop: "10px",
+            paddingTop: "10px"
           }}
         >
+          <div style={{
+            padding: "10px"
+          }}>
           <div
             style={{
               paddingRight: "30px",
@@ -128,11 +131,17 @@ const LoggingPhysicalSymptom = (props) => {
               width="50"
               height="50"
             />
+            </div>
             <p>Bloating</p>
           </div>
+
+          <div  style={{
+            padding: "10px"
+          }}>
           <div
             style={{
               paddingRight: "25px",
+              paddingLeft: "5px"
             }}
           >
             <img
@@ -151,9 +160,16 @@ const LoggingPhysicalSymptom = (props) => {
               width="50"
               height="50"
             />
+            </div>
             <p>Headaches</p>
           </div>
-          <div>
+
+          <div  style={{
+            padding: "10px"
+          }}>
+          <div style={{
+            paddingLeft: "10px"
+          }}>
             <img
               onClick={handleSymptom3ButtonClicked}
               style={{
@@ -170,7 +186,10 @@ const LoggingPhysicalSymptom = (props) => {
               width="50"
               height="50"
             />
-            <p>Gas</p>
+            </div>
+            <p style={{
+              paddingLeft:"30px"
+            }}>Gas</p>
           </div>
         </div>
         <div
@@ -181,6 +200,10 @@ const LoggingPhysicalSymptom = (props) => {
             paddingTop: "10px",
           }}
         >
+
+          <div  style={{
+            padding: "10px"
+          }}>
           <div
             style={{
               paddingRight: "30px",
@@ -202,11 +225,19 @@ const LoggingPhysicalSymptom = (props) => {
               width="50"
               height="50"
             />
-            <p>Acne</p>
+            </div>
+            <p style={{
+              paddingLeft: "11px"
+            }}>Acne</p>
           </div>
+
+          <div  style={{
+            padding: "10px"
+          }}>
           <div
             style={{
               paddingRight: "25px",
+              paddingLeft: "5"
             }}
           >
             <img
@@ -225,9 +256,17 @@ const LoggingPhysicalSymptom = (props) => {
               width="40"
               height="40"
             />
+            </div>
             <p>Low Energy</p>
           </div>
-          <div>
+
+          <div  style={{
+            padding: "10px",
+            paddingLeft: "10px"
+          }}>
+          <div style={{
+            paddingLeft:"12px"
+          }}>
             <img
               onClick={handleSymptom6ButtonClicked}
               style={{
@@ -244,12 +283,18 @@ const LoggingPhysicalSymptom = (props) => {
               width="45"
               height="45"
             />
-            <p>Stress</p>
+            </div>
+            <p style={{
+              paddingLeft: "22px"
+            }}>Stress</p>
           </div>
         </div>
+
+
+        
         <div
           style={{
-            paddingLeft: "160px",
+            paddingLeft: "170px",
           }}
         >
           <div

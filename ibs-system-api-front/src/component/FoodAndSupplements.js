@@ -40,14 +40,14 @@ const FoodAndSupplements = (props) => {
   }
   
 
-  //meal regularity
+  //Supplements
   const [button4Color, setButton4Color] = useState(
-    props.regButtonClicked ? '#4da6ff' : '#8CD9CF'
+    props.supplementsButtonClicked ? '#4da6ff' : '#8CD9CF'
   );
-  function handleRegButtonClick(){
+  function handleSupplementsButtonClick(){
     //when done change colour to say its logged
     setButton4Color('#4da6ff')
-    props.regButtonPressed();
+    props.supplementsButtonPressed();
   }
 
 
@@ -195,7 +195,7 @@ const FoodAndSupplements = (props) => {
 
     }}>
           <img
-          onClick={handleRegButtonClick}
+          onClick={handleSupplementsButtonClick}
             style={{
               cursor: "pointer",
               opacity: "80%",

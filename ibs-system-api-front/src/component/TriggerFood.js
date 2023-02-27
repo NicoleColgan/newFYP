@@ -6,47 +6,7 @@ const TriggerFood = (props) => {
     //passed the function to this compopnent
     props.onClose();
   };
-  const [button1Color, setButton1Color] = useState("#8CD9CF"); //green
-  function handleSymptom1ButtonClicked() {
-    //if any of the other buttons are clicked, turn them back to green
-    if (button1Color === "#8CD9CF") {
-      //green
-      setButton1Color("#4da6ff"); //blue
-    } else {
-      setButton1Color("#8CD9CF");
-    }
-
-    if (button2Color === "#4da6ff") setButton2Color("#8CD9CF");
-    if (button3Color === "#4da6ff") setButton3Color("#8CD9CF");
-  }
-
-  const [button2Color, setButton2Color] = useState("#8CD9CF"); //green
-
-  function handleSymptom2ButtonClicked() {
-    if (button2Color === "#8CD9CF") {
-      //green
-      setButton2Color("#4da6ff"); //blue
-    } else {
-      setButton2Color("#8CD9CF");
-    }
-
-    if (button1Color === "#4da6ff") setButton1Color("#8CD9CF");
-    if (button3Color === "#4da6ff") setButton3Color("#8CD9CF");
-  }
-
-  const [button3Color, setButton3Color] = useState("#8CD9CF"); //green
-
-  function handleSymptom3ButtonClicked() {
-    if (button3Color === "#8CD9CF") {
-      //green
-      setButton3Color("#4da6ff"); //blue
-    } else {
-      setButton3Color("#8CD9CF");
-    }
-    if (button2Color === "#4da6ff") setButton2Color("#8CD9CF");
-    if (button1Color === "#4da6ff") setButton1Color("#8CD9CF");
-  }
-
+ 
   return (
     <div className=" Popup">
       <div className="Popup-overlay"></div>
