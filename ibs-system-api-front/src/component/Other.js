@@ -1,52 +1,12 @@
 import React from "react";
 import { useState } from "react";
 
-const TriggerFood = (props) => {
+const Other = (props) => {
   const handleCloseClick = () => {
     //passed the function to this compopnent
     props.onClose();
   };
-  const [button1Color, setButton1Color] = useState("#8CD9CF"); //green
-  function handleSymptom1ButtonClicked() {
-    //if any of the other buttons are clicked, turn them back to green
-    if (button1Color === "#8CD9CF") {
-      //green
-      setButton1Color("#4da6ff"); //blue
-    } else {
-      setButton1Color("#8CD9CF");
-    }
-
-    if (button2Color === "#4da6ff") setButton2Color("#8CD9CF");
-    if (button3Color === "#4da6ff") setButton3Color("#8CD9CF");
-  }
-
-  const [button2Color, setButton2Color] = useState("#8CD9CF"); //green
-
-  function handleSymptom2ButtonClicked() {
-    if (button2Color === "#8CD9CF") {
-      //green
-      setButton2Color("#4da6ff"); //blue
-    } else {
-      setButton2Color("#8CD9CF");
-    }
-
-    if (button1Color === "#4da6ff") setButton1Color("#8CD9CF");
-    if (button3Color === "#4da6ff") setButton3Color("#8CD9CF");
-  }
-
-  const [button3Color, setButton3Color] = useState("#8CD9CF"); //green
-
-  function handleSymptom3ButtonClicked() {
-    if (button3Color === "#8CD9CF") {
-      //green
-      setButton3Color("#4da6ff"); //blue
-    } else {
-      setButton3Color("#8CD9CF");
-    }
-    if (button2Color === "#4da6ff") setButton2Color("#8CD9CF");
-    if (button1Color === "#4da6ff") setButton1Color("#8CD9CF");
-  }
-
+  
   return (
     <div className=" Popup">
       <div className="Popup-overlay"></div>
@@ -54,7 +14,7 @@ const TriggerFood = (props) => {
         className="Popup-content"
         style={{
           width: "500px",
-          height: "420px",
+          height: "330px",
           backgroundColor: "white",
           borderRadius: "25px",
         }}
@@ -64,28 +24,20 @@ const TriggerFood = (props) => {
             style={{
               textDecoration: "underline",
               margin: "0 0 0 0",
-              paddingLeft: "175px",
+              paddingLeft: "210px",
             }}
           >
-            Supplements
+            Other
           </h2>
           <br />
-          <p
-            style={{
-              margin: "0 0 10px 0",
-              textAlign: "center",
-            }}
-          >
-            Log any supplements you are currently taking.
-          </p>
+          
           <p
             style={{
               margin: "0 0 30px 0",
               textAlign: "center",
             }}
           >
-            The correct supplement regime can help to manage digestive symptoms. People with digestive issues are at greater risk for nutrient deficiencies as the body is unable to process and break down food efficiently. Supplementation accompanied by a varied diet can help to improve digestion, regulate bowel movements, and improve physical symptoms and overall wellbeing.
-
+            Enter notes about the urgency of your bowl movements, potential triggers, or other factors that you feel may exacerbated your stool symptoms.
           </p>
         </div>
 
@@ -143,4 +95,4 @@ const TriggerFood = (props) => {
   );
 };
 
-export default TriggerFood;
+export default Other;

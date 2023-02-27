@@ -1,100 +1,57 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from "react";
 
-const Hunger = (props) => {
-      
-
+const BowelMovements = (props) => {
   const handleCloseClick = () => {
     //passed the function to this compopnent
     props.onClose();
-  }
-  const [button1Color, setButton1Color] = useState('#8CD9CF');  //green
-  function handleSymptom1ButtonClicked(){
-    //if any of the other buttons are clicked, turn them back to green
-    if(button1Color==='#8CD9CF'){  //green
-        setButton1Color('#4da6ff');  //blue
-      } 
-      else {
-        setButton1Color('#8CD9CF')
-      }
+  };
+
+  //frequency
+  //if it was clicked, make it blue, if not, make it green
+  const [button1Color, setButton1Color] = useState(
+    props.frequencyButtonClicked ? '#4da6ff' : '#8CD9CF'
+  );
   
-      if(button2Color==='#4da6ff')
-          setButton2Color('#8CD9CF');
-      if(button3Color==='#4da6ff')
-          setButton3Color('#8CD9CF');
-    
+  function handleFrequencyButtonClick(){
+    //when done change colour to say its logged
+    setButton1Color('#4da6ff')
+    props.frequencyButtonPressed();
   }
 
-  const [button2Color, setButton2Color] = useState('#8CD9CF');  //green
-
-  function handleSymptom2ButtonClicked(){
-    if(button2Color==='#8CD9CF'){  //green
-      setButton2Color('#4da6ff');  //blue
-    } 
-    else {
-      setButton2Color('#8CD9CF')
-    }
-
-    if(button1Color==='#4da6ff')
-        setButton1Color('#8CD9CF');
-    if(button3Color==='#4da6ff')
-        setButton3Color('#8CD9CF');
-    
+  //Consistency
+  const [button2Color, setButton2Color] = useState(
+    props.consistencyButtonClicked ? '#4da6ff' : '#8CD9CF'
+  );
+  function handleConsistencyButtonClick(){
+    //when done change colour to say its logged
+    setButton2Color('#4da6ff')
+    props.consistencyButtonPressed();
   }
 
-    const [button3Color, setButton3Color] = useState('#8CD9CF');  //green
-
-  function handleSymptom3ButtonClicked(){
-    if(button3Color==='#8CD9CF'){  //green
-      setButton3Color('#4da6ff');  //blue
-    } 
-    else {
-      setButton3Color('#8CD9CF')
-    }
-    if(button2Color==='#4da6ff')
-        setButton2Color('#8CD9CF');
-    if(button1Color==='#4da6ff')
-        setButton1Color('#8CD9CF');
-    
+  //Other
+  const [button3Color, setButton3Color] = useState(
+    props.otherButtonClicked ? '#4da6ff' : '#8CD9CF'
+  );
+  function handleOtherButtonClick(){
+    //when done change colour to say its logged
+    setButton3Color('#4da6ff')
+    props.otherButtonPressed();
   }
+  
 
+  
   return (
     <div className=" Popup">
       <div className="Popup-overlay"></div>
       <div
         className="Popup-content"
         style={{
-          width: "500px",
-          height: "400px",
+          width: "400px",
+          height: "330px",
           backgroundColor: "white",
           borderRadius: "25px",
         }}
       >
-        <div
-          style={{
-          }}
-        >
-          <h2
-            style={{
-              textDecoration: "underline",
-              margin: "0 0 0 0",
-              paddingLeft: "200px"
-            }}
-          >
-            Hunger
-          </h2>
-          <br/>
-          <p style={{
-              margin: "0 0 10px 0",
-              textAlign: "center"
-            }}> Rate your hunger levels before and after a meal.</p> 
-            <p style={{
-              margin: "0 0 30px 0",
-              textAlign: "center"
-            }}>Eating when your very hungry can worsen your symptoms and lead to overeating. If your less hungry than usual, it could be a sign that your digestion is not optimal.</p>
-        </div>
-        
-
         <div
           style={{
             display: "flex",
@@ -103,17 +60,34 @@ const Hunger = (props) => {
             paddingTop: "10px",
           }}
         >
-         <div style={{
-            paddingRight: "11px"
-         }}>  
+          <h2
+            style={{
+              paddingBottom: "20px",
+              textDecoration: "underline",
+            }}
+          >
+            Bowel movements
+          </h2>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: "10px"
+          }}
+        >
+          <div style={{
+            padding: "10px"
+          }}>
           <div
             style={{
-              paddingRight: "50px",
-              paddingLeft: "10px"
+              paddingRight: "30px",
+              paddingLeft: "3px"
             }}
           >
             <img
-            onClick={handleSymptom1ButtonClicked}
+              onClick={handleFrequencyButtonClick}
               style={{
                 cursor: "pointer",
                 width: "65px",
@@ -123,25 +97,26 @@ const Hunger = (props) => {
                 backgroundColor: button1Color,
                 paddingTop: "8px",
               }}
-              src="x.png"
+              src="numbers.png"
               alt="Image description"
               width="50"
               height="50"
             />
-            </div> 
-            <p>Less hungry</p>
+            </div>
+            <p>Frequency</p>
           </div>
 
-          <div style={{
-            paddingRight: "20px"
+          <div  style={{
+            padding: "10px"
           }}>
           <div
             style={{
-              paddingRight: "30px",
+              paddingRight: "25px",
+              paddingLeft: "5px"
             }}
           >
             <img
-            onClick={handleSymptom2ButtonClicked}
+              onClick={handleConsistencyButtonClick}
               style={{
                 cursor: "pointer",
                 width: "65px",
@@ -151,23 +126,23 @@ const Hunger = (props) => {
                 backgroundColor: button2Color,
                 paddingTop: "8px",
               }}
-              src="questionMark.png"
+              src="poo2.png"
               alt="Image description"
               width="50"
               height="50"
             />
-            <p style={{
-                paddingLeft: "5px"
-            }}>Normal</p>
             </div>
+            <p>Consistency </p>
           </div>
 
-          <div>
+          <div  style={{
+            padding: "10px"
+          }}>
           <div style={{
             paddingLeft: "15px"
           }}>
             <img
-            onClick={handleSymptom3ButtonClicked}
+              onClick={handleOtherButtonClick}
               style={{
                 cursor: "pointer",
                 width: "65px",
@@ -177,28 +152,21 @@ const Hunger = (props) => {
                 backgroundColor: button3Color,
                 paddingTop: "8px",
               }}
-              src="tick.png"
+              src="dot.png"
               alt="Image description"
               width="50"
               height="50"
             />
             </div>
-            <p>More hungry</p>
+            <p style={{
+              paddingLeft:"30px"
+            }}>Other</p>
           </div>
         </div>
+
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingTop: "10px",
-          }}
-        >
-          
-        </div>
-        <div
-          style={{
-            paddingLeft: "210px",
+            paddingLeft: "170px",
           }}
         >
           <div
@@ -228,7 +196,7 @@ const Hunger = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Hunger
+export default BowelMovements;

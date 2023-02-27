@@ -85,8 +85,7 @@ const Reg = (props) => {
           }}
         >
          <div style={{
-            paddingRight: "10px",
-            paddingLeft: "30px"
+          paddingRight: "50px"
          }}>  
           <div
             style={{
@@ -113,11 +112,10 @@ const Reg = (props) => {
             <p>Inconsistent meal patterns</p>
           </div>
 
-          <div style={{
-         }}>  
+          <div>  
           <div
             style={{
-              paddingLeft: "70px"
+              paddingLeft: "45px"
             }}
           >
             <img
@@ -136,10 +134,9 @@ const Reg = (props) => {
               width="50"
               height="50"
             />
-            <p style={{
-                paddingLeft: "5px"
-            }}>Consistent meal patterns</p>
+           
             </div>
+             <p>Consistent meal patterns</p>
           </div>
         </div>
         <div

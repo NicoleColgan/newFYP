@@ -13,6 +13,11 @@ import FoodAndSupplements from "./FoodAndSupplements";
 import Hydration from "./Hydration";
 import TriggerFood from "./TriggerFood";
 import Fibre from "./Fibre";
+import Supplements from "./Supplements";
+import BowelMovements from "./BowelMovements";
+import Frequency from "./Frequency";
+import Consistency from "./Consistency";
+import Other from "./Other";
 
 const Logging = () => {
   const [showPhysicalSymptomPopup, setShowPhysicalSymptomPopup] = useState(false);
@@ -125,6 +130,7 @@ const Logging = () => {
     setShowTriggerFoodPopUp(false);  //method dependent
     setShowFoodAndSupplementsPopup(true);
   }
+
   //Fibre
   const [fibreButtonClicked, setFibreButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
   const [showFibrePopUp, setShowFibrePopUp] = useState(false);
@@ -139,6 +145,72 @@ const Logging = () => {
     setShowFoodAndSupplementsPopup(true);
   }
 
+  //Supplements
+  const [supplementsButtonClicked, setSupplementsButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showSupplementsPopUp, setShowSupplementsPopUp] = useState(false);
+  function handleSupplementsButtonClick(){
+    setSupplementsButtonClicked(true); //method dependent
+    setShowSupplementsPopUp(true); //method dependent
+    setShowFoodAndSupplementsPopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleSupplementsButtonCloseClick(){
+    setShowSupplementsPopUp(false);  //method dependent
+    setShowFoodAndSupplementsPopup(true);
+  }
+
+  //BowelMovements
+  const [showBowelMovementsPopup, setShowBowelMovementsPopup] = useState(false);
+
+  function handleBowelMovementsButtonClick(){
+    setShowBowelMovementsPopup(true);
+  }
+  function handleBowelMovementsCloseButtonClick(){
+    setShowBowelMovementsPopup(false);
+  }
+
+  //Frequency
+  const [frequencyButtonClicked, setFrequencyButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showFrequencyPopUp, setShowFrequencyPopUp] = useState(false);
+  function handleFrequencyButtonClick(){
+    setFrequencyButtonClicked(true); //method dependent
+    setShowFrequencyPopUp(true); //method dependent
+    setShowBowelMovementsPopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleFrequencyButtonCloseClick(){
+    setShowFrequencyPopUp(false);  //method dependent
+    setShowBowelMovementsPopup(true);
+  }
+
+  //Consistency
+  const [consistencyButtonClicked, setConsistencyButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showConsistencyPopUp, setShowConsistencyPopUp] = useState(false);
+  function handleConsistencyButtonClick(){
+    setConsistencyButtonClicked(true); //method dependent
+    setShowConsistencyPopUp(true); //method dependent
+    setShowBowelMovementsPopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleConsistencyButtonCloseClick(){
+    setShowConsistencyPopUp(false);  //method dependent
+    setShowBowelMovementsPopup(true);
+  }
+
+  //Other
+  const [otherButtonClicked, setOtherButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showOtherPopUp, setShowOtherPopUp] = useState(false);
+  function handleOtherButtonClick(){
+    setOtherButtonClicked(true); //method dependent
+    setShowOtherPopUp(true); //method dependent
+    setShowBowelMovementsPopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleOtherButtonCloseClick(){
+    setShowOtherPopUp(false);  //method dependent
+    setShowBowelMovementsPopup(true);
+  }
+
   return (
     <div fluid className="loggingBox">
       {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} />}
@@ -147,10 +219,15 @@ const Logging = () => {
       {showSatietyPopUp && <Satiety onClose={handleSatietyButtonCloseClick}/>}
       {showNumMealsPopUp && <NumMeals onClose={handleNumMealsButtonCloseClick}/>}
       {showRegPopUp && <Reg onClose={handleRegButtonCloseClick}/>}
-      {showFoodAndSupplementsPopup && <FoodAndSupplements onClose={handleFoodAndSupplementsCloseButtonClick} hydrationButtonPressed={handleHydrationButtonClick} hydrationButtonClicked={hydrationButtonClicked} triggerFoodButtonPressed={handleTriggerFoodButtonClick} triggerFoodButtonClicked={triggerFoodButtonClicked} fibreButtonPressed={handleFibreButtonClick} fibreButtonClicked={fibreButtonClicked}/>}
+      {showFoodAndSupplementsPopup && <FoodAndSupplements onClose={handleFoodAndSupplementsCloseButtonClick} hydrationButtonPressed={handleHydrationButtonClick} hydrationButtonClicked={hydrationButtonClicked} triggerFoodButtonPressed={handleTriggerFoodButtonClick} triggerFoodButtonClicked={triggerFoodButtonClicked} fibreButtonPressed={handleFibreButtonClick} fibreButtonClicked={fibreButtonClicked} supplementsButtonPressed={handleSupplementsButtonClick} supplementsButtonClicked={supplementsButtonClicked}/>}
       {showHydrationPopUp && <Hydration onClose={handleHydrationButtonCloseClick}/>}
       {showTriggerFoodPopUp && <TriggerFood onClose={handleTriggerFoodButtonCloseClick}/>}
       {showFibrePopUp && <Fibre onClose={handleFibreButtonCloseClick}/>}
+      {showSupplementsPopUp && <Supplements onClose={handleSupplementsButtonCloseClick}/>}
+      {showBowelMovementsPopup && <BowelMovements onClose={handleBowelMovementsCloseButtonClick} frequencyButtonPressed={handleFrequencyButtonClick} frequencyButtonClicked={frequencyButtonClicked} consistencyButtonPressed={handleConsistencyButtonClick} consistencyButtonClicked={consistencyButtonClicked} otherButtonPressed={handleOtherButtonClick} otherButtonClicked={otherButtonClicked}/>}
+      {showFrequencyPopUp && <Frequency onClose={handleFrequencyButtonCloseClick}/>}
+      {showConsistencyPopUp && <Consistency onClose={handleConsistencyButtonCloseClick}/>}
+      {showOtherPopUp && <Other onClose={handleOtherButtonCloseClick}/>}
 
     <div>
       <Calendar className="react-calendar" />
@@ -174,7 +251,7 @@ const Logging = () => {
         <div>
           <button onClick={handlePhysicalSymptomButtonClick} className="loggingButton">Physical Symptom</button>
           <span className="buttonSpace"></span>
-          <button className="loggingButton">Bowel Movements</button>
+          <button onClick={handleBowelMovementsButtonClick} className="loggingButton">Bowel Movements</button>
         </div>
         <span className="buttonSpace"></span>
         <div>
