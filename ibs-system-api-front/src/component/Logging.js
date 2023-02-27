@@ -9,6 +9,10 @@ import Apetite from "./Appetite";
 import NumMeals from "./NumMeals";
 import Reg from "./Reg"
 import LoggingPhysicalSymptom from "./LoggingPhysicalSymptom";
+import FoodAndSupplements from "./FoodAndSupplements";
+import Hydration from "./Hydration";
+import TriggerFood from "./TriggerFood";
+import Fibre from "./Fibre";
 
 const Logging = () => {
   const [showPhysicalSymptomPopup, setShowPhysicalSymptomPopup] = useState(false);
@@ -19,9 +23,10 @@ const Logging = () => {
   function handlePhysicalSymptomCloseButtonClick(){
     setShowPhysicalSymptomPopup(false);
   }
+
+  //apetite
   const [showAppetitePopup, setShowAppetitePopup] = useState(false);
 
-  
   function handleAppetiteButtonClick(){
     setShowAppetitePopup(true);
   }
@@ -83,6 +88,57 @@ const Logging = () => {
     setShowAppetitePopup(true);
   }
 
+  //food and supplements
+  const [showFoodAndSupplementsPopup, setShowFoodAndSupplementsPopup] = useState(false);
+
+  function handleFoodAndSupplementsButtonClick(){
+    setShowFoodAndSupplementsPopup(true);
+  }
+  function handleFoodAndSupplementsCloseButtonClick(){
+    setShowFoodAndSupplementsPopup(false);
+  }
+
+  //hydration button
+  const [hydrationButtonClicked, setHydrationButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showHydrationPopUp, setShowHydrationPopUp] = useState(false);
+  function handleHydrationButtonClick(){
+    setHydrationButtonClicked(true); //method dependent
+    setShowHydrationPopUp(true); //method dependent
+    setShowFoodAndSupplementsPopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleHydrationButtonCloseClick(){
+    setShowHydrationPopUp(false);  //method dependent
+    setShowFoodAndSupplementsPopup(true);
+  }
+
+  //TriggerFood
+  const [triggerFoodButtonClicked, setTriggerFoodButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showTriggerFoodPopUp, setShowTriggerFoodPopUp] = useState(false);
+  function handleTriggerFoodButtonClick(){
+    setTriggerFoodButtonClicked(true); //method dependent
+    setShowTriggerFoodPopUp(true); //method dependent
+    setShowFoodAndSupplementsPopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleTriggerFoodButtonCloseClick(){
+    setShowTriggerFoodPopUp(false);  //method dependent
+    setShowFoodAndSupplementsPopup(true);
+  }
+  //Fibre
+  const [fibreButtonClicked, setFibreButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showFibrePopUp, setShowFibrePopUp] = useState(false);
+  function handleFibreButtonClick(){
+    setFibreButtonClicked(true); //method dependent
+    setShowFibrePopUp(true); //method dependent
+    setShowFoodAndSupplementsPopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleFibreButtonCloseClick(){
+    setShowFibrePopUp(false);  //method dependent
+    setShowFoodAndSupplementsPopup(true);
+  }
+
   return (
     <div fluid className="loggingBox">
       {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} />}
@@ -91,6 +147,10 @@ const Logging = () => {
       {showSatietyPopUp && <Satiety onClose={handleSatietyButtonCloseClick}/>}
       {showNumMealsPopUp && <NumMeals onClose={handleNumMealsButtonCloseClick}/>}
       {showRegPopUp && <Reg onClose={handleRegButtonCloseClick}/>}
+      {showFoodAndSupplementsPopup && <FoodAndSupplements onClose={handleFoodAndSupplementsCloseButtonClick} hydrationButtonPressed={handleHydrationButtonClick} hydrationButtonClicked={hydrationButtonClicked} triggerFoodButtonPressed={handleTriggerFoodButtonClick} triggerFoodButtonClicked={triggerFoodButtonClicked} fibreButtonPressed={handleFibreButtonClick} fibreButtonClicked={fibreButtonClicked}/>}
+      {showHydrationPopUp && <Hydration onClose={handleHydrationButtonCloseClick}/>}
+      {showTriggerFoodPopUp && <TriggerFood onClose={handleTriggerFoodButtonCloseClick}/>}
+      {showFibrePopUp && <Fibre onClose={handleFibreButtonCloseClick}/>}
 
     <div>
       <Calendar className="react-calendar" />
@@ -124,7 +184,7 @@ const Logging = () => {
         </div>
         <span className="buttonSpace"></span>
         <div>
-          <button className="loggingButton">Food & Supplements</button>
+          <button onClick={handleFoodAndSupplementsButtonClick} className="loggingButton">Food & Supplements</button>
           <span className="buttonSpace"></span>
           <button className="loggingButton">Other</button>
         </div>
