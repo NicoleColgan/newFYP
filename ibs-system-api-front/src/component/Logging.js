@@ -18,6 +18,7 @@ import BowelMovements from "./BowelMovements";
 import Frequency from "./Frequency";
 import Consistency from "./Consistency";
 import Other from "./Other";
+import WellbeingAndExercise from "./WellbeingAndExercise";
 
 const Logging = () => {
   const [showPhysicalSymptomPopup, setShowPhysicalSymptomPopup] = useState(false);
@@ -211,6 +212,16 @@ const Logging = () => {
     setShowBowelMovementsPopup(true);
   }
 
+  //WellbeingAndExercise
+  const [showWellbeingAndExercisePopup, setShowWellbeingAndExercisePopup] = useState(false);
+
+  function handleWellbeingAndExerciseButtonClick(){
+    setShowWellbeingAndExercisePopup(true);
+  }
+  function handleWellbeingAndExerciseCloseButtonClick(){
+    setShowWellbeingAndExercisePopup(false);
+  }
+
   return (
     <div fluid className="loggingBox">
       {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} />}
@@ -228,6 +239,7 @@ const Logging = () => {
       {showFrequencyPopUp && <Frequency onClose={handleFrequencyButtonCloseClick}/>}
       {showConsistencyPopUp && <Consistency onClose={handleConsistencyButtonCloseClick}/>}
       {showOtherPopUp && <Other onClose={handleOtherButtonCloseClick}/>}
+      {showWellbeingAndExercisePopup && <WellbeingAndExercise onClose={handleWellbeingAndExerciseCloseButtonClick}/>}
 
     <div>
       <Calendar className="react-calendar" />
@@ -257,7 +269,7 @@ const Logging = () => {
         <div>
           <button onClick={handleAppetiteButtonClick} className="loggingButton">Appetite</button>
           <span className="buttonSpace"></span>
-          <button className="loggingButton">Wellbeing & Exercise</button>
+          <button onClick={handleWellbeingAndExerciseButtonClick} className="loggingButton">Wellbeing & Exercise</button>
         </div>
         <span className="buttonSpace"></span>
         <div>

@@ -62,7 +62,7 @@ const Other = (props) => {
 
         <div
           style={{
-            paddingLeft: "210px",
+            paddingLeft: "215px",
           }}
         >
           <div
