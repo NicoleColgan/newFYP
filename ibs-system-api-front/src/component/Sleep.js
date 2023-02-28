@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
 
-const Other = (props) => {
+const Sleep = (props) => {
   const handleCloseClick = () => {
     //passed the function to this compopnent
     props.onClose();
   };
-  
+ 
   return (
     <div className=" Popup">
       <div className="Popup-overlay"></div>
@@ -14,7 +14,7 @@ const Other = (props) => {
         className="Popup-content"
         style={{
           width: "500px",
-          height: "330px",
+          height: "355px",
           backgroundColor: "white",
           borderRadius: "25px",
         }}
@@ -24,20 +24,27 @@ const Other = (props) => {
             style={{
               textDecoration: "underline",
               margin: "0 0 0 0",
-              paddingLeft: "210px",
+              paddingLeft: "215px",
             }}
           >
-            Other
+            Sleep
           </h2>
           <br />
-          
+          <p
+            style={{
+              margin: "0 0 10px 0",
+              textAlign: "center",
+            }}
+          >
+            Log your sleep quality and quantity.{" "}
+          </p>
           <p
             style={{
               margin: "0 0 30px 0",
               textAlign: "center",
             }}
           >
-            Enter notes about the urgency of your bowl movements, potential triggers, or other factors that you feel may exacerbated your stool symptoms.
+            Getting enough quality sleep can help manage your symptoms because it helps reduce cortisol in the body, which directly affects your digestion, and it gives your body time to rest and digest your food.
           </p>
         </div>
 
@@ -62,7 +69,7 @@ const Other = (props) => {
 
         <div
           style={{
-            paddingLeft: "215px",
+            paddingLeft: "210px",
           }}
         >
           <div
@@ -95,4 +102,4 @@ const Other = (props) => {
   );
 };
 
-export default Other;
+export default Sleep;

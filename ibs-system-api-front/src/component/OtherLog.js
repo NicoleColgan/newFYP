@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
 
-const Other = (props) => {
+const OtherLog = (props) => {
   const handleCloseClick = () => {
     //passed the function to this compopnent
     props.onClose();
   };
-  
+ 
   return (
     <div className=" Popup">
       <div className="Popup-overlay"></div>
@@ -14,7 +14,7 @@ const Other = (props) => {
         className="Popup-content"
         style={{
           width: "500px",
-          height: "330px",
+          height: "285px",
           backgroundColor: "white",
           borderRadius: "25px",
         }}
@@ -24,20 +24,19 @@ const Other = (props) => {
             style={{
               textDecoration: "underline",
               margin: "0 0 0 0",
-              paddingLeft: "210px",
+              paddingLeft: "215px",
             }}
           >
             Other
           </h2>
           <br />
-          
           <p
             style={{
-              margin: "0 0 30px 0",
+              margin: "0 0 10px 0",
               textAlign: "center",
             }}
           >
-            Enter notes about the urgency of your bowl movements, potential triggers, or other factors that you feel may exacerbated your stool symptoms.
+            Log any other symptoms or notes that you feel are important for managing your condition.{" "}
           </p>
         </div>
 
@@ -62,7 +61,7 @@ const Other = (props) => {
 
         <div
           style={{
-            paddingLeft: "215px",
+            paddingLeft: "210px",
           }}
         >
           <div
@@ -95,4 +94,4 @@ const Other = (props) => {
   );
 };
 
-export default Other;
+export default OtherLog;

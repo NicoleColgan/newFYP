@@ -18,7 +18,12 @@ import BowelMovements from "./BowelMovements";
 import Frequency from "./Frequency";
 import Consistency from "./Consistency";
 import Other from "./Other";
-
+import WellbeingAndExercise from "./WellbeingAndExercise";
+import MentalHealth from "./MentalHealth";
+import ExerciseFrequency from "./ExerciseFrequency";
+import ExerciseIntensity from "./ExerciseIntensity";
+import Sleep from "./Sleep";
+import OtherLog from "./OtherLog";
 const Logging = () => {
   const [showPhysicalSymptomPopup, setShowPhysicalSymptomPopup] = useState(false);
   
@@ -211,6 +216,83 @@ const Logging = () => {
     setShowBowelMovementsPopup(true);
   }
 
+  //WellbeingAndExercise
+  const [showWellbeingAndExercisePopup, setShowWellbeingAndExercisePopup] = useState(false);
+
+  function handleWellbeingAndExerciseButtonClick(){
+    setShowWellbeingAndExercisePopup(true);
+  }
+  function handleWellbeingAndExerciseCloseButtonClick(){
+    setShowWellbeingAndExercisePopup(false);
+  }
+
+  //MentalHealth
+  const [mentalHealthButtonClicked, setMentalHealthButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showMentalHealthPopUp, setShowMentalHealthPopUp] = useState(false);
+  function handleMentalHealthButtonClick(){
+    setMentalHealthButtonClicked(true); //method dependent
+    setShowMentalHealthPopUp(true); //method dependent
+    setShowWellbeingAndExercisePopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleMentalHealthButtonCloseClick(){
+    setShowMentalHealthPopUp(false);  //method dependent
+    setShowWellbeingAndExercisePopup(true);
+  }
+
+  //ExerciseFrequency
+  const [exerciseFrequencyButtonClicked, setExerciseFrequencyButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showExerciseFrequencyPopUp, setShowExerciseFrequencyPopUp] = useState(false);
+  function handleExerciseFrequencyButtonClick(){
+    setExerciseFrequencyButtonClicked(true); //method dependent
+    setShowExerciseFrequencyPopUp(true); //method dependent
+    setShowWellbeingAndExercisePopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleExerciseFrequencyButtonCloseClick(){
+    setShowExerciseFrequencyPopUp(false);  //method dependent
+    setShowWellbeingAndExercisePopup(true);
+  }
+
+  //ExerciseIntensity
+  const [exerciseIntensityButtonClicked, setExerciseIntensityButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showExerciseIntensityPopUp, setShowExerciseIntensityPopUp] = useState(false);
+  function handleExerciseIntensityButtonClick(){
+    setExerciseIntensityButtonClicked(true); //method dependent
+    setShowExerciseIntensityPopUp(true); //method dependent
+    setShowWellbeingAndExercisePopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleExerciseIntensityButtonCloseClick(){
+    setShowExerciseIntensityPopUp(false);  //method dependent
+    setShowWellbeingAndExercisePopup(true);
+  }
+
+  //Sleep
+  const [sleepButtonClicked, setSleepButtonClicked] = useState(false);  //used to colour keep the colour of the button blue after weve logged for it
+  const [showSleepPopUp, setShowSleepPopUp] = useState(false);
+  function handleSleepButtonClick(){
+    setSleepButtonClicked(true); //method dependent
+    setShowSleepPopUp(true); //method dependent
+    setShowWellbeingAndExercisePopup(false);
+    //want to set this colour to blue and stay like this
+  }
+  function handleSleepButtonCloseClick(){
+    setShowSleepPopUp(false);  //method dependent
+    setShowWellbeingAndExercisePopup(true);
+  }
+
+  //OtherLog
+  const [showOtherLogPopup, setShowOtherLogPopup] = useState(false);
+
+  function handleOtherLogButtonClick(){
+    setShowOtherLogPopup(true);
+  }
+  function handleOtherLogCloseButtonClick(){
+    setShowOtherLogPopup(false);
+  }
+
+
   return (
     <div fluid className="loggingBox">
       {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} />}
@@ -228,6 +310,12 @@ const Logging = () => {
       {showFrequencyPopUp && <Frequency onClose={handleFrequencyButtonCloseClick}/>}
       {showConsistencyPopUp && <Consistency onClose={handleConsistencyButtonCloseClick}/>}
       {showOtherPopUp && <Other onClose={handleOtherButtonCloseClick}/>}
+      {showWellbeingAndExercisePopup && <WellbeingAndExercise onClose={handleWellbeingAndExerciseCloseButtonClick} mentalHealthButtonPressed={handleMentalHealthButtonClick} mentalHealthButtonClicked={mentalHealthButtonClicked} exerciseFrequencyButtonPressed={handleExerciseFrequencyButtonClick} exerciseFrequencyButtonClicked={exerciseFrequencyButtonClicked} exerciseIntensityButtonPressed={handleExerciseIntensityButtonClick} exerciseIntensityButtonClicked={exerciseIntensityButtonClicked} sleepButtonPressed={handleSleepButtonClick} sleepButtonClicked={sleepButtonClicked}/>}
+      {showMentalHealthPopUp && <MentalHealth onClose={handleMentalHealthButtonCloseClick}/>}
+      {showExerciseFrequencyPopUp && <ExerciseFrequency onClose={handleExerciseFrequencyButtonCloseClick}/>}
+      {showExerciseIntensityPopUp && <ExerciseIntensity onClose={handleExerciseIntensityButtonCloseClick}/>}
+      {showSleepPopUp && <Sleep onClose={handleSleepButtonCloseClick}/>}
+      {showOtherLogPopup && <OtherLog onClose={handleOtherLogCloseButtonClick} />}
 
     <div>
       <Calendar className="react-calendar" />
@@ -257,13 +345,13 @@ const Logging = () => {
         <div>
           <button onClick={handleAppetiteButtonClick} className="loggingButton">Appetite</button>
           <span className="buttonSpace"></span>
-          <button className="loggingButton">Wellbeing & Exercise</button>
+          <button onClick={handleWellbeingAndExerciseButtonClick} className="loggingButton">Wellbeing & Exercise</button>
         </div>
         <span className="buttonSpace"></span>
         <div>
           <button onClick={handleFoodAndSupplementsButtonClick} className="loggingButton">Food & Supplements</button>
           <span className="buttonSpace"></span>
-          <button className="loggingButton">Other</button>
+          <button onClick={handleOtherLogButtonClick} className="loggingButton">Other</button>
         </div>
       </div>
     </div>
