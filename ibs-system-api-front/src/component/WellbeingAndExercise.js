@@ -8,46 +8,47 @@ const WellbeingAndExercise = (props) => {
     props.onClose();
   }
 
+  //MentalHealth
   //if it was clicked, make it blue, if not, make it green
   const [button1Color, setButton1Color] = useState(
-    props.hungerButtonClicked ? '#4da6ff' : '#8CD9CF'
+    props.mentalHealthButtonClicked ? '#4da6ff' : '#8CD9CF'
   );
   
-  function handleHungerButtonClick(){
+  function handleMentalHealthButtonClick(){
     //when done change colour to say its logged
     setButton1Color('#4da6ff')
-    props.hungerButtonPressed();
+    props.mentalHealthButtonPressed();
   }
 
-  //Satiety
+  //ExerciseFrequency
   const [button2Color, setButton2Color] = useState(
-    props.satietyButtonClicked ? '#4da6ff' : '#8CD9CF'
+    props.exerciseFrequencyButtonClicked ? '#4da6ff' : '#8CD9CF'
   );
-  function handleSatietyButtonClick(){
+  function handleExerciseFrequencyButtonClick(){
     //when done change colour to say its logged
     setButton2Color('#4da6ff')
-    props.satietyButtonPressed();
+    props.exerciseFrequencyButtonPressed();
   }
 
-  //numMeals
+  //ExerciseIntensity
   const [button3Color, setButton3Color] = useState(
-    props.numMealsButtonClicked ? '#4da6ff' : '#8CD9CF'
+    props.exerciseIntensityButtonClicked ? '#4da6ff' : '#8CD9CF'
   );
-  function handleNumMealsButtonClick(){
+  function handleExerciseIntensityButtonClick(){
     //when done change colour to say its logged
     setButton3Color('#4da6ff')
-    props.numMealsButtonPressed();
+    props.exerciseIntensityButtonPressed();
   }
   
 
-  //meal regularity
+  //Sleep
   const [button4Color, setButton4Color] = useState(
-    props.regButtonClicked ? '#4da6ff' : '#8CD9CF'
+    props.sleepButtonClicked ? '#4da6ff' : '#8CD9CF'
   );
-  function handleRegButtonClick(){
+  function handleSleepButtonClick(){
     //when done change colour to say its logged
     setButton4Color('#4da6ff')
-    props.regButtonPressed();
+    props.sleepButtonPressed();
   }
 
 
@@ -96,7 +97,7 @@ const WellbeingAndExercise = (props) => {
     }}>
         
       <img
-      onClick={handleHungerButtonClick}
+      onClick={handleMentalHealthButtonClick}
         style={{
           cursor: "pointer",
           width: "65px",
@@ -122,7 +123,7 @@ const WellbeingAndExercise = (props) => {
       paddingLeft: "42px"
     }}>
           <img
-          onClick={handleSatietyButtonClick}
+          onClick={handleExerciseFrequencyButtonClick}
             style={{
               cursor: "pointer",
               width: "65px",
@@ -156,6 +157,7 @@ const WellbeingAndExercise = (props) => {
       paddingRight: "5px"
     }}
   >
+
     <div style={{
         paddingRight:"40px"
     }}>
@@ -164,7 +166,7 @@ const WellbeingAndExercise = (props) => {
       paddingLeft: "70px"
     }}>
       <img
-      onClick={handleNumMealsButtonClick}
+      onClick={handleExerciseIntensityButtonClick}
         style={{
           cursor: "pointer",
           width: "65px",
@@ -182,19 +184,19 @@ const WellbeingAndExercise = (props) => {
       
     </div>
     <p style={{
-        paddingLeft: "40px"
+        paddingLeft: "45px"
     }}>Exercise intensity</p>
     </div>
 
     <div style={{
-        paddingRight:"35px"
+        paddingRight:"65px"
     }}>
     <div style={{
         paddingLeft:"15px"
 
     }}>
           <img
-          onClick={handleRegButtonClick}
+          onClick={handleSleepButtonClick}
             style={{
               cursor: "pointer",
               opacity: "80%",
@@ -212,13 +214,14 @@ const WellbeingAndExercise = (props) => {
           
         </div>
     <p style={{
-        paddingRight: "10px"
-    }}>Sleep quality</p>
+        paddingRight: "13px",
+        paddingLeft: "26px"
+    }}>Sleep</p>
     </div>
     
   </div>
   <div style={{ 
-    paddingLeft: "160px"
+    paddingLeft: "165px"
   }}>
     <div style={{
   borderRadius: "25px",
