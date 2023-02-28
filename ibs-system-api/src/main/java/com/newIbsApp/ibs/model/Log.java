@@ -4,16 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * User makes a log
+ */
 @Data
 @AllArgsConstructor //creates a contructor with all arguments
 @NoArgsConstructor  //creates a constructor with no args
-public class User {
+public class Log {
+
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private List<Log> logs;
+    private Long userId;
+    private LocalDate date;
+    //log type can be physicalSymptom, trigger foods, exercise frequency etc.
+    private String logType;
 }

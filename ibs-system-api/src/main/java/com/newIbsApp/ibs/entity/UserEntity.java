@@ -1,7 +1,10 @@
 package com.newIbsApp.ibs.entity;
 
+import com.newIbsApp.ibs.model.Log;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * This is the object we will interact with when were trying to talk to the db
@@ -21,4 +24,7 @@ public class UserEntity {
     private String lastName;
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "userEntity",cascade = CascadeType.ALL)
+    private List<LogEntity> logs;
 }

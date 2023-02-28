@@ -1,6 +1,7 @@
 package com.newIbsApp.ibs.services;
 
 import com.newIbsApp.ibs.entity.UserEntity;
+import com.newIbsApp.ibs.model.Log;
 import com.newIbsApp.ibs.model.User;
 import com.newIbsApp.ibs.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
@@ -38,13 +39,21 @@ public class UserServiceImpl implements UserService{
         List<UserEntity> userEntities = userRepository.findAll();
         //convert to new users for ui
         //map function is used to convert from one type to another
+        //userService uses LogEntity and not Log so when creating a new user we have to
+        //use the Log not the db version (LogEntity) so have to convert the LogEntity list stored
+        //by the user entity to a list
         List<User> users = userEntities.stream().map(u -> new User(
                         u.getId(),
                         u.getFirstName(),
                         u.getLastName(),
                         u.getEmail(),
-                        u.getPassword()))
-                .collect(Collectors.toList());
+                        u.getPassword(),
+                        u.getLogs().stream().map(logEntity -> new Log(
+                                logEntity.getId(),
+                                logEntity.getUserEntity().getId(),
+                                logEntity.getDate(),
+                                logEntity.getLogType())).collect(Collectors.toList())
+                        )).collect(Collectors.toList());
         return users;
     }
     @Override
@@ -63,8 +72,13 @@ public class UserServiceImpl implements UserService{
                         u.getFirstName(),
                         u.getLastName(),
                         u.getEmail(),
-                        u.getPassword()))
-                .collect(Collectors.toList());
+                        u.getPassword(),
+                        u.getLogs().stream().map(logEntity -> new Log(
+                                logEntity.getId(),
+                                logEntity.getUserEntity().getId(),
+                                logEntity.getDate(),
+                                logEntity.getLogType())).collect(Collectors.toList())
+                        )).collect(Collectors.toList());
         for(User u: users){
             if(u.getEmail().equals(email)) {
                 User user = new User();
@@ -83,8 +97,13 @@ public class UserServiceImpl implements UserService{
                         u.getFirstName(),
                         u.getLastName(),
                         u.getEmail(),
-                        u.getPassword()))
-                .collect(Collectors.toList());
+                        u.getPassword(),
+                        u.getLogs().stream().map(logEntity -> new Log(
+                                logEntity.getId(),
+                                logEntity.getUserEntity().getId(),
+                                logEntity.getDate(),
+                                logEntity.getLogType())).collect(Collectors.toList())
+                )).collect(Collectors.toList());
         for(User u: users){
             //if a user exists with this email
             if(u.getEmail().equals(email)) {

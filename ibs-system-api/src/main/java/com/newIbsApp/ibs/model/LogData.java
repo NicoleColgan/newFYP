@@ -1,19 +1,16 @@
 package com.newIbsApp.ibs.model;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor //creates a contructor with all arguments
 @NoArgsConstructor  //creates a constructor with no args
-public class User {
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private List<Log> logs;
+public class LogData {
+    //example for physicalSymptom data would be {"headache", "bloating"}
+    //example for trigger foods {"My trigger foods are...")
+    private Long logId;
+    private String data;
 }
