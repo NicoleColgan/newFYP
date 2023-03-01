@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
-@Table(name="Log")
+@Table(name="logs")
 public class LogEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +20,12 @@ public class LogEntity {
     @JoinColumn(name="users")
     private UserEntity userEntity;
 
-    @Column(name="logType")
-    private String logType;
-
     @Column(name="date")
     private LocalDate date;
+
+    @Column(name="log_type")
+    private String logType;
+
+    @OneToMany(mappedBy = "logEntity")
+    private List<LogDataEntity> logDataEntities;
 }

@@ -4,6 +4,6 @@ import java.io.Serializable;
 
 //needs to impelemtn Serializable because we have a composite pk
 public class LogDataId implements Serializable {
-    private Long logId;
+    private Long logEntity;
     private String data;
 }

@@ -52,7 +52,8 @@ public class UserServiceImpl implements UserService{
                                 logEntity.getId(),
                                 logEntity.getUserEntity().getId(),
                                 logEntity.getDate(),
-                                logEntity.getLogType())).collect(Collectors.toList())
+                                logEntity.getLogType(),
+                                logEntity.getLogDataEntities())).collect(Collectors.toList())
                         )).collect(Collectors.toList());
         return users;
     }
@@ -77,7 +78,8 @@ public class UserServiceImpl implements UserService{
                                 logEntity.getId(),
                                 logEntity.getUserEntity().getId(),
                                 logEntity.getDate(),
-                                logEntity.getLogType())).collect(Collectors.toList())
+                                logEntity.getLogType(),
+                                logEntity.getLogDataEntities())).collect(Collectors.toList())
                         )).collect(Collectors.toList());
         for(User u: users){
             if(u.getEmail().equals(email)) {
@@ -102,7 +104,9 @@ public class UserServiceImpl implements UserService{
                                 logEntity.getId(),
                                 logEntity.getUserEntity().getId(),
                                 logEntity.getDate(),
-                                logEntity.getLogType())).collect(Collectors.toList())
+                                logEntity.getLogType(),
+                                logEntity.getLogDataEntities()
+                        )).collect(Collectors.toList())
                 )).collect(Collectors.toList());
         for(User u: users){
             //if a user exists with this email

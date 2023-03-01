@@ -6,7 +6,7 @@ import lombok.Data;
 //data annotion creates get and set methods
 @Entity
 @Data
-@Table(name="LogData")
+@Table(name="Log_data")
 @IdClass(LogDataId.class)
 public class LogDataEntity {
 

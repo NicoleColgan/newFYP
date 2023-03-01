@@ -1,5 +1,6 @@
 package com.newIbsApp.ibs.model;
 
+import com.newIbsApp.ibs.entity.LogDataEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,5 @@ public class Log {
     private LocalDate date;
     //log type can be physicalSymptom, trigger foods, exercise frequency etc.
     private String logType;
+    private List<LogDataEntity> logDataEntities;
 }

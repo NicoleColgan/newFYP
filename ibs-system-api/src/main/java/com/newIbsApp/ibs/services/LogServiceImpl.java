@@ -5,12 +5,14 @@ import com.newIbsApp.ibs.model.Log;
 import com.newIbsApp.ibs.repository.LogRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class LogServiceImpl implements LogService{
     private LogRepository logRepository;
 
@@ -40,7 +42,8 @@ public class LogServiceImpl implements LogService{
                 l.getId(),
                 l.getUserEntity().getId(),
                 l.getDate(),
-                l.getLogType()
+                l.getLogType(),
+                l.getLogDataEntities()
         )).collect(Collectors.toList());
 
         return logs;
