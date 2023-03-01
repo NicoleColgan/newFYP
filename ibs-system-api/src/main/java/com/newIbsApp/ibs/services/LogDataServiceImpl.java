@@ -1,0 +1,57 @@
+package com.newIbsApp.ibs.services;
+
+import com.newIbsApp.ibs.entity.LogDataEntity;
+import com.newIbsApp.ibs.model.Log;
+import com.newIbsApp.ibs.model.LogData;
+import com.newIbsApp.ibs.repository.LogDataRepository;
+import org.springframework.beans.BeanUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+public class LogDataServiceImpl implements LogDataService{
+    private LogDataRepository logDataRepository;
+
+    public LogDataServiceImpl(LogDataRepository logDataRepository) {
+        this.logDataRepository=logDataRepository;
+    }
+    @Override
+    public List<LogData> getLogDataById(Long id) {
+        List<LogData> logDatas = getAllLogData();
+        List<LogData> toReturn= new ArrayList<>();
+        for(LogData l: logDatas){
+            if(l.getLogId()==id)
+                toReturn.add(l);
+        }
+        return toReturn;
+    }
+
+    @Override
+    public List<LogData> getAllLogData() {
+        List<LogDataEntity> logDataEntities = logDataRepository.findAll();
+
+        List<LogData> logDatas = logDataEntities.stream().map(l -> new LogData(
+                l.getLogEntity().getId(),
+                l.getData()
+        )).collect(Collectors.toList());
+        return logDatas;
+    }
+
+    @Override
+    public LogData createLogData(LogData logData) {
+        LogDataEntity logDataEntity = new LogDataEntity();
+
+        //copy valuyes into entity object
+        BeanUtils.copyProperties(logData,logDataEntity);
+        System.out.println("LogData entity: "+logDataEntity);
+        System.out.println("LogData: "+logData);
+
+        //save to db
+        logDataRepository.save(logDataEntity);
+        return logData;
+    }
+
+    //do i need a create logData like i have in create log - yeah because need to save it to db
+}

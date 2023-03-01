@@ -5,5 +5,9 @@ import com.newIbsApp.ibs.model.LogData;
 import java.util.List;
 
 public interface LogDataService {
-    List<String> getLogDataById(Long id);
+    List<LogData> getLogDataById(Long id);
+
+    List<LogData> getAllLogData();
+
+    LogData createLogData(LogData logData);
 }
