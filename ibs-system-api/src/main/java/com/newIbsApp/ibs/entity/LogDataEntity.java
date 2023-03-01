@@ -1,5 +1,6 @@
 package com.newIbsApp.ibs.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ public class LogDataEntity {
     @Id
     @ManyToOne
     @JoinColumn(name="log_id")
+    @JsonIgnoreProperties("logDataEntities")
     private LogEntity logEntity;
 
     @Id
