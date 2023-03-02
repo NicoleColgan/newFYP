@@ -1,5 +1,6 @@
 package com.newIbsApp.ibs.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.newIbsApp.ibs.model.Log;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -26,5 +27,16 @@ public class UserEntity {
     private String password;
 
     @OneToMany(mappedBy = "userEntity",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<LogEntity> logs;
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package com.newIbsApp.ibs.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -17,7 +18,8 @@ public class LogEntity {
 
     //Many logs can belong to one user
     //UserEntity refernces the pk (id) of the UserEntity
-    @ManyToOne
+    //eager - load immediately
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="users")
     @JsonIgnoreProperties("logs")
     private UserEntity userEntity;
@@ -29,5 +31,17 @@ public class LogEntity {
     private String logType;
 
     @OneToMany(mappedBy = "logEntity")
+    @JsonIgnore
     private List<LogDataEntity> logDataEntities;
+
+    @Override
+    public String toString() {
+        return "LogEntity{" +
+                "id=" + id +
+                ", userEntity=" + userEntity +
+                ", date=" + date +
+                ", logType='" + logType + '\'' +
+                ", logDataEntities=" + logDataEntities +
+                '}';
+    }
 }
