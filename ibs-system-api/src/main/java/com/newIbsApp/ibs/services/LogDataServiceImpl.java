@@ -1,9 +1,11 @@
 package com.newIbsApp.ibs.services;
 
 import com.newIbsApp.ibs.entity.LogDataEntity;
+import com.newIbsApp.ibs.entity.LogEntity;
 import com.newIbsApp.ibs.model.Log;
 import com.newIbsApp.ibs.model.LogData;
 import com.newIbsApp.ibs.repository.LogDataRepository;
+import com.newIbsApp.ibs.repository.LogRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +16,19 @@ import java.util.stream.Collectors;
 @Service
 public class LogDataServiceImpl implements LogDataService{
     private LogDataRepository logDataRepository;
+    private final LogRepository logRepository;
 
-    public LogDataServiceImpl(LogDataRepository logDataRepository) {
+    public LogDataServiceImpl(LogDataRepository logDataRepository,
+                              LogRepository logRepository) {
         this.logDataRepository=logDataRepository;
+        this.logRepository = logRepository;
     }
     @Override
     public List<LogData> getLogDataById(Long id) {
         List<LogData> logDatas = getAllLogData();
         List<LogData> toReturn= new ArrayList<>();
         for(LogData l: logDatas){
-            if(l.getLogId()==id)
+            if(l.getLogEntity()==id)
                 toReturn.add(l);
         }
         return toReturn;
@@ -48,6 +53,11 @@ public class LogDataServiceImpl implements LogDataService{
         BeanUtils.copyProperties(logData,logDataEntity);
         System.out.println("LogData entity: "+logDataEntity);
         System.out.println("LogData: "+logData);
+
+        //set LogEntity in LogDataEntity
+        LogEntity logEntity = logRepository.findById(logData.getLogEntity()).orElse(null);
+        System.out.println("logEntity");
+        logDataEntity.setLogEntity(logEntity);
 
         //save to db
         logDataRepository.save(logDataEntity);

@@ -32,7 +32,7 @@ public class LogDataController {
         return logDataService.createLogData(logData);
     }
 
-    @GetMapping("logDatas/{id}")
+    @GetMapping("/logDatas/{id}")
     public ResponseEntity<List<LogData>> getLogDataById(@PathVariable Long id){
         List<LogData> logData = new ArrayList<>();
         logData = logDataService.getLogDataById(id);
