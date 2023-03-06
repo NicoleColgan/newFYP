@@ -6,9 +6,13 @@ import store from "../context/UserStore";
 import { useDispatch } from 'react-redux';
 import { UserContext } from '../App';
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function SignUp() {
   const { user, setUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
 
   const [error, setError] = useState({
@@ -21,10 +25,8 @@ function SignUp() {
 
   //whenever theres a change (they enter a new character, update the state)
   const handleChange = (e) => {
-    console.log("Before "+user.firstName);
     const { name, value } = e.target;
-    setUser(prevUser => ({ ...prevUser, [name]: prevUser[name] + value }));
-    console.log("After " +user.firstName);
+    setUser({...user,[e.target.name]: value});
   }
   
 
@@ -59,11 +61,14 @@ function SignUp() {
           setError({errorCode: 4, errorMessage: "Email Address already registered"});
         }
         else{ //able to save user to db
+          console.log(user);
           UserService.saveUser(user).then((response) => {
           console.log("response");
           console.log(response);
           console.log(user);
           setError({errorCode: 0, errorMessage: ""});
+          //if all was successful, go to logging page
+          navigate("/logging");
         }).catch((err) => {
           console.log(err);
         });
@@ -112,7 +117,7 @@ function SignUp() {
           }}
             type="text"
             name="firstName"
-            value={store.getState().user.firstName}
+            value={user.firstName}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-5 py-10"
           ></input>
@@ -132,7 +137,7 @@ function SignUp() {
         }}
             type="text"
             name="lastName"
-            value={store.getState().user.lastName}
+            value={user.lastName}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
@@ -152,7 +157,7 @@ function SignUp() {
         }}
             type="email"
             name="email"
-            value={store.getState().user.email}
+            value={user.email}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
@@ -172,7 +177,7 @@ function SignUp() {
         }}
             type="password"
             name="password"
-            value={store.getState().user.password}
+            value={user.password}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>

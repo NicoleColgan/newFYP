@@ -20,4 +20,11 @@ public class LogDataEntity {
     @Id
     @Column(name="data")
     private String data;
+    @Override
+    public String toString() {
+        return "LogDataEntity{" +
+                "logEntity=" + logEntity.getId() +
+                ", data='" + data + '\'' +
+                '}';
+    }
 }

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 
 const LoggingPhysicalSymptom = (props) => {
+
   const handleCloseClick = () => {
+    //make a new log 
+    //check if any buttons are blue because that means theyre selected
+    if(button1Color === "#4da6ff" || button2Color === "#4da6ff" || button3Color === "#4da6ff" || button4Color === "#4da6ff" || button5Color === "#4da6ff" || button6Color === "#4da6ff"){
+      //there is something to log
+
+    }
     //passed the function to this compopnent
     props.onClose();
   };

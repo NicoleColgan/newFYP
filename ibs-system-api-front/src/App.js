@@ -20,8 +20,7 @@ export default function App() {
     firstName: "g",
     lastName: "",
     email: "",
-    password: "",
-    logs: "",
+    password: ""
   });
 
   return (
