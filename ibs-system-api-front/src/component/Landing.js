@@ -5,9 +5,12 @@ import Container from "react-bootstrap/Container";
 import SignUp from "./SignUp"
 import SignIn from "./SignIn"
 import LoggingPhysicalSymptom from './LoggingPhysicalSymptom';
+import { UserContext } from '../App';
+import { useContext } from "react";
 
 
 const Landing = () => {
+  const { user } = useContext(UserContext);
   return (
     <Container fluid className="box " style={{ width: "100%", justifyContent: "flex-end" }}>
     <Col md={5} sm={5} className="column justify-content-center d-flex">
@@ -17,7 +20,7 @@ const Landing = () => {
           color: "#1a8cff",
           fontSize: "60px",
           fontWeight: 500
-          }}>THE GUT DIARY</h1>
+          }}>THE GUT DIARY </h1>
         <h4 
         style={{
           color: "#1a8cff",

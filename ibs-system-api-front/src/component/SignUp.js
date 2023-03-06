@@ -2,18 +2,14 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useState } from 'react'
 import UserService from "../services/UserService";
+import store from "../context/UserStore";
+import { useDispatch } from 'react-redux';
+import { UserContext } from '../App';
+import { useContext } from "react";
 
 function SignUp() {
+  const { user, setUser } = useContext(UserContext);
 
-  //creating a state - this is the default state and these values will be set when the page is loaded intially
-  //we will assign values in the input boxes to this state, so whenver something is entered into the input box, these states will be updated
-  const [newUser, setNewUser] = useState({
-    id: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
-  });
 
   const [error, setError] = useState({
     //an error code of 1 means not all fields are filled in
@@ -25,10 +21,12 @@ function SignUp() {
 
   //whenever theres a change (they enter a new character, update the state)
   const handleChange = (e) => {
-    const value = e.target.value;
-    //add new value (character to existing info stored in newUser state)
-    setNewUser({...newUser,[e.target.name]: value});
+    console.log("Before "+user.firstName);
+    const { name, value } = e.target;
+    setUser(prevUser => ({ ...prevUser, [name]: prevUser[name] + value }));
+    console.log("After " +user.firstName);
   }
+  
 
   function handleSubmit(e){
     //prevent page from refreshing and messing up data (which might affect the db)
@@ -43,28 +41,28 @@ function SignUp() {
     const pattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     //do not proceed if there are emtpy fields
-    if(newUser.firstName==="" || newUser.lastName==="" || newUser.email==="" || newUser.password===""){
+    if(user.firstName==="" || user.lastName==="" || user.email==="" || user.password===""){
       setError({errorCode: 1,errorMessage: "Please fill out all fields"});
     }
-    else if(!newUser.email.match(pattern)){  //do not proceed if email is invalid
+    else if(!user.email.match(pattern)){  //do not proceed if email is invalid
       setError({errorCode: 2,errorMessage: "Invalid email format"});
     } 
-    else if(newUser.password.length<5){  //do not proceed if password doesnt match constraints
+    else if(user.password.length<5){  //do not proceed if password doesnt match constraints
       //basic password auth checks that its 5 characters long
       setError({errorCode: 3, errorMessage: "Password must be longer than 5 characters"});
     }
     else {  //everything went ok - but still need to check if user is already in the db
-      UserService.checkUserExists(newUser.email).then(data => {
+      UserService.checkUserExists(user.email).then(data => {
         console.log(data);
         if(data){
           //user is already in db - so we dont want to add them
           setError({errorCode: 4, errorMessage: "Email Address already registered"});
         }
         else{ //able to save user to db
-            UserService.saveUser(newUser).then((response) => {
+          UserService.saveUser(user).then((response) => {
           console.log("response");
           console.log(response);
-          console.log(newUser);
+          console.log(user);
           setError({errorCode: 0, errorMessage: ""});
         }).catch((err) => {
           console.log(err);
@@ -114,7 +112,7 @@ function SignUp() {
           }}
             type="text"
             name="firstName"
-            value={newUser.firstName}
+            value={store.getState().user.firstName}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-5 py-10"
           ></input>
@@ -134,7 +132,7 @@ function SignUp() {
         }}
             type="text"
             name="lastName"
-            value={newUser.lastName}
+            value={store.getState().user.lastName}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
@@ -154,7 +152,7 @@ function SignUp() {
         }}
             type="email"
             name="email"
-            value={newUser.email}
+            value={store.getState().user.email}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
@@ -174,7 +172,7 @@ function SignUp() {
         }}
             type="password"
             name="password"
-            value={newUser.password}
+            value={store.getState().user.password}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>

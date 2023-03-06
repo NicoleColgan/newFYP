@@ -82,6 +82,7 @@ const LoggingPhysicalSymptom = (props) => {
           borderRadius: "25px",
         }}
       >
+        
         <div
           style={{
             display: "flex",
