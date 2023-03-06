@@ -7,10 +7,17 @@ import SignIn from "./SignIn"
 import LoggingPhysicalSymptom from './LoggingPhysicalSymptom';
 import { UserContext } from '../App';
 import { useContext } from "react";
+import { useState } from 'react';
 
 
 const Landing = () => {
   const { user } = useContext(UserContext);
+  const [showSignIp, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(true);
+  function handleSignInClicked(){
+    setShowSignUp(false);
+    setShowSignIn(true);
+  }
   return (
     <Container fluid className="box " style={{ width: "100%", justifyContent: "flex-end" }}>
     <Col md={5} sm={5} className="column justify-content-center d-flex">
@@ -28,7 +35,8 @@ const Landing = () => {
       </div>        
     </Col>
     <Col md={3} sm={3} className="column">
-      <SignUp />
+      {showSignUp && <SignUp handleSignInClicked={handleSignInClicked}/>}
+      {showSignIp && <SignIn />}
     </Col>
 </Container>
   )

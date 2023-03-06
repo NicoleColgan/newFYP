@@ -9,10 +9,14 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-function SignUp() {
+function SignUp(props) {
   const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  function handleSignIn(){
+    props.handleSignInClicked();
+  }
 
 
   const [error, setError] = useState({
@@ -82,7 +86,7 @@ function SignUp() {
     <div className="loginComponent"
     style={{
       width: "227px",
-      height: "350px",
+      height: "400px",
       paddingLeft: "50px",
       backgroundColor: "white",
       borderRadius: "25px"
@@ -192,6 +196,8 @@ function SignUp() {
         className="px-6">
         
 <button className="submitRegistrationButton" style={{borderRadius: "25px"}} type="submit">Submit</button>
+<br></br>
+<button onClick={handleSignIn} className="submitRegistrationButton" style={{borderRadius: "25px"}} type="submit">Sign in</button>
       </div>
       {error.errorCode===1 ? <p
       style={{color: "#ff0000",

@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './context/UserStore';
 import React, { useState } from 'react'
 import { createContext } from 'react';
+
 //components (App) are used to render
 //you can only return one parent so if you wrap them in empty tags, you can return more than 1
 //The way routing works is that you show different components based on the different routes that you have defined
