@@ -1,24 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LogService from "../services/LogService";
 
 const LoggingPhysicalSymptom = (props) => {
 
-  const [log, setLog] = useState({
-    id: "",
-    userId: "",
-    logType: "",
-    logDataEntities: ""
-  })
-  const handleCloseClick = () => {
+  const today = new Date();
+const year = today.getFullYear();
+const month = String(today.getMonth() + 1).padStart(2, '0');
+const day = String(today.getDate()).padStart(2, '0');
+const todayStr = `${year}-${month}-${day}`;
+
+  var readyToSubmit = false;
+  function handleCloseClick() {
+
+    console.log("token id: "+JSON.parse(localStorage.getItem("token")).id);
     //make a new log 
     //check if any buttons are blue because that means theyre selected
     if(button1Color === "#4da6ff" || button2Color === "#4da6ff" || button3Color === "#4da6ff" || button4Color === "#4da6ff" || button5Color === "#4da6ff" || button6Color === "#4da6ff"){
       //there is something to log
-      //if they selected physical symptom, they ca
+      //if they selected physical symptom, they can have differerent data
+      console.log("log before saving: "+props.log);
+      try {
+        props.setLog({
+          userId: JSON.parse(localStorage.getItem("token")).id,
+          date: todayStr,
+          logType: "PhysicalSymptom",
+          logDataEntities: [{
+            data: "bloating"
+          }]
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
     //passed the function to this compopnent
     props.onClose();
   };
+
+  //the useEfect button can watch out for changes on an item and do something when it changes
+  //the item in the square brackets at the end specifies the dependencies
+  //i.e. only change when this item changes
+  useEffect(() => {
+      console.log("log after saving: "+props.log);
+      LogService.saveLog(props.log);
+  }, [props.log])
   const [button1Color, setButton1Color] = useState("#8CD9CF"); //green
 
   function handleSymptom1ButtonClicked() {

@@ -9,3 +9,4 @@ class LogService {
         return axios.post(LOG_API_URL, newLog);
     }
 }
+export default new LogService();

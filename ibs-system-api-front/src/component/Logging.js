@@ -27,6 +27,14 @@ import OtherLog from "./OtherLog";
 import { useNavigate } from "react-router-dom";
 const Logging = () => {
 
+  const [log, setLog] = useState({
+    id: "",
+    userId: "",
+    date: "",
+    logType: "",
+    logDataEntities: ""
+  })
+
   const navigate = useNavigate();
 
   const isAuthenticated = localStorage.getItem("token") !== null;
@@ -327,7 +335,7 @@ const Logging = () => {
 
   return (
     <div fluid className="loggingBox">
-      {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} />}
+      {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} log={log} setLog={setLog}/>}
       {showAppetitePopup && <Apetite onClose={handleAppetiteCloseButtonClick} hungerButtonPressed={handleHungerButtonClick} hungerButtonClicked={hungerButtonClicked} satietyButtonPressed={handleSatietyButtonClick} satietyButtonClicked={satietyButtonClicked} numMealsButtonPressed={handleNumMealsButtonClick} numMealsButtonClicked={numMealsButtonClicked} regButtonPressed={handleRegButtonClick} regButtonClicked={regButtonClicked}/>}
       {showHungerPopUp && <Hunger onClose={handleHungerButtonCloseClick}/>}
       {showSatietyPopUp && <Satiety onClose={handleSatietyButtonCloseClick}/>}
