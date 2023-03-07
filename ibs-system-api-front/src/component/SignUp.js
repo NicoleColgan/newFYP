@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 
 
 function SignUp(props) {
+  //remove all tokens
+  localStorage.removeItem("token");
+  
   const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -35,6 +38,7 @@ function SignUp(props) {
   
 
   function handleSubmit(e){
+    
     //prevent page from refreshing and messing up data (which might affect the db)
     e.preventDefault();
     //this function should first check that the email is in the correct format

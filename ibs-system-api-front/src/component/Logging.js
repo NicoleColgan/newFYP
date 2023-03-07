@@ -26,6 +26,7 @@ import Sleep from "./Sleep";
 import OtherLog from "./OtherLog";
 import { useNavigate } from "react-router-dom";
 const Logging = () => {
+
   const navigate = useNavigate();
 
   const isAuthenticated = localStorage.getItem("token") !== null;

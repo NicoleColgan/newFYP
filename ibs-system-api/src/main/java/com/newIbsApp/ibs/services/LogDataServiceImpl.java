@@ -51,8 +51,8 @@ public class LogDataServiceImpl implements LogDataService{
 
         //copy valuyes into entity object
         BeanUtils.copyProperties(logData,logDataEntity);
-        System.out.println("LogData entity: "+logDataEntity);
-        System.out.println("LogData: "+logData);
+        //System.out.println("LogData entity: "+logDataEntity);
+        //System.out.println("LogData: "+logData);
 
         //set LogEntity in LogDataEntity
         LogEntity logEntity = logRepository.findById(logData.getLogEntity()).orElse(null);

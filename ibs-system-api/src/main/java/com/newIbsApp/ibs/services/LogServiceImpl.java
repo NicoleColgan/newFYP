@@ -54,8 +54,8 @@ public class LogServiceImpl implements LogService{
 
 
 
-        System.out.println("Log entity: "+logEntity);
-        System.out.println("Log: "+log);
+        //System.out.println("Log entity: "+logEntity);
+        //System.out.println("Log: "+log);
 
         //save to db and save a copy because need to give logDataEntities
         //an id aswel, but the id is auto set so have to get it back from db
