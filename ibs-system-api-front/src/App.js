@@ -18,11 +18,12 @@ export const UserContext = createContext();
 export default function App() {
   const [user, setUser] = useState({
     id: "",
-    firstName: "g",
+    firstName: "",
     lastName: "",
     email: "",
     password: ""
   });
+
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

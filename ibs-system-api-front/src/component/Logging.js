@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { Col, Modal } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -24,7 +24,25 @@ import ExerciseFrequency from "./ExerciseFrequency";
 import ExerciseIntensity from "./ExerciseIntensity";
 import Sleep from "./Sleep";
 import OtherLog from "./OtherLog";
+import { useNavigate } from "react-router-dom";
 const Logging = () => {
+  const navigate = useNavigate();
+
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  //if theyre authenticated they can view this otherwise have to log in
+  //useEffect because it runs after component is rendered and all these parts 
+  //are run  before anything is rendered so theyll essentially be covered by the html after 
+  const useAuthentication = () => {
+    useEffect(() => {
+      if (!isAuthenticated) {
+        navigate("/landing");
+      }
+    }, [isAuthenticated, navigate]);
+
+    return isAuthenticated;
+  };
+  useAuthentication();
+  
   const [showPhysicalSymptomPopup, setShowPhysicalSymptomPopup] = useState(false);
   const [button1CloseClicked, setButton1CloseClicked] = useState(false);  //green
 
