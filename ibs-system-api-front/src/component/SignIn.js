@@ -2,13 +2,15 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useState } from 'react'
 import UserService from "../services/UserService";
+import { UserContext } from '../App';
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
-    const [user, setUser] = useState({
-        id: "",
-        email: "",
-        password: ""
-      });
+    const { user, setUser } = useContext(UserContext);
+
+    const navigate = useNavigate();
+
     
       const [error, setError] = useState({
         //an error code of 1 means not all fields are filled in
@@ -44,12 +46,12 @@ function SignIn() {
           }
           else {
             //everything is fine, check against values in db
-            UserService.authenticateUser(user.email,user.password).then(data => {
+            UserService.authenticateUser(user.email,user.password,navigate).then(data => {
               console.log("User");
               console.log(data);
               if(data===false){
                 setError({errorCode: 2,errorMessage: "Incorrect username or password"});
-              } else {
+              } else {  //successful log in - go to logging page
                 setError({errorCode: 0, errorMessage: "Logged in"});
               }
             })

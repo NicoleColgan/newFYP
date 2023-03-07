@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor //creates a contructor with all arguments
 @NoArgsConstructor  //creates a constructor with no args
@@ -13,4 +15,5 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private List<Log> logs;
 }

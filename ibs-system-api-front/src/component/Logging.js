@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { Col, Modal } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -24,24 +24,47 @@ import ExerciseFrequency from "./ExerciseFrequency";
 import ExerciseIntensity from "./ExerciseIntensity";
 import Sleep from "./Sleep";
 import OtherLog from "./OtherLog";
+import { useNavigate } from "react-router-dom";
 const Logging = () => {
-  const [showPhysicalSymptomPopup, setShowPhysicalSymptomPopup] = useState(false);
+  const navigate = useNavigate();
+
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  //if theyre authenticated they can view this otherwise have to log in
+  //useEffect because it runs after component is rendered and all these parts 
+  //are run  before anything is rendered so theyll essentially be covered by the html after 
+  const useAuthentication = () => {
+    useEffect(() => {
+      if (!isAuthenticated) {
+        navigate("/landing");
+      }
+    }, [isAuthenticated, navigate]);
+
+    return isAuthenticated;
+  };
+  useAuthentication();
   
+  const [showPhysicalSymptomPopup, setShowPhysicalSymptomPopup] = useState(false);
+  const [button1CloseClicked, setButton1CloseClicked] = useState(false);  //green
+
   function handlePhysicalSymptomButtonClick(){
     setShowPhysicalSymptomPopup(true);
   }
   function handlePhysicalSymptomCloseButtonClick(){
     setShowPhysicalSymptomPopup(false);
+    setButton1CloseClicked(true);  
   }
+  
 
   //apetite
   const [showAppetitePopup, setShowAppetitePopup] = useState(false);
+  const [button3CloseClicked, setButton3CloseClicked] = useState(false);  //green
 
   function handleAppetiteButtonClick(){
     setShowAppetitePopup(true);
   }
   function handleAppetiteCloseButtonClick(){
     setShowAppetitePopup(false);
+    setButton3CloseClicked(true);
   }
 
   //hunger button
@@ -100,12 +123,14 @@ const Logging = () => {
 
   //food and supplements
   const [showFoodAndSupplementsPopup, setShowFoodAndSupplementsPopup] = useState(false);
+  const [button5CloseClicked, setButton5CloseClicked] = useState(false);  //green
 
   function handleFoodAndSupplementsButtonClick(){
     setShowFoodAndSupplementsPopup(true);
   }
   function handleFoodAndSupplementsCloseButtonClick(){
     setShowFoodAndSupplementsPopup(false);
+    setButton5CloseClicked(true);
   }
 
   //hydration button
@@ -166,12 +191,14 @@ const Logging = () => {
 
   //BowelMovements
   const [showBowelMovementsPopup, setShowBowelMovementsPopup] = useState(false);
+  const [button2CloseClicked, setButton2CloseClicked] = useState(false);  //green
 
   function handleBowelMovementsButtonClick(){
     setShowBowelMovementsPopup(true);
   }
   function handleBowelMovementsCloseButtonClick(){
     setShowBowelMovementsPopup(false);
+    setButton2CloseClicked(true);
   }
 
   //Frequency
@@ -218,12 +245,14 @@ const Logging = () => {
 
   //WellbeingAndExercise
   const [showWellbeingAndExercisePopup, setShowWellbeingAndExercisePopup] = useState(false);
+  const [button4CloseClicked, setButton4CloseClicked] = useState(false);  //green
 
   function handleWellbeingAndExerciseButtonClick(){
     setShowWellbeingAndExercisePopup(true);
   }
   function handleWellbeingAndExerciseCloseButtonClick(){
     setShowWellbeingAndExercisePopup(false);
+    setButton4CloseClicked(true);
   }
 
   //MentalHealth
@@ -284,12 +313,14 @@ const Logging = () => {
 
   //OtherLog
   const [showOtherLogPopup, setShowOtherLogPopup] = useState(false);
+  const [button6CloseClicked, setButton6CloseClicked] = useState(false);  //green
 
   function handleOtherLogButtonClick(){
     setShowOtherLogPopup(true);
   }
   function handleOtherLogCloseButtonClick(){
     setShowOtherLogPopup(false);
+    setButton6CloseClicked(true);
   }
 
 
@@ -331,27 +362,40 @@ const Logging = () => {
     height: "248px",
     borderRadius: "25px"
   }}>
+    
     <div>
       <div style={{
         paddingLeft: "70px",
         paddingTop: "13px"
       }}>
         <div>
-          <button onClick={handlePhysicalSymptomButtonClick} className="loggingButton">Physical Symptom</button>
+          <button  style={{ textDecoration: button1CloseClicked ? "line-through" : "",
+          opacity: button1CloseClicked ? "50%" : "100%"}}
+          onClick={handlePhysicalSymptomButtonClick} className="loggingButton">Physical Symptom</button>
           <span className="buttonSpace"></span>
-          <button onClick={handleBowelMovementsButtonClick} className="loggingButton">Bowel Movements</button>
+          <button style={{ textDecoration: button2CloseClicked ? "line-through" : "",
+          opacity: button2CloseClicked ? "50%" : "100%"}}
+          onClick={handleBowelMovementsButtonClick} className="loggingButton">Bowel Movements</button>
         </div>
         <span className="buttonSpace"></span>
         <div>
-          <button onClick={handleAppetiteButtonClick} className="loggingButton">Appetite</button>
+          <button style={{ textDecoration: button3CloseClicked ? "line-through" : "",
+          opacity: button3CloseClicked ? "50%" : "100%"}}
+          onClick={handleAppetiteButtonClick} className="loggingButton">Appetite</button>
           <span className="buttonSpace"></span>
-          <button onClick={handleWellbeingAndExerciseButtonClick} className="loggingButton">Wellbeing & Exercise</button>
+          <button style={{ textDecoration: button4CloseClicked ? "line-through" : "",
+          opacity: button4CloseClicked ? "50%" : "100%"}}
+          onClick={handleWellbeingAndExerciseButtonClick} className="loggingButton">Wellbeing & Exercise</button>
         </div>
         <span className="buttonSpace"></span>
         <div>
-          <button onClick={handleFoodAndSupplementsButtonClick} className="loggingButton">Food & Supplements</button>
+          <button style={{ textDecoration: button5CloseClicked ? "line-through" : "",
+          opacity: button5CloseClicked ? "50%" : "100%"}}
+          onClick={handleFoodAndSupplementsButtonClick} className="loggingButton">Food & Supplements</button>
           <span className="buttonSpace"></span>
-          <button onClick={handleOtherLogButtonClick} className="loggingButton">Other</button>
+          <button style={{ textDecoration: button6CloseClicked ? "line-through" : "",
+          opacity: button6CloseClicked ? "50%" : "100%"}}
+          onClick={handleOtherLogButtonClick} className="loggingButton">Other</button>
         </div>
       </div>
     </div>
