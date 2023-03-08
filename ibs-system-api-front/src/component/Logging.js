@@ -35,6 +35,11 @@ const Logging = () => {
     logDataEntities: ""
   })
 
+  const [logData, setLogData] = useState({
+    logEntity: "",
+    data: ""
+  })
+
   const navigate = useNavigate();
 
   const isAuthenticated = localStorage.getItem("token") !== null;
@@ -335,7 +340,7 @@ const Logging = () => {
 
   return (
     <div fluid className="loggingBox">
-      {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} log={log} setLog={setLog}/>}
+      {showPhysicalSymptomPopup && <LoggingPhysicalSymptom onClose={handlePhysicalSymptomCloseButtonClick} log={log} setLog={setLog} logData={logData} setLogData={setLogData}/>}
       {showAppetitePopup && <Apetite onClose={handleAppetiteCloseButtonClick} hungerButtonPressed={handleHungerButtonClick} hungerButtonClicked={hungerButtonClicked} satietyButtonPressed={handleSatietyButtonClick} satietyButtonClicked={satietyButtonClicked} numMealsButtonPressed={handleNumMealsButtonClick} numMealsButtonClicked={numMealsButtonClicked} regButtonPressed={handleRegButtonClick} regButtonClicked={regButtonClicked}/>}
       {showHungerPopUp && <Hunger onClose={handleHungerButtonCloseClick}/>}
       {showSatietyPopUp && <Satiety onClose={handleSatietyButtonCloseClick}/>}

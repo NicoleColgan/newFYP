@@ -8,10 +8,11 @@ const year = today.getFullYear();
 const month = String(today.getMonth() + 1).padStart(2, '0');
 const day = String(today.getDate()).padStart(2, '0');
 const todayStr = `${year}-${month}-${day}`;
+const [readyToSubmit, setReadyToSubmit]=useState(false);
 
-  var readyToSubmit = false;
-  function handleCloseClick() {
+  async function handleCloseClick() {
 
+    
     console.log("token id: "+JSON.parse(localStorage.getItem("token")).id);
     //make a new log 
     //check if any buttons are blue because that means theyre selected
@@ -20,29 +21,49 @@ const todayStr = `${year}-${month}-${day}`;
       //if they selected physical symptom, they can have differerent data
       console.log("log before saving: "+props.log);
       try {
-        props.setLog({
-          userId: JSON.parse(localStorage.getItem("token")).id,
-          date: todayStr,
-          logType: "PhysicalSymptom",
-          logDataEntities: [{
-            data: "bloating"
-          }]
-        });
+        await props.setLog({
+            userId: JSON.parse(localStorage.getItem("token")).id,
+            date: todayStr,
+            logType: "anotherone",
+            logDataEntities: [{
+              data: "bloating"
+            }]
+          });
+        console.log("log after saving: "+props.log);
+        // props.setLog({
+        //   userId: JSON.parse(localStorage.getItem("token")).id,
+        //   date: todayStr,
+        //   logType: "PhysicalSymptom",
+        //   logDataEntities: []
+        // });
+
+        // //post different log data depending on what button was pressed
+        // if(button1Color==="#4da6ff"){  //bloating
+        //   //need to get a reference to the log just posted 
+        //   props.setLogData({
+        //     logEntity: "",
+        //     data: "bloating"
+        //   })
+        // }
       } catch (error) {
         console.error(error);
       }
     }
     //passed the function to this compopnent
+    setReadyToSubmit(true);
     props.onClose();
+    
   };
+  useEffect(() => {
+    if (props.log.userId !== "" && props.log.date !== "" && props.log.logType !== "" && props.log.logDataEntities !== "") {
+      LogService.saveLog(props.log);
+    }
+  }, [props.log]);
 
   //the useEfect button can watch out for changes on an item and do something when it changes
   //the item in the square brackets at the end specifies the dependencies
   //i.e. only change when this item changes
-  useEffect(() => {
-      console.log("log after saving: "+props.log);
-      LogService.saveLog(props.log);
-  }, [props.log])
+  // 
   const [button1Color, setButton1Color] = useState("#8CD9CF"); //green
 
   function handleSymptom1ButtonClicked() {
