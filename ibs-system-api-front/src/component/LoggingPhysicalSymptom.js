@@ -9,22 +9,13 @@ const month = String(today.getMonth() + 1).padStart(2, '0');
 const day = String(today.getDate()).padStart(2, '0');
 const todayStr = `${year}-${month}-${day}`;
 
-const [logData, setLogData] = useState({
-  logEntity: "",
-  data: ""
-})
-const [readyToSubmit, setReadyToSubmit]=useState(false);
-const [renderCount, setRenderCount] = useState(0);
   async function handleCloseClick() {
 
-    
-    console.log("token id: "+JSON.parse(localStorage.getItem("token")).id);
-    //make a new log 
-    //check if any buttons are blue because that means theyre selected
+    //check if any buttons are blue because that means we want to log something
     if(button1Color === "#4da6ff" || button2Color === "#4da6ff" || button3Color === "#4da6ff" || button4Color === "#4da6ff" || button5Color === "#4da6ff" || button6Color === "#4da6ff"){
       //there is something to log
       //if they selected physical symptom, they can have differerent data
-      console.log("log before saving: "+props.log);
+      //need to wait for the logData to be added before setting the log and posting it to the db
       try {
         await props.setLog({
             userId: JSON.parse(localStorage.getItem("token")).id,
@@ -32,21 +23,11 @@ const [renderCount, setRenderCount] = useState(0);
             logType: "Physical Symptom",
             logDataEntities: await addLogData()
           });
-        // props.setLog({
-        //   userId: JSON.parse(localStorage.getItem("token")).id,
-        //   date: todayStr,
-        //   logType: "PhysicalSymptom",
-        //   logDataEntities: []
-        // });
-
         props.onClose();
-        
       } catch (error) {
         console.error(error);
       }
     }
-    //passed the function to this compopnent
-    
   };
 
   async function addLogData(){
