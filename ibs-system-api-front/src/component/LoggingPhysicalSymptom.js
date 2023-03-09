@@ -8,8 +8,13 @@ const year = today.getFullYear();
 const month = String(today.getMonth() + 1).padStart(2, '0');
 const day = String(today.getDate()).padStart(2, '0');
 const todayStr = `${year}-${month}-${day}`;
-const [readyToSubmit, setReadyToSubmit]=useState(false);
 
+const [logData, setLogData] = useState({
+  logEntity: "",
+  data: ""
+})
+const [readyToSubmit, setReadyToSubmit]=useState(false);
+const [renderCount, setRenderCount] = useState(0);
   async function handleCloseClick() {
 
     
@@ -24,12 +29,9 @@ const [readyToSubmit, setReadyToSubmit]=useState(false);
         await props.setLog({
             userId: JSON.parse(localStorage.getItem("token")).id,
             date: todayStr,
-            logType: "anotherone",
-            logDataEntities: [{
-              data: "bloating"
-            }]
+            logType: "Physical Symptom",
+            logDataEntities: await addLogData()
           });
-        console.log("log after saving: "+props.log);
         // props.setLog({
         //   userId: JSON.parse(localStorage.getItem("token")).id,
         //   date: todayStr,
@@ -37,28 +39,50 @@ const [readyToSubmit, setReadyToSubmit]=useState(false);
         //   logDataEntities: []
         // });
 
-        // //post different log data depending on what button was pressed
-        // if(button1Color==="#4da6ff"){  //bloating
-        //   //need to get a reference to the log just posted 
-        //   props.setLogData({
-        //     logEntity: "",
-        //     data: "bloating"
-        //   })
-        // }
+        props.onClose();
+        
       } catch (error) {
         console.error(error);
       }
     }
     //passed the function to this compopnent
-    setReadyToSubmit(true);
-    props.onClose();
     
   };
-  useEffect(() => {
-    if (props.log.userId !== "" && props.log.date !== "" && props.log.logType !== "" && props.log.logDataEntities !== "") {
-      LogService.saveLog(props.log);
+
+  async function addLogData(){
+    var logDataEntities=[];
+    if(button1Color === "#4da6ff"){ // bloating was pressed 
+      logDataEntities.push({ data: "Bloating" });
     }
+    if(button2Color === "#4da6ff"){
+      logDataEntities.push({ data: "Headaches" });
+    }
+    if(button3Color === "#4da6ff"){
+      logDataEntities.push({ data: "Gas" });
+    }
+    if(button4Color === "#4da6ff"){
+      logDataEntities.push({ data: "Acne" });
+    }
+    if(button5Color === "#4da6ff"){
+      logDataEntities.push({ data: "Low Energy" });
+    }
+    if(button6Color === "#4da6ff"){
+      logDataEntities.push({ data: "Stress" });
+    }
+    return logDataEntities;
+  }
+
+  useEffect(() => {
+    const saveLogAndSetLogData = async () => {
+      if (props.log.userId !== "" && props.log.date !== "" && props.log.logType !== "" && props.log.logDataEntities !== "") {
+        const loggedItem = await LogService.saveLog(props.log);
+        //have to convert logged item into a string because locaStorage holds strings
+        localStorage.setItem("logged", JSON.stringify(loggedItem.data));
+      }
+    }
+    saveLogAndSetLogData();
   }, [props.log]);
+  
 
   //the useEfect button can watch out for changes on an item and do something when it changes
   //the item in the square brackets at the end specifies the dependencies

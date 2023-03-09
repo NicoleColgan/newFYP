@@ -1,5 +1,6 @@
 package com.newIbsApp.ibs.controller;
 
+import com.newIbsApp.ibs.entity.LogEntity;
 import com.newIbsApp.ibs.model.Log;
 import com.newIbsApp.ibs.services.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,9 @@ public class LogController {
         this.logService=logService;
     }
 
+    //change to logEntity because need its id for front end
     @PostMapping("/logs")
-    public Log createLog(@RequestBody Log log){
+    public LogEntity createLog(@RequestBody Log log){
         return logService.createLog(log);
     }
 

@@ -32,7 +32,7 @@ public class LogServiceImpl implements LogService{
     }
 
     @Override
-    public Log createLog(Log log){
+    public LogEntity createLog(Log log){
         LogEntity logEntity = new LogEntity();
 
         //copy values in the log object to the Log entity object
@@ -72,7 +72,7 @@ public class LogServiceImpl implements LogService{
             savedData.setLogDataEntities(logDataRepository.saveAll(savedData.getLogDataEntities()));
         }
 
-        return log;
+        return logEntity;
     }
 
     @Override
