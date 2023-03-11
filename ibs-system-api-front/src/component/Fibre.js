@@ -76,7 +76,6 @@ const Fibre = (props) => {
         >
           <h2
             style={{
-              textDecoration: "underline",
               margin: "0 0 0 0",
               paddingLeft: "220px"
             }}

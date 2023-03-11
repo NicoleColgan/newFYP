@@ -62,8 +62,7 @@ const BowelMovements = (props) => {
         >
           <h2
             style={{
-              paddingBottom: "20px",
-              textDecoration: "underline",
+              paddingBottom: "20px"
             }}
           >
             Bowel movements

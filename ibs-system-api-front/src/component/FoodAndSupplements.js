@@ -73,7 +73,6 @@ const FoodAndSupplements = (props) => {
   <h2
     style={{
       padding: "10px",
-      textDecoration: "underline",
       paddingBottom:"15px"
     }}
   >

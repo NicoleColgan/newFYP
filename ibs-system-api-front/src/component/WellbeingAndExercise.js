@@ -73,7 +73,7 @@ const WellbeingAndExercise = (props) => {
   >
   <h2
     style={{
-      textDecoration: "underline",
+      
       paddingBottom:"15px"
     }}
   >

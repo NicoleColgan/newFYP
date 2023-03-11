@@ -135,7 +135,7 @@ const todayStr = `${year}-${month}-${day}`;
     }
   }
   return (
-    <div className=" Popup">
+    <div className="Popup">
       <div className="Popup-overlay"></div>
       <div
         className="Popup-content"
@@ -158,10 +158,9 @@ const todayStr = `${year}-${month}-${day}`;
           <h2
             style={{
               paddingBottom: "20px",
-              textDecoration: "underline",
             }}
           >
-            Physical symptom
+            Physical Symptoms
           </h2>
         </div>
         <div
