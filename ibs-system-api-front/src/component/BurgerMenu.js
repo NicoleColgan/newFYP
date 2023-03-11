@@ -2,15 +2,23 @@ import React, { useState, useEffect } from "react";
 
 const BurgerMenu = (props) => {
   
-  const [button1Color, setButton1Color] = useState("#8CD9CF"); //green
 
-  function handleSymptom1ButtonClicked() {
-    if (button1Color === "#8CD9CF") {
-      //green
-      setButton1Color("#4da6ff"); //blue
-    } else {
-      setButton1Color("#8CD9CF");
-    }
+  function handleMakeALogButtonClicked() {
+      props.HandleMakeALog();
+  }
+  function handleViewALogButtonClicked(){
+    props.HandleViewLogPressed();
+  }
+
+  function handleViewAnalyticsButtonClicked(){
+    props.HandleAnalyticsPressed();
+  }
+  //handleLearnButtonClicked
+  function handleLearnButtonClicked(){
+    props.HandleLearnPressed();
+  }
+  function handleTestButtonClicked(){
+    props.HandleTestPressed();
   }
 
   return (
@@ -33,14 +41,14 @@ const BurgerMenu = (props) => {
         >
           <div style={{ display: "flex", alignItems: "center" }}>
             <img
-              onClick={handleSymptom1ButtonClicked}
+              onClick={handleMakeALogButtonClicked}
               style={{
                 cursor: "pointer",
                 width: "65px",
                 height: "65px",
                 opacity: "80%",
                 borderRadius: "50%",
-                backgroundColor: button1Color,
+                backgroundColor: "#8CD9CF",
                 paddingTop: "8px",
                 float: "left",
                 marginRight: "10px",
@@ -61,14 +69,14 @@ const BurgerMenu = (props) => {
         >
           <div style={{ display: "flex", alignItems: "center" }}>
             <img
-              onClick={1}
+              onClick={handleViewALogButtonClicked}
               style={{
                 cursor: "pointer",
                 width: "65px",
                 height: "65px",
                 opacity: "80%",
                 borderRadius: "50%",
-                backgroundColor: button1Color,
+                backgroundColor: "#8CD9CF",
                 paddingTop: "8px",
                 float: "left",
                 marginRight: "10px",
@@ -87,14 +95,14 @@ const BurgerMenu = (props) => {
         >
           <div style={{ display: "flex", alignItems: "center" }}>
             <img
-              onClick={1}
+              onClick={handleViewAnalyticsButtonClicked}
               style={{
                 cursor: "pointer",
                 width: "65px",
                 height: "65px",
                 opacity: "80%",
                 borderRadius: "50%",
-                backgroundColor: button1Color,
+                backgroundColor: "#8CD9CF",
                 paddingTop: "8px",
                 float: "left",
                 marginRight: "10px",
@@ -113,14 +121,14 @@ const BurgerMenu = (props) => {
         >
           <div style={{ display: "flex", alignItems: "center" }}>
             <img
-              onClick={handleSymptom1ButtonClicked}
+              onClick={handleLearnButtonClicked}
               style={{
                 cursor: "pointer",
                 width: "65px",
                 height: "65px",
                 opacity: "80%",
                 borderRadius: "50%",
-                backgroundColor: button1Color,
+                backgroundColor: "#8CD9CF",
                 paddingTop: "8px",
                 float: "left",
                 marginRight: "10px",
@@ -138,14 +146,14 @@ const BurgerMenu = (props) => {
         >
           <div style={{ display: "flex", alignItems: "center" }}>
             <img
-              onClick={1}
+              onClick={handleTestButtonClicked}
               style={{
                 cursor: "pointer",
                 width: "65px",
                 height: "65px",
                 opacity: "80%",
                 borderRadius: "50%",
-                backgroundColor: button1Color,
+                backgroundColor: "#8CD9CF",
                 paddingTop: "8px",
                 float: "left",
                 marginRight: "10px",

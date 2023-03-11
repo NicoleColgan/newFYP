@@ -360,6 +360,75 @@ const Logging = () => {
 
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
   const [showUserMenu,setShowUserMenu]= useState(false);
+  const [showWriteLogImage, setShowWriteLogImage] = useState(true);
+  const [showViewLogImage, setShowViewLogImage] = useState(false);
+  const [showAnalyticsImage, setShowAnalyticsImage] = useState(true);
+  const [showLearnImage, setShowLearnImage] = useState(true);
+  const [showTestImage, setShowTestImage] = useState(true);
+  function HandleMakeALog(){  //write a log
+    setIsBurgerMenuActive(false);
+    setShowBurgerMenu(false);
+    setShowWriteLogImage(true);
+    setShowViewLogImage(false);
+    setShowAnalyticsImage(false);
+    setShowLearnImage(false);
+    setShowTestImage(false);
+  }
+  function HandleViewLogPressed(){
+    setIsBurgerMenuActive(false);
+    setShowBurgerMenu(false);
+    setShowViewLogImage(true);
+    setShowWriteLogImage(false);
+    setShowAnalyticsImage(false);
+    setShowLearnImage(false);
+    setShowTestImage(false);
+  }
+  function HandleAnalyticsPressed(){
+    setIsBurgerMenuActive(false);
+    setShowBurgerMenu(false);
+    setShowViewLogImage(false);
+    setShowWriteLogImage(false);
+    setShowAnalyticsImage(true);
+    setShowLearnImage(false);
+    setShowTestImage(false);
+  }
+  function HandleLearnPressed(){
+    setIsBurgerMenuActive(false);
+    setShowBurgerMenu(false);
+    setShowViewLogImage(false);
+    setShowWriteLogImage(false);
+    setShowAnalyticsImage(false);
+    setShowLearnImage(true);
+    setShowTestImage(false);
+  }
+  function HandleTestPressed(){
+    setIsBurgerMenuActive(false);
+    setShowBurgerMenu(false);
+    setShowViewLogImage(false);
+    setShowWriteLogImage(false);
+    setShowAnalyticsImage(false);
+    setShowLearnImage(false);
+    setShowTestImage(true);
+  }
+  function HandleImageToDisplay(){
+    if(showWriteLogImage)
+      return "write.png";
+    else if(showViewLogImage)
+      return "view.png"
+    else if(showAnalyticsImage)
+      return "analytics.png"
+    else if(showLearnImage)
+      return "learn.png"
+    else if (showTestImage)
+      return "numbers.png"
+  }
+  const [burgerMenuActive, setIsBurgerMenuActive]=useState(false);
+  
+  //disable future dates on tile
+  const [date, setDate] = useState(new Date());
+
+  //disable tiles after today
+  const tileDisabled = ({date}) => date > new Date();
 
   return (
     <div fluid className="loggingBox">
@@ -456,7 +525,7 @@ const Logging = () => {
       {showOtherLogPopup && (
         <OtherLog onClose={handleOtherLogCloseButtonClick} />
       )}
-      {showBurgerMenu && <BurgerMenu />}
+      {showBurgerMenu && <BurgerMenu HandleTestPressed={HandleTestPressed} HandleLearnPressed={HandleLearnPressed} HandleMakeALog={HandleMakeALog} HandleViewLogPressed={HandleViewLogPressed} HandleAnalyticsPressed={HandleAnalyticsPressed}/>}
       {showUserMenu && <UserMenu />}
 
       <div style={{ display: "flex", justifyContent: "flex-start" }}>
@@ -467,13 +536,16 @@ const Logging = () => {
               size={45}
               rounded
               color="#1a8cff"
+              toggled={burgerMenuActive}
               onToggle={(toggled) => {
                 if (toggled) {
                   // open a menu
                   setShowBurgerMenu(true);
+                  setIsBurgerMenuActive(true);
                 } else {
                   // close a menu
                   setShowBurgerMenu(false);
+                  setIsBurgerMenuActive(false);
                 }
               }}
             />
@@ -487,16 +559,19 @@ const Logging = () => {
               backgroundColor: "#8CD9CF",
               marginLeft: "10px",
             }}
-            src="write.png"
+            src={HandleImageToDisplay()}
             alt="Image description"
             width="50"
             height="50"
           />
         </div>
-        <Calendar className="react-calendar" />
+        <Calendar value={date} 
+        onChange={setDate}
+        tileDisabled={tileDisabled}
+        className="react-calendar" />
         <p
-        onClick={(toggled) => {
-          if (toggled) {
+        onClick={() => {
+          if (!showUserMenu) {
             // open a menu
             setShowUserMenu(true);
           } else {
@@ -504,7 +579,7 @@ const Logging = () => {
             setShowUserMenu(false);
           }
         }}
-          style={{ position: "absolute", top: "0", right: "25px", cursor: "pointer" }}
+          style={{ zIndex: showUserMenu ? "999" : "auto", position: "absolute", top: "0", right: "25px", cursor: "pointer" }}
           className="circular"
         >
           {getInitials()}

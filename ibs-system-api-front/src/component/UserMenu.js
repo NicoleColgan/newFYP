@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const UserMenu = (props) => {
   
   const [button1Color, setButton1Color] = useState("#8CD9CF"); //green
 
-  function handleSymptom1ButtonClicked() {
+  const navigate = useNavigate();
+  function HandleSettingsButtonClicked() {
     if (button1Color === "#8CD9CF") {
       //green
       setButton1Color("#4da6ff"); //blue
     } else {
       setButton1Color("#8CD9CF");
     }
+  }
+
+  function HandleLogout(){
+    navigate("/landing");
   }
 
   return (
@@ -34,7 +41,7 @@ const UserMenu = (props) => {
           <div style={{ display: "flex", alignItems: "center" }}>
             <p style={{ paddingRight:"10px" }}>Settings</p>
             <img
-              onClick={handleSymptom1ButtonClicked}
+              onClick={HandleSettingsButtonClicked}
               style={{
                 cursor: "pointer",
                 width: "65px",
@@ -63,14 +70,14 @@ const UserMenu = (props) => {
           <div style={{ display: "flex", alignItems: "center" }}>
             <p style={{ paddingRight: "12px" }}>Log out</p>
             <img
-              onClick={1}
+              onClick={HandleLogout}
               style={{
                 cursor: "pointer",
                 width: "65px",
                 height: "65px",
                 opacity: "80%",
                 borderRadius: "50%",
-                backgroundColor: button1Color,
+                backgroundColor: "#8CD9CF",
                 paddingTop: "8px",
                 float: "left",
                 marginRight: "10px",
