@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './context/UserStore';
 import React, { useState } from 'react'
 import { createContext } from 'react';
+import ViewLogging from './component/ViewLogging';
 
 //components (App) are used to render
 //you can only return one parent so if you wrap them in empty tags, you can return more than 1
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="/landing" element={<Landing />} />
           <Route index element={<Landing />} />
           <Route path="/logging" element={<Logging />} />
+          <Route path="/viewLogging" element={<ViewLogging />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

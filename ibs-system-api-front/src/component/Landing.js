@@ -31,7 +31,7 @@ const Landing = () => {
         <h4 
         style={{
           color: "#1a8cff",
-          fontWeight: 500}}>Information about the app and our goals go here</h4>
+          fontWeight: 500}}>Empower yourself with knowledge and tools to manage your condition - all in one app.</h4>
       </div>        
     </Col>
     <Col md={3} sm={3} className="column">
