@@ -1,57 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import LogService from "../services/LogService";
 
-const BowelMovements = (props) => {
-  const handleCloseClick = () => {
-    //passed the function to this compopnent
-    props.onClose();
-  };
+const ViewLoggingPhysicalSymptom = (props) => {
 
-  //frequency
-  //if it was clicked, make it blue, if not, make it green
-  const [button1Color, setButton1Color] = useState(
-    props.frequencyButtonClicked ? '#4da6ff' : '#8CD9CF'
-  );
-  
-  function handleFrequencyButtonClick(){
-    //when done change colour to say its logged
-    setButton1Color('#4da6ff')
-    props.frequencyButtonPressed();
-  }
+//cant select the buttons anymore
+  function handleCloseClick() {
+        props.onClose();
+    }
 
-  //Consistency
-  const [button2Color, setButton2Color] = useState(
-    props.consistencyButtonClicked ? '#4da6ff' : '#8CD9CF'
-  );
-  function handleConsistencyButtonClick(){
-    //when done change colour to say its logged
-    setButton2Color('#4da6ff')
-    props.consistencyButtonPressed();
-  }
 
-  //Other
-  const [button3Color, setButton3Color] = useState(
-    props.otherButtonClicked ? '#4da6ff' : '#8CD9CF'
-  );
-  function handleOtherButtonClick(){
-    //when done change colour to say its logged
-    setButton3Color('#4da6ff')
-    props.otherButtonPressed();
-  }
-  
+  const button1Color=props.bloatingButtonColour;
 
-  
+  const button2Color = props.headachesButtonColour;
+
+  const button3Color = props.gasButtonColour;
+
+  const button4Color = props.acneButtonColour;
+
+  const button5Color= props.lowEnergyButtonColour;
+
+  const button6Color = props.stressButtonColour;
+
   return (
-    <div className=" Popup">
+    <div className="Popup">
       <div className="Popup-overlay"></div>
       <div
         className="Popup-content"
         style={{
           width: "400px",
-          height: "330px",
+          height: "490px",
           backgroundColor: "white",
           borderRadius: "25px",
         }}
       >
+        
         <div
           style={{
             display: "flex",
@@ -62,10 +44,10 @@ const BowelMovements = (props) => {
         >
           <h2
             style={{
-              paddingBottom: "20px"
+              paddingBottom: "20px",
             }}
           >
-            Bowel movements
+            Physical Symptoms
           </h2>
         </div>
         <div
@@ -82,13 +64,10 @@ const BowelMovements = (props) => {
           <div
             style={{
               paddingRight: "30px",
-              paddingLeft: "3px"
             }}
           >
             <img
-              onClick={handleFrequencyButtonClick}
               style={{
-                cursor: "pointer",
                 width: "65px",
                 height: "65px",
                 opacity: "80%",
@@ -96,13 +75,13 @@ const BowelMovements = (props) => {
                 backgroundColor: button1Color,
                 paddingTop: "8px",
               }}
-              src="numbers.png"
+              src="bloating.png"
               alt="Image description"
               width="50"
               height="50"
             />
             </div>
-            <p>Frequency</p>
+            <p>Bloating</p>
           </div>
 
           <div  style={{
@@ -115,9 +94,7 @@ const BowelMovements = (props) => {
             }}
           >
             <img
-              onClick={handleConsistencyButtonClick}
               style={{
-                cursor: "pointer",
                 width: "65px",
                 height: "65px",
                 opacity: "80%",
@@ -125,25 +102,23 @@ const BowelMovements = (props) => {
                 backgroundColor: button2Color,
                 paddingTop: "8px",
               }}
-              src="poo2.png"
+              src="headaches.png"
               alt="Image description"
               width="50"
               height="50"
             />
             </div>
-            <p>Consistency </p>
+            <p>Headaches</p>
           </div>
 
           <div  style={{
             padding: "10px"
           }}>
           <div style={{
-            paddingLeft: "15px"
+            paddingLeft: "10px"
           }}>
             <img
-              onClick={handleOtherButtonClick}
               style={{
-                cursor: "pointer",
                 width: "65px",
                 opacity: "80%",
                 height: "65px",
@@ -151,7 +126,7 @@ const BowelMovements = (props) => {
                 backgroundColor: button3Color,
                 paddingTop: "8px",
               }}
-              src="dot.png"
+              src="gas.png"
               alt="Image description"
               width="50"
               height="50"
@@ -159,10 +134,103 @@ const BowelMovements = (props) => {
             </div>
             <p style={{
               paddingLeft:"30px"
-            }}>Other</p>
+            }}>Gas</p>
+          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: "10px",
+          }}
+        >
+
+          <div  style={{
+            padding: "10px"
+          }}>
+          <div
+            style={{
+              paddingRight: "30px",
+            }}
+          >
+            <img
+              style={{
+                width: "65px",
+                opacity: "80%",
+                height: "65px",
+                borderRadius: "50%",
+                backgroundColor: button4Color,
+                paddingTop: "8px",
+              }}
+              src="acne.png"
+              alt="Image description"
+              width="50"
+              height="50"
+            />
+            </div>
+            <p style={{
+              paddingLeft: "11px"
+            }}>Acne</p>
+          </div>
+
+          <div  style={{
+            padding: "10px"
+          }}>
+          <div
+            style={{
+              paddingRight: "25px",
+              paddingLeft: "5"
+            }}
+          >
+            <img
+              style={{
+                opacity: "80%",
+                width: "65px",
+                height: "65px",
+                borderRadius: "50%",
+                backgroundColor: button5Color,
+                paddingTop: "8px",
+              }}
+              src="tired4.png"
+              alt="Image description"
+              width="40"
+              height="40"
+            />
+            </div>
+            <p>Low Energy</p>
+          </div>
+
+          <div  style={{
+            padding: "10px",
+            paddingLeft: "10px"
+          }}>
+          <div style={{
+            paddingLeft:"12px"
+          }}>
+            <img
+              style={{
+                width: "65px",
+                opacity: "80%",
+                height: "65px",
+                borderRadius: "50%",
+                backgroundColor: button6Color,
+                paddingTop: "8px",
+              }}
+              src="stress.png"
+              alt="Image description"
+              width="45"
+              height="45"
+            />
+            </div>
+            <p style={{
+              paddingLeft: "22px"
+            }}>Stress</p>
           </div>
         </div>
 
+
+        
         <div
           style={{
             paddingLeft: "170px",
@@ -198,4 +266,4 @@ const BowelMovements = (props) => {
   );
 };
 
-export default BowelMovements;
+export default ViewLoggingPhysicalSymptom;

@@ -8,7 +8,7 @@ import Satiety from "./Satiety";
 import Apetite from "./Appetite";
 import NumMeals from "./NumMeals";
 import Reg from "./Reg";
-import LoggingPhysicalSymptom from "./LoggingPhysicalSymptom";
+import ViewLoggingPhysicalSymptom from "./ViewLoggingPhysicalSymptom";
 import FoodAndSupplements from "./FoodAndSupplements";
 import Hydration from "./Hydration";
 import TriggerFood from "./TriggerFood";
@@ -29,9 +29,9 @@ import { Divide as Hamburger } from "hamburger-react";
 import BurgerMenu from "./BurgerMenu";
 import UserMenu from "./UserMenu";
 import Popover from 'react-bootstrap/Popover';
-import Button from 'react-bootstrap/Button';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-const Logging = () => {
+import Overlay from 'react-bootstrap/Overlay'
+import LogService from "../services/LogService";
+const ViewLogging = () => {
   const [log, setLog] = useState({
     id: "",
     userId: "",
@@ -59,14 +59,11 @@ const Logging = () => {
 
   const [showPhysicalSymptomPopup, setShowPhysicalSymptomPopup] =
     useState(false);
-  const [button1CloseClicked, setButton1CloseClicked] = useState(false); //green
-
   function handlePhysicalSymptomButtonClick() {
     setShowPhysicalSymptomPopup(true);
   }
   function handlePhysicalSymptomCloseButtonClick() {
     setShowPhysicalSymptomPopup(false);
-    setButton1CloseClicked(true);
   }
 
   //apetite
@@ -369,13 +366,7 @@ const Logging = () => {
   const [showLearnImage, setShowLearnImage] = useState(true);
   const [showTestImage, setShowTestImage] = useState(true);
   function HandleMakeALog(){  //write a log
-    setIsBurgerMenuActive(false);
-    setShowBurgerMenu(false);
-    setShowWriteLogImage(true);
-    setShowViewLogImage(false);
-    setShowAnalyticsImage(false);
-    setShowLearnImage(false);
-    setShowTestImage(false);
+    navigate("/logging");
   }
   function HandleViewLogPressed(){
     setIsBurgerMenuActive(false);
@@ -385,7 +376,7 @@ const Logging = () => {
     setShowAnalyticsImage(false);
     setShowLearnImage(false);
     setShowTestImage(false);
-    navigate("/viewLogging");
+    navigate("/viewLogs");
   }
   function HandleAnalyticsPressed(){
     setIsBurgerMenuActive(false);
@@ -414,19 +405,7 @@ const Logging = () => {
     setShowLearnImage(false);
     setShowTestImage(true);
   }
-  function HandleImageToDisplay(){
-    if(showWriteLogImage)
-      return "write.png";
-    else if(showViewLogImage){
-      return "view.png"
-    }
-    else if(showAnalyticsImage)
-      return "analytics.png"
-    else if(showLearnImage)
-      return "learn.png"
-    else if (showTestImage)
-      return "numbers.png"
-  }
+  
   const [burgerMenuActive, setIsBurgerMenuActive]=useState(false);
   
   //disable future dates on tile
@@ -435,24 +414,110 @@ const Logging = () => {
   //disable tiles after today
   const tileDisabled = ({date}) => date > new Date();
 
-  // const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    showCalenderInstructionsHandler();
+  }, []);
+   const [showCalenderInstructions, setShowCalenderInstructions] = useState(false);
 
-  // const showModalHandler = () => {
-  //   setShowModal(true);
-  //   setTimeout(() => setShowModal(false), 3000);  //hide after 3 secs
-  // }
+  const showCalenderInstructionsHandler = () => {
+    setShowCalenderInstructions(true);
+    setTimeout(() => setShowCalenderInstructions(false), 10000);  //hide after 3 secs
+  }
 
-  // const hideModalHandler = () => {
-  //   setShowModal(false);
-  // }
+  //handle calender clicks
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const [bloatingButtonColour,setBloatingButtonColour] = useState("#8CD9CF");   //default colour is green
+  
+  const [gasButtonColour,setGasButtonColour] = useState("#8CD9CF");   //default colour is green
+
+  const [acneButtonColour,setAcneButtonColour] = useState("#8CD9CF");   //default colour is green
+
+  const [lowEnergyButtonColour,setLowEnergyButtonColour] = useState("#8CD9CF");   //default colour is green
+
+  const [stressButtonColour,setStressButtonColour] = useState("#8CD9CF");   //default colour is green
+
+  const [headachesButtonColour,setHeadachesButtonColour] = useState("#8CD9CF");   //default colour is green
+
+  async function HandleDateChange (date) {
+    //reset all buttons to green
+    setBloatingButtonColour("#8CD9CF");
+    setGasButtonColour("#8CD9CF");
+    setHeadachesButtonColour("#8CD9CF");
+    setAcneButtonColour("#8CD9CF");
+    setStressButtonColour("#8CD9CF");
+    setLowEnergyButtonColour("#8CD9CF");
+    
+    setSelectedDate(date);
+    console.log("selected date: "+date);
+    //gather all the data from this day 
+    const logsOnSpecificDay = await LogService.getLogByDate(date);
+
+    //extract each type of log
+    for(let i=0; i<logsOnSpecificDay.length; i++){
+        if(logsOnSpecificDay[i].logType==="Physical Symptom"){
+            if(logsOnSpecificDay[i].logDataEntities.length>0){
+            const physicalSymptomLogDataEntities = logsOnSpecificDay[i].logDataEntities;
+            //loop thorugh all physical symtom log data enties
+                for(let j=0; j<physicalSymptomLogDataEntities.length; j++){
+                    //set the colour for each button
+                    if(physicalSymptomLogDataEntities[j].data==="Bloating"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setBloatingButtonColour("#4da6ff");  
+                    }
+                    else if(physicalSymptomLogDataEntities[j].data==="Headaches"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setHeadachesButtonColour("#4da6ff"); 
+                    }
+                    else if(physicalSymptomLogDataEntities[j].data==="Gas"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setGasButtonColour("#4da6ff"); 
+                    }
+                    else if(physicalSymptomLogDataEntities[j].data==="Acne"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setAcneButtonColour("#4da6ff"); 
+                    }
+                    else if(physicalSymptomLogDataEntities[j].data==="Low Energy"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setLowEnergyButtonColour("#4da6ff"); 
+                    }
+                    else if(physicalSymptomLogDataEntities[j].data==="Stress"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setStressButtonColour("#4da6ff"); 
+                    }
+                }
+            }
+        }
+    }
+  }
+ 
+
 
   return (
     <div fluid className="loggingBox">
       {showPhysicalSymptomPopup && (
-        <LoggingPhysicalSymptom
+        <ViewLoggingPhysicalSymptom
           onClose={handlePhysicalSymptomCloseButtonClick}
           log={log}
           setLog={setLog}
+          headachesButtonColour={headachesButtonColour}
+          bloatingButtonColour={bloatingButtonColour}
+          gasButtonColour={gasButtonColour}
+          acneButtonColour={acneButtonColour}
+          lowEnergyButtonColour={lowEnergyButtonColour}
+          stressButtonColour={stressButtonColour}
         />
       )}
       {showAppetitePopup && (
@@ -566,6 +631,7 @@ const Logging = () => {
               }}
             />
           </div>
+          
           <img
             style={{
               width: "55px",
@@ -575,14 +641,19 @@ const Logging = () => {
               backgroundColor: "#8CD9CF",
               marginLeft: "10px",
             }}
-            src={HandleImageToDisplay()}
+            src="view.png"
             alt="Image description"
             width="50"
             height="50"
           />
+          {showCalenderInstructions && (
+            <p style={{
+                paddingLeft: "15px"
+            }}>To view what you logged on a specific day, please select that day on the calendar.</p>
+          )}
         </div>
-        <Calendar value={date} 
-        onChange={setDate}
+        <Calendar value={selectedDate} 
+        onChange={HandleDateChange}
         tileDisabled={tileDisabled}
         className="react-calendar" />
         <p
@@ -625,27 +696,14 @@ const Logging = () => {
           >
             <div>
               <button
-                disabled={button1CloseClicked ? true : false}
-                style={{
-                  opacity: button1CloseClicked ? "60%" : "100%",
-                }}
                 onClick={handlePhysicalSymptomButtonClick}
                 className="loggingButton"
               >
-                Physical Symptoms
-                {button1CloseClicked && (
-                  <img
-                    src="checkmark.png"
-                    width="30px"
-                    height="30px"
-                    backgroundColor="green"
-                    style={{ verticalAlign: "middle", paddingLeft: "5px" }}
-                  ></img>
-                )}
+                Physical Symptoms (View page)
               </button>
               <span className="buttonSpace"></span>
               <button
-                disabled={button2CloseClicked ? true : false}
+                disabled= "true"
                 style={{
                   opacity: button2CloseClicked ? "50%" : "100%",
                 }}
@@ -667,7 +725,7 @@ const Logging = () => {
             <span className="buttonSpace"></span>
             <div>
               <button
-                disabled={button3CloseClicked ? true : false}
+                disabled="true"
                 style={{
                   opacity: button3CloseClicked ? "60%" : "100%",
                 }}
@@ -688,7 +746,7 @@ const Logging = () => {
               <span className="buttonSpace"></span>
 
               <button
-                disabled={button4CloseClicked ? true : false}
+                disabled="true"
                 style={{
                   opacity: button4CloseClicked ? "60%" : "100%",
                 }}
@@ -711,7 +769,7 @@ const Logging = () => {
 
             <div>
               <button
-                disabled={button5CloseClicked ? true : false}
+                disabled="true"
                 style={{
                   opacity: button5CloseClicked ? "60%" : "100%",
                 }}
@@ -733,7 +791,7 @@ const Logging = () => {
               <span className="buttonSpace"></span>
 
               <button
-                disabled={button6CloseClicked ? true : false}
+                disabled="true"
                 style={{
                   opacity: button6CloseClicked ? "60%" : "100%",
                 }}
@@ -759,4 +817,4 @@ const Logging = () => {
   );
 };
 
-export default Logging;
+export default ViewLogging;

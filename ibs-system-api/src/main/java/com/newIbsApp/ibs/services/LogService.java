@@ -1,12 +1,13 @@
 package com.newIbsApp.ibs.services;
 
+import com.newIbsApp.ibs.entity.LogEntity;
 import com.newIbsApp.ibs.model.Log;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface LogService {
-    Log createLog(Log log);
+    LogEntity createLog(Log log);
 
     List<Log> getAllLogs();
 

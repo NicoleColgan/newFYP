@@ -32,7 +32,7 @@ public class LogServiceImpl implements LogService{
     }
 
     @Override
-    public Log createLog(Log log){
+    public LogEntity createLog(Log log){
         LogEntity logEntity = new LogEntity();
 
         //copy values in the log object to the Log entity object
@@ -54,8 +54,8 @@ public class LogServiceImpl implements LogService{
 
 
 
-        System.out.println("Log entity: "+logEntity);
-        System.out.println("Log: "+log);
+        //System.out.println("Log entity: "+logEntity);
+        //System.out.println("Log: "+log);
 
         //save to db and save a copy because need to give logDataEntities
         //an id aswel, but the id is auto set so have to get it back from db
@@ -72,7 +72,7 @@ public class LogServiceImpl implements LogService{
             savedData.setLogDataEntities(logDataRepository.saveAll(savedData.getLogDataEntities()));
         }
 
-        return log;
+        return logEntity;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class LogServiceImpl implements LogService{
         List<Log> userLogs = getLogsByUser(id);
         List<Log> userLogsByDate = new ArrayList<>();
         for(Log log: userLogs){
-            if (log.getDate()==date){
+            if (log.getDate().isEqual(date)){
                 userLogsByDate.add(log);
             }
         }

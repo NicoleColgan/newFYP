@@ -36,8 +36,9 @@ class UserService {
             const response = await axios.get(USER_API_URL + "/auth/email/" + email+"/password/"+ password);
             if (response.status === 200) {
               console.log("Authenticated");
-              const {token} = await response.data;
-              localStorage.setItem("token",token);
+              const token = response.data;
+              console.log("token before storing: "+token);
+              localStorage.setItem("token",JSON.stringify(token));
               navigate("/logging");
               return true;
             } else {

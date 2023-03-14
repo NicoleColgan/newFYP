@@ -7,6 +7,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SignIn() {
+  //remove all tokens
+  localStorage.removeItem("token");
     const { user, setUser } = useContext(UserContext);
 
     const navigate = useNavigate();

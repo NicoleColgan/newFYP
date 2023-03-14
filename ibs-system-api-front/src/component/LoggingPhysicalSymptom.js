@@ -1,17 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import LogService from "../services/LogService";
 
 const LoggingPhysicalSymptom = (props) => {
 
-  const handleCloseClick = () => {
-    //make a new log 
-    //check if any buttons are blue because that means theyre selected
+  const today = new Date();
+const year = today.getFullYear();
+const month = String(today.getMonth() + 1).padStart(2, '0');
+const day = String(today.getDate()).padStart(2, '0');
+const todayStr = `${year}-${month}-${day}`;
+
+  async function handleCloseClick() {
+
+    //check if any buttons are blue because that means we want to log something
     if(button1Color === "#4da6ff" || button2Color === "#4da6ff" || button3Color === "#4da6ff" || button4Color === "#4da6ff" || button5Color === "#4da6ff" || button6Color === "#4da6ff"){
       //there is something to log
-
+      //if they selected physical symptom, they can have differerent data
+      //need to wait for the logData to be added before setting the log and posting it to the db
+      try {
+        await props.setLog({
+            userId: JSON.parse(localStorage.getItem("token")).id,
+            date: todayStr,
+            logType: "Physical Symptom",
+            logDataEntities: await addLogData()
+          });
+        props.onClose();
+      } catch (error) {
+        console.error(error);
+      }
     }
-    //passed the function to this compopnent
-    props.onClose();
   };
+
+  async function addLogData(){
+    var logDataEntities=[];
+    if(button1Color === "#4da6ff"){ // bloating was pressed 
+      logDataEntities.push({ data: "Bloating" });
+    }
+    if(button2Color === "#4da6ff"){
+      logDataEntities.push({ data: "Headaches" });
+    }
+    if(button3Color === "#4da6ff"){
+      logDataEntities.push({ data: "Gas" });
+    }
+    if(button4Color === "#4da6ff"){
+      logDataEntities.push({ data: "Acne" });
+    }
+    if(button5Color === "#4da6ff"){
+      logDataEntities.push({ data: "Low Energy" });
+    }
+    if(button6Color === "#4da6ff"){
+      logDataEntities.push({ data: "Stress" });
+    }
+    return logDataEntities;
+  }
+
+  useEffect(() => {
+    const saveLogAndSetLogData = async () => {
+      if (props.log.userId !== "" && props.log.date !== "" && props.log.logType !== "" && props.log.logDataEntities !== "") {
+        const loggedItem = await LogService.saveLog(props.log);
+        //have to convert logged item into a string because locaStorage holds strings
+        localStorage.setItem("logged", JSON.stringify(loggedItem.data));
+      }
+    }
+    saveLogAndSetLogData();
+  }, [props.log]);
+  
+
+  //the useEfect button can watch out for changes on an item and do something when it changes
+  //the item in the square brackets at the end specifies the dependencies
+  //i.e. only change when this item changes
+  // 
   const [button1Color, setButton1Color] = useState("#8CD9CF"); //green
 
   function handleSymptom1ButtonClicked() {
@@ -78,7 +135,7 @@ const LoggingPhysicalSymptom = (props) => {
     }
   }
   return (
-    <div className=" Popup">
+    <div className="Popup">
       <div className="Popup-overlay"></div>
       <div
         className="Popup-content"
@@ -101,10 +158,9 @@ const LoggingPhysicalSymptom = (props) => {
           <h2
             style={{
               paddingBottom: "20px",
-              textDecoration: "underline",
             }}
           >
-            Physical symptom
+            Physical Symptoms
           </h2>
         </div>
         <div
