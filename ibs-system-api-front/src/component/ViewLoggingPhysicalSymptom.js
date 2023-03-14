@@ -9,17 +9,17 @@ const ViewLoggingPhysicalSymptom = (props) => {
     }
 
 
-  const [button1Color, setButton1Color] = useState("#8CD9CF"); //green
+  const button1Color=props.bloatingButtonColour;
 
-  const [button2Color, setButton2Color] = useState("#8CD9CF"); //green
+  const button2Color = props.headachesButtonColour;
 
-  const [button3Color, setButton3Color] = useState("#8CD9CF"); //green
+  const button3Color = props.gasButtonColour;
 
-  const [button4Color, setButton4Color] = useState("#8CD9CF"); //green
+  const button4Color = props.acneButtonColour;
 
-  const [button5Color, setButton5Color] = useState("#8CD9CF"); //green
+  const button5Color= props.lowEnergyButtonColour;
 
-  const [button6Color, setButton6Color] = useState("#8CD9CF"); //green
+  const button6Color = props.stressButtonColour;
 
   return (
     <div className="Popup">

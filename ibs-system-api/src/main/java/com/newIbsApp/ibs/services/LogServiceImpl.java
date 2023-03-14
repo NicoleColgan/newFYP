@@ -114,7 +114,7 @@ public class LogServiceImpl implements LogService{
         List<Log> userLogs = getLogsByUser(id);
         List<Log> userLogsByDate = new ArrayList<>();
         for(Log log: userLogs){
-            if (log.getDate()==date){
+            if (log.getDate().isEqual(date)){
                 userLogsByDate.add(log);
             }
         }

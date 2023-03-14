@@ -426,12 +426,81 @@ const ViewLogging = () => {
 
   //handle calender clicks
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const [bloatingButtonColour,setBloatingButtonColour] = useState("#8CD9CF");   //default colour is green
   
-  const handleDateChange = (date) => {
+  const [gasButtonColour,setGasButtonColour] = useState("#8CD9CF");   //default colour is green
+
+  const [acneButtonColour,setAcneButtonColour] = useState("#8CD9CF");   //default colour is green
+
+  const [lowEnergyButtonColour,setLowEnergyButtonColour] = useState("#8CD9CF");   //default colour is green
+
+  const [stressButtonColour,setStressButtonColour] = useState("#8CD9CF");   //default colour is green
+
+  const [headachesButtonColour,setHeadachesButtonColour] = useState("#8CD9CF");   //default colour is green
+
+  async function HandleDateChange (date) {
+    //reset all buttons to green
+    setBloatingButtonColour("#8CD9CF");
+    setGasButtonColour("#8CD9CF");
+    setHeadachesButtonColour("#8CD9CF");
+    setAcneButtonColour("#8CD9CF");
+    setStressButtonColour("#8CD9CF");
+    setLowEnergyButtonColour("#8CD9CF");
+    
     setSelectedDate(date);
     console.log("selected date: "+date);
     //gather all the data from this day 
-    const logsOnSpecificDay = LogService.getLogByDate(date);
+    const logsOnSpecificDay = await LogService.getLogByDate(date);
+
+    //extract each type of log
+    for(let i=0; i<logsOnSpecificDay.length; i++){
+        if(logsOnSpecificDay[i].logType==="Physical Symptom"){
+            if(logsOnSpecificDay[i].logDataEntities.length>0){
+            const physicalSymptomLogDataEntities = logsOnSpecificDay[i].logDataEntities;
+            //loop thorugh all physical symtom log data enties
+                for(let j=0; j<physicalSymptomLogDataEntities.length; j++){
+                    //set the colour for each button
+                    if(physicalSymptomLogDataEntities[j].data==="Bloating"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setBloatingButtonColour("#4da6ff");  
+                    }
+                    else if(physicalSymptomLogDataEntities[j].data==="Headaches"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setHeadachesButtonColour("#4da6ff"); 
+                    }
+                    else if(physicalSymptomLogDataEntities[j].data==="Gas"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setGasButtonColour("#4da6ff"); 
+                    }
+                    else if(physicalSymptomLogDataEntities[j].data==="Acne"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setAcneButtonColour("#4da6ff"); 
+                    }
+                    else if(physicalSymptomLogDataEntities[j].data==="Low Energy"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setLowEnergyButtonColour("#4da6ff"); 
+                    }
+                    else if(physicalSymptomLogDataEntities[j].data==="Stress"){
+                        //set colour to be blue to indicate that it was pressed
+                        //these values will be passed as props to the view 
+                        //component an be used to set the colour of the buttons
+                        setStressButtonColour("#4da6ff"); 
+                    }
+                }
+            }
+        }
+    }
   }
  
 
@@ -443,6 +512,12 @@ const ViewLogging = () => {
           onClose={handlePhysicalSymptomCloseButtonClick}
           log={log}
           setLog={setLog}
+          headachesButtonColour={headachesButtonColour}
+          bloatingButtonColour={bloatingButtonColour}
+          gasButtonColour={gasButtonColour}
+          acneButtonColour={acneButtonColour}
+          lowEnergyButtonColour={lowEnergyButtonColour}
+          stressButtonColour={stressButtonColour}
         />
       )}
       {showAppetitePopup && (
@@ -578,7 +653,7 @@ const ViewLogging = () => {
           )}
         </div>
         <Calendar value={selectedDate} 
-        onChange={handleDateChange}
+        onChange={HandleDateChange}
         tileDisabled={tileDisabled}
         className="react-calendar" />
         <p
