@@ -14,7 +14,6 @@ function SignUp(props) {
   localStorage.removeItem("token");
   
   const { user, setUser } = useContext(UserContext);
-
   const navigate = useNavigate();
 
   function handleSignIn(){
@@ -36,56 +35,65 @@ function SignUp(props) {
     setUser({...user,[e.target.name]: value});
   }
   
+  async function hashPassword(password){
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-  function handleSubmit(e){
-    
-    //prevent page from refreshing and messing up data (which might affect the db)
+    console.log("hashed passsword inside hash function: "+hashedPassword);
+    if (user) {
+      const updatedUser = { ...user, password: hashedPassword };
+      setUser(updatedUser);
+      console.log("user after setting password: "+updatedUser.password);
+   
+    }
+    return hashedPassword;
+}
+  
+  const bcrypt = require('bcryptjs');
+  
+  async function handleSubmit(e) {
+    // prevent page from refreshing and messing up data (which might affect the db)
     e.preventDefault();
-    //this function should first check that the email is in the correct format
-
-    
-    //reset error
+  
+    // this function should first check that the email is in the correct format
+    // reset error
     setError({ errorCode: 0, errorMessage: "" });
-
-    //regular expression pattern for a valid email address
+  
+    // regular expression pattern for a valid email address
     const pattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    //do not proceed if there are emtpy fields
-    if(user.firstName==="" || user.lastName==="" || user.email==="" || user.password===""){
-      setError({errorCode: 1,errorMessage: "Please fill out all fields"});
-    }
-    else if(!user.email.match(pattern)){  //do not proceed if email is invalid
-      setError({errorCode: 2,errorMessage: "Invalid email format"});
-    } 
-    else if(user.password.length<5){  //do not proceed if password doesnt match constraints
-      //basic password auth checks that its 5 characters long
-      setError({errorCode: 3, errorMessage: "Password must be longer than 5 characters"});
-    }
-    else {  //everything went ok - but still need to check if user is already in the db
-      UserService.checkUserExists(user.email).then(data => {
-        console.log(data);
-        if(data){
-          //user is already in db - so we dont want to add them
-          setError({errorCode: 4, errorMessage: "Email Address already registered"});
-        }
-        else{ //able to save user to db
-          console.log(user);
-          UserService.saveUser(user).then((response) => {
+  
+    // do not proceed if there are empty fields
+    if (user.firstName === "" || user.lastName === "" || user.email === "" || user.password === "") {
+      setError({ errorCode: 1, errorMessage: "Please fill out all fields" });
+    } else if (!user.email.match(pattern)) { // do not proceed if email is invalid
+      setError({ errorCode: 2, errorMessage: "Invalid email format" });
+    } else if (user.password.length < 5) { // do not proceed if password doesn't match constraints
+      // basic password auth checks that its 5 characters long
+      setError({ errorCode: 3, errorMessage: "Password must be longer than 5 characters" });
+    } else { // everything went ok - but still need to check if user is already in the db
+      try {
+        const userExists = await UserService.checkUserExists(user.email);
+        if (userExists) {
+          // user is already in db - so we don't want to add them
+          setError({ errorCode: 4, errorMessage: "Email Address already registered" });
+        } else { // able to save user to db
+          const hashedPassword = await hashPassword(user.password);
+          console.log("user after hashed password: " + user);
+          const updatedUser = { ...user, password: hashedPassword };
+          const response = await UserService.saveUser(updatedUser);
           console.log("response");
           console.log(response);
-          console.log(user);
-          setError({errorCode: 0, errorMessage: ""});
-          //if all was successful, go to logging page
+          setError({ errorCode: 0, errorMessage: "" });
+          // if all was successful, go to logging page
           navigate("/logging");
-        }).catch((err) => {
-          console.log(err);
-        });
-          }
-        });
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
-    //console.log("error code: ",error.errorCode);
   };
-
+  
+  
   return (
     <div className="loginComponent"
     style={{

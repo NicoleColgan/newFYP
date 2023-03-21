@@ -1,14 +1,18 @@
 import axios from "axios"
 
+const bcrypt = require('bcryptjs');
 
 //define base url - the one you call in post man - its defined in the backend
 const USER_API_URL = "http://localhost:8080/api/v1/users"
 
 class UserService {
 
-    saveUser(newUser){
+    async saveUser(newUser){
         //post request to url to save entire user
-        return axios.post(USER_API_URL, newUser);
+        const response = await axios.post(USER_API_URL, newUser);
+        localStorage.setItem("token",JSON.stringify(response.data));
+        return response;
+        
     }
 
     async checkUserExists(email,history) {
@@ -33,14 +37,18 @@ class UserService {
 
       async authenticateUser (email, password,navigate){
         try {
-            const response = await axios.get(USER_API_URL + "/auth/email/" + email+"/password/"+ password);
+            const hashedPassword = await (await axios.get(USER_API_URL + "/getPassword/email/" + email+"/password/"+ password)).data;
+            const response = await axios.get(USER_API_URL + "/email/" + email);
             if (response.status === 200) {
-              console.log("Authenticated");
-              const token = response.data;
-              console.log("token before storing: "+token);
-              localStorage.setItem("token",JSON.stringify(token));
-              navigate("/logging");
-              return true;
+              if(bcrypt.compare(password,hashedPassword)){
+                console.log("Authenticated");
+                const token = response.data;
+                console.log("token before storing: "+token);
+                localStorage.setItem("token",JSON.stringify(token));
+                navigate("/logging");
+                return true;
+              }
+              return false;
             } else {
               console.log("Some other error occured: ", response.status);
               return false;
