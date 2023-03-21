@@ -68,7 +68,7 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
-    @GetMapping("/users/getPassword/email/{email}/password/{password}")
+    @GetMapping("/users/getPassword/email/{email}")
     public String getUserPassword(@PathVariable String email) {
         User user = null;
         user = userService.getUserByEmail(email);

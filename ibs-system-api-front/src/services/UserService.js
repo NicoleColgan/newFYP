@@ -37,10 +37,12 @@ class UserService {
 
       async authenticateUser (email, password,navigate){
         try {
-            const hashedPassword = await (await axios.get(USER_API_URL + "/getPassword/email/" + email+"/password/"+ password)).data;
+            
             const response = await axios.get(USER_API_URL + "/email/" + email);
+            const hashedPassword = response.data.password;
             if (response.status === 200) {
-              if(bcrypt.compare(password,hashedPassword)){
+              const authenticated = await bcrypt.compare(password,hashedPassword);
+              if(authenticated===true){
                 console.log("Authenticated");
                 const token = response.data;
                 console.log("token before storing: "+token);
