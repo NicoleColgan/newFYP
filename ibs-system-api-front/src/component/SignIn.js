@@ -28,8 +28,9 @@ function SignIn() {
         //add new value (character to existing info stored in newUser state)
         setUser({...user,[e.target.name]: value});
       }
+      
     
-      function handleSubmit(e){
+      async function handleSubmit(e){
         //prevent page from refreshing and messing up data (which might affect the db)
         e.preventDefault();
 
