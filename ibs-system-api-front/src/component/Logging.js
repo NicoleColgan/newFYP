@@ -377,6 +377,15 @@ const Logging = () => {
     setShowLearnImage(false);
     setShowTestImage(false);
   }
+  function PastCalendarDatePressed(dateSelected){
+    // Check if selected date is today's date
+    if (dateSelected.getDay() === date.getDay()) {
+      // Do nothing or show an error message
+      return;
+    }
+    navigate("/viewLogging");
+
+  }
   function HandleViewLogPressed(){
     setIsBurgerMenuActive(false);
     setShowBurgerMenu(false);
@@ -395,6 +404,7 @@ const Logging = () => {
     setShowAnalyticsImage(true);
     setShowLearnImage(false);
     setShowTestImage(false);
+    navigate("/analytics");
   }
   function HandleLearnPressed(){
     setIsBurgerMenuActive(false);
@@ -433,19 +443,18 @@ const Logging = () => {
   const [date, setDate] = useState(new Date());
 
   //disable tiles after today
-  const tileDisabled = ({date}) => date > new Date();
+  const tileDisabled = ({date}) => date >= new Date();
 
-  // const [showModal, setShowModal] = useState(false);
 
-  // const showModalHandler = () => {
-  //   setShowModal(true);
-  //   setTimeout(() => setShowModal(false), 3000);  //hide after 3 secs
-  // }
+   useEffect(() => {
+    showCalenderInstructionsHandler();
+  }, []);
+   const [showCalenderInstructions, setShowCalenderInstructions] = useState(false);
 
-  // const hideModalHandler = () => {
-  //   setShowModal(false);
-  // }
-
+  const showCalenderInstructionsHandler = () => {
+    setShowCalenderInstructions(true);
+    setTimeout(() => setShowCalenderInstructions(false), 10000);  //hide after 3 secs
+  }
   return (
     <div fluid className="loggingBox">
       {showPhysicalSymptomPopup && (
@@ -580,9 +589,14 @@ const Logging = () => {
             width="50"
             height="50"
           />
+          {showCalenderInstructions && (
+            <p style={{
+                paddingLeft: "15px"
+            }}>Select a button to start logging.</p>
+          )}
         </div>
         <Calendar value={date} 
-        onChange={setDate}
+        onChange={PastCalendarDatePressed}
         tileDisabled={tileDisabled}
         className="react-calendar" />
         <p

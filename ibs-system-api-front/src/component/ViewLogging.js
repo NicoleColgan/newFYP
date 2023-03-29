@@ -376,7 +376,7 @@ const ViewLogging = () => {
     setShowAnalyticsImage(false);
     setShowLearnImage(false);
     setShowTestImage(false);
-    navigate("/viewLogs");
+    navigate("/viewLogging");
   }
   function HandleAnalyticsPressed(){
     setIsBurgerMenuActive(false);
@@ -386,6 +386,7 @@ const ViewLogging = () => {
     setShowAnalyticsImage(true);
     setShowLearnImage(false);
     setShowTestImage(false);
+    navigate("/analytics");
   }
   function HandleLearnPressed(){
     setIsBurgerMenuActive(false);
