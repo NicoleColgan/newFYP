@@ -700,11 +700,10 @@ const ViewLogging = () => {
                 onClick={handlePhysicalSymptomButtonClick}
                 className="loggingButton"
               >
-                Physical Symptoms (View page)
+                Physical Symptoms
               </button>
               <span className="buttonSpace"></span>
               <button
-                disabled= "true"
                 style={{
                   opacity: button2CloseClicked ? "50%" : "100%",
                 }}
@@ -726,7 +725,6 @@ const ViewLogging = () => {
             <span className="buttonSpace"></span>
             <div>
               <button
-                disabled="true"
                 style={{
                   opacity: button3CloseClicked ? "60%" : "100%",
                 }}
@@ -747,7 +745,6 @@ const ViewLogging = () => {
               <span className="buttonSpace"></span>
 
               <button
-                disabled="true"
                 style={{
                   opacity: button4CloseClicked ? "60%" : "100%",
                 }}
@@ -770,7 +767,6 @@ const ViewLogging = () => {
 
             <div>
               <button
-                disabled="true"
                 style={{
                   opacity: button5CloseClicked ? "60%" : "100%",
                 }}
@@ -792,7 +788,6 @@ const ViewLogging = () => {
               <span className="buttonSpace"></span>
 
               <button
-                disabled="true"
                 style={{
                   opacity: button6CloseClicked ? "60%" : "100%",
                 }}

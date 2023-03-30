@@ -1,34 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Col, Modal } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Calendar from "react-calendar";
-import Hunger from "./Hunger";
-import Satiety from "./Satiety";
-import Apetite from "./Appetite";
-import NumMeals from "./NumMeals";
-import Reg from "./Reg";
-import ViewLoggingPhysicalSymptom from "./ViewLoggingPhysicalSymptom";
-import FoodAndSupplements from "./FoodAndSupplements";
-import Hydration from "./Hydration";
-import TriggerFood from "./TriggerFood";
-import Fibre from "./Fibre";
-import Supplements from "./Supplements";
-import BowelMovements from "./BowelMovements";
-import Frequency from "./Frequency";
-import Consistency from "./Consistency";
-import Other from "./Other";
-import WellbeingAndExercise from "./WellbeingAndExercise";
-import MentalHealth from "./MentalHealth";
-import ExerciseFrequency from "./ExerciseFrequency";
-import ExerciseIntensity from "./ExerciseIntensity";
-import Sleep from "./Sleep";
-import OtherLog from "./OtherLog";
 import { useNavigate } from "react-router-dom";
 import { Divide as Hamburger } from "hamburger-react";
 import BurgerMenu from "./BurgerMenu";
-import UserMenu from "./UserMenu";
-import LogService from "../services/LogService";
+import PhysicalSymptomsAnalytics from "./PhysicalSymptomsAnalytics";
+
 const Analytics = () => {
   const [log, setLog] = useState({
     id: "",
@@ -97,7 +73,7 @@ const Analytics = () => {
     setShowAnalyticsImage(false);
     setShowLearnImage(false);
     setShowTestImage(false);
-    navigate("/viewLogs");
+    navigate("/viewLogging");
   }
   function HandleAnalyticsPressed(){
     setIsBurgerMenuActive(false);
@@ -195,6 +171,7 @@ const Analytics = () => {
         </p>
         </div>
         </div>
+        <PhysicalSymptomsAnalytics />
     </div>
   );
 };
