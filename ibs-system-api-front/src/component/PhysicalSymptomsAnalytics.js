@@ -7,8 +7,9 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend
+    Legend,PieChart, Pie, Cell 
   } from "recharts";
+import { CenturyView } from "react-calendar";
   
 const PhysicalSymptomsAnalytics = (props) => {
     const data = [
@@ -37,6 +38,53 @@ const PhysicalSymptomsAnalytics = (props) => {
           'Hunger level': 2
         }
       ];
+
+      const data4 = [
+        {
+          name: "wk1",
+          'frequency': 5,
+        },
+        {
+          name: "wk2",
+          'frequency': 6
+        },
+        {
+          name: "wk3",
+          'frequency': 5
+        },
+        {
+          name: "wk4",
+          'frequency': 5
+        },
+        {
+          name: "wk5",
+          'frequency': 3
+        },
+        {
+          name: "wk6",
+          'frequency': 2
+        }
+      ];
+      const data01 = [
+        { name: "Group A", value: 400 },
+        { name: "Group B", value: 300 },
+        { name: "Group C", value: 300 },
+        { name: "Group D", value: 200 }
+      ];
+      const data02 = [
+        { name: "A1", value: 100 },
+        { name: "A2", value: 300 },
+        { name: "B1", value: 100 },
+        { name: "B2", value: 80 },
+        { name: "B3", value: 40 },
+        { name: "B4", value: 30 },
+        { name: "B5", value: 50 },
+        { name: "C1", value: 100 },
+        { name: "C2", value: 200 },
+        { name: "D1", value: 150 },
+        { name: "D2", value: 50 }
+      ];
+      
   function handleMakeALogButtonClicked() {
     props.HandleMakeALog();
   }
@@ -310,18 +358,20 @@ const PhysicalSymptomsAnalytics = (props) => {
             </div>
           </div>
         </div>
+
         <div style={{
             paddingLeft: "10px",
             marginTop: "0px"
         }}>
         <div style={{
             backgroundColor: "white",
-            height: "280px",
+            height: "310px",
             borderRadius: "25px"
         }}>
             <h3 style={{
                 textAlign: "center",
-                paddingTop: "20px"
+                paddingTop: "20px",
+                paddingBottom: "15px"
             }}>Hunger level changes in the past month</h3>
         <BarChart
       width={500}
@@ -379,6 +429,129 @@ const PhysicalSymptomsAnalytics = (props) => {
     </div>
 
     
+      </div>
+
+      <div alignItems
+        style={{
+          padding: "10px",
+          display: "flex"
+        }}
+      >
+
+<div style={{
+        paddingLeft: "0px",
+        marginTop: "-10px"
+    }}>
+    <div style={{
+        backgroundColor: "white",
+        borderRadius: "25px",
+        width: "340px",
+        height: "280px"
+    }}>
+        <div style={{
+            padding: "10px"
+        }}>
+        <h3 style={{
+            textAlign: "center",
+            marginTop: "10px"
+        }}>Bowel Movements</h3>
+        <p style={{
+            fontSize: "15px",
+            textAlign: "center"
+        }}>Here’s a list of words you frequently used in your bowel movement logs. It may be a good idea to look at the frequently used words in your trigger food log to determine if those foods are affecting your bowel movements.</p>
+        <ul style={{
+            paddingLeft: "30px",
+            paddingTop: "10px"
+        }}
+        >
+            <li className="colored-bullet">Type 7</li>
+            <li className="colored-bullet">Diarrhoea</li>
+            <li className="colored-bullet">Urgency</li>
+        </ul>
+        
+        </div>
+        </div>
+    </div>
+
+    <div style={{
+        paddingLeft: "10px",
+        marginTop: "-100px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    }}>
+    <div style={{
+         backgroundColor: "white",
+         borderRadius: "25px",
+         width: "330px",
+         height: "310px",
+         display: "flex",
+         flexDirection: "column",
+         justifyContent: "center",
+         alignItems: "center",
+    }}>
+        <h3 style={{
+            marginTop: 80,
+            marginBottom: -70
+        }}>Data that suits pie chart</h3>
+
+        <PieChart width={400} height={400}>
+      <Pie
+        data={data01}
+        dataKey="value"
+        cx={200}
+        cy={200}
+        outerRadius={60}
+        fill="#8CD9CF"
+      />
+      <Pie
+        data={data02}
+        dataKey="value"
+        cx={200}
+        cy={200}
+        innerRadius={70}
+        outerRadius={90}
+        fill="#1a8cff"
+        label
+      />
+    </PieChart>
+        
+        </div>
+    </div>
+
+    <div style={{
+            paddingLeft: "10px",
+            marginTop: "-88px"
+        }}>
+        <div style={{
+            backgroundColor: "white",
+            height: "310px",
+            borderRadius: "25px"
+        }}>
+            <h3 style={{
+                textAlign: "center",
+                paddingTop: "20px",
+                paddingBottom: "15px"
+            }}>Meal frequency changes in the past month</h3>
+        <BarChart
+      width={500}
+      height={200}
+      data={data4}
+      margin={{
+        top: 5,
+        right: 55,
+        bottom: 5
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Bar dataKey="frequency" fill="#1a8cff" />
+    </BarChart>
+    </div>
+    </div>
+
       </div>
     </div>
   );
