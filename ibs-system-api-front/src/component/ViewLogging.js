@@ -454,54 +454,56 @@ const ViewLogging = () => {
     //gather all the data from this day 
     const logsOnSpecificDay = await LogService.getLogByDate(date);
 
-    //extract each type of log
-    for(let i=0; i<logsOnSpecificDay.length; i++){
-        if(logsOnSpecificDay[i].logType==="Physical Symptom"){
-            if(logsOnSpecificDay[i].logDataEntities.length>0){
-            const physicalSymptomLogDataEntities = logsOnSpecificDay[i].logDataEntities;
-            //loop thorugh all physical symtom log data enties
-                for(let j=0; j<physicalSymptomLogDataEntities.length; j++){
-                    //set the colour for each button
-                    if(physicalSymptomLogDataEntities[j].data==="Bloating"){
-                        //set colour to be blue to indicate that it was pressed
-                        //these values will be passed as props to the view 
-                        //component an be used to set the colour of the buttons
-                        setBloatingButtonColour("#4da6ff");  
-                    }
-                    else if(physicalSymptomLogDataEntities[j].data==="Headaches"){
-                        //set colour to be blue to indicate that it was pressed
-                        //these values will be passed as props to the view 
-                        //component an be used to set the colour of the buttons
-                        setHeadachesButtonColour("#4da6ff"); 
-                    }
-                    else if(physicalSymptomLogDataEntities[j].data==="Gas"){
-                        //set colour to be blue to indicate that it was pressed
-                        //these values will be passed as props to the view 
-                        //component an be used to set the colour of the buttons
-                        setGasButtonColour("#4da6ff"); 
-                    }
-                    else if(physicalSymptomLogDataEntities[j].data==="Acne"){
-                        //set colour to be blue to indicate that it was pressed
-                        //these values will be passed as props to the view 
-                        //component an be used to set the colour of the buttons
-                        setAcneButtonColour("#4da6ff"); 
-                    }
-                    else if(physicalSymptomLogDataEntities[j].data==="Low Energy"){
-                        //set colour to be blue to indicate that it was pressed
-                        //these values will be passed as props to the view 
-                        //component an be used to set the colour of the buttons
-                        setLowEnergyButtonColour("#4da6ff"); 
-                    }
-                    else if(physicalSymptomLogDataEntities[j].data==="Stress"){
-                        //set colour to be blue to indicate that it was pressed
-                        //these values will be passed as props to the view 
-                        //component an be used to set the colour of the buttons
-                        setStressButtonColour("#4da6ff"); 
-                    }
-                }
-            }
-        }
-    }
+    if(logsOnSpecificDay){
+      //extract each type of log
+      for(let i=0; i<logsOnSpecificDay.length; i++){
+          if(logsOnSpecificDay[i].logType==="Physical Symptom"){
+              if(logsOnSpecificDay[i].logDataEntities.length>0){
+              const physicalSymptomLogDataEntities = logsOnSpecificDay[i].logDataEntities;
+              //loop thorugh all physical symtom log data enties
+                  for(let j=0; j<physicalSymptomLogDataEntities.length; j++){
+                      //set the colour for each button
+                      if(physicalSymptomLogDataEntities[j].data==="Bloating"){
+                          //set colour to be blue to indicate that it was pressed
+                          //these values will be passed as props to the view 
+                          //component an be used to set the colour of the buttons
+                          setBloatingButtonColour("#4da6ff");  
+                      }
+                      else if(physicalSymptomLogDataEntities[j].data==="Headaches"){
+                          //set colour to be blue to indicate that it was pressed
+                          //these values will be passed as props to the view 
+                          //component an be used to set the colour of the buttons
+                          setHeadachesButtonColour("#4da6ff"); 
+                      }
+                      else if(physicalSymptomLogDataEntities[j].data==="Gas"){
+                          //set colour to be blue to indicate that it was pressed
+                          //these values will be passed as props to the view 
+                          //component an be used to set the colour of the buttons
+                          setGasButtonColour("#4da6ff"); 
+                      }
+                      else if(physicalSymptomLogDataEntities[j].data==="Acne"){
+                          //set colour to be blue to indicate that it was pressed
+                          //these values will be passed as props to the view 
+                          //component an be used to set the colour of the buttons
+                          setAcneButtonColour("#4da6ff"); 
+                      }
+                      else if(physicalSymptomLogDataEntities[j].data==="Low Energy"){
+                          //set colour to be blue to indicate that it was pressed
+                          //these values will be passed as props to the view 
+                          //component an be used to set the colour of the buttons
+                          setLowEnergyButtonColour("#4da6ff"); 
+                      }
+                      else if(physicalSymptomLogDataEntities[j].data==="Stress"){
+                          //set colour to be blue to indicate that it was pressed
+                          //these values will be passed as props to the view 
+                          //component an be used to set the colour of the buttons
+                          setStressButtonColour("#4da6ff"); 
+                      }
+                  }
+              }
+          }
+      }
+  }
   }
  
 

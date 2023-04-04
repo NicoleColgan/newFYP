@@ -477,12 +477,12 @@ const Logging = () => {
           regButtonClicked={regButtonClicked}
         />
       )}
-      {showHungerPopUp && <Hunger onClose={handleHungerButtonCloseClick} />}
-      {showSatietyPopUp && <Satiety onClose={handleSatietyButtonCloseClick} />}
+      {showHungerPopUp && <Hunger onClose={handleHungerButtonCloseClick} log={log} setLog={setLog}/>}
+      {showSatietyPopUp && <Satiety onClose={handleSatietyButtonCloseClick} log={log} setLog={setLog}/>}
       {showNumMealsPopUp && (
-        <NumMeals onClose={handleNumMealsButtonCloseClick} />
+        <NumMeals onClose={handleNumMealsButtonCloseClick} log={log} setLog={setLog}  />
       )}
-      {showRegPopUp && <Reg onClose={handleRegButtonCloseClick} />}
+      {showRegPopUp && <Reg onClose={handleRegButtonCloseClick} log={log} setLog={setLog}/>}
       {showFoodAndSupplementsPopup && (
         <FoodAndSupplements
           onClose={handleFoodAndSupplementsCloseButtonClick}
@@ -497,14 +497,14 @@ const Logging = () => {
         />
       )}
       {showHydrationPopUp && (
-        <Hydration onClose={handleHydrationButtonCloseClick} />
+        <Hydration onClose={handleHydrationButtonCloseClick} log={log} setLog={setLog}/>
       )}
       {showTriggerFoodPopUp && (
-        <TriggerFood onClose={handleTriggerFoodButtonCloseClick} />
+        <TriggerFood onClose={handleTriggerFoodButtonCloseClick} log={log} setLog={setLog}/>
       )}
-      {showFibrePopUp && <Fibre onClose={handleFibreButtonCloseClick} />}
+      {showFibrePopUp && <Fibre onClose={handleFibreButtonCloseClick} log={log} setLog={setLog}/>}
       {showSupplementsPopUp && (
-        <Supplements onClose={handleSupplementsButtonCloseClick} />
+        <Supplements onClose={handleSupplementsButtonCloseClick} log={log} setLog={setLog}/>
       )}
       {showBowelMovementsPopup && (
         <BowelMovements
@@ -518,12 +518,12 @@ const Logging = () => {
         />
       )}
       {showFrequencyPopUp && (
-        <Frequency onClose={handleFrequencyButtonCloseClick} />
+        <Frequency onClose={handleFrequencyButtonCloseClick} log={log} setLog={setLog}/>
       )}
       {showConsistencyPopUp && (
-        <Consistency onClose={handleConsistencyButtonCloseClick} />
+        <Consistency onClose={handleConsistencyButtonCloseClick} log={log} setLog={setLog}/>
       )}
-      {showOtherPopUp && <Other onClose={handleOtherButtonCloseClick} />}
+      {showOtherPopUp && <Other onClose={handleOtherButtonCloseClick} log={log} setLog={setLog}/>}
       {showWellbeingAndExercisePopup && (
         <WellbeingAndExercise
           onClose={handleWellbeingAndExerciseCloseButtonClick}
@@ -538,17 +538,17 @@ const Logging = () => {
         />
       )}
       {showMentalHealthPopUp && (
-        <MentalHealth onClose={handleMentalHealthButtonCloseClick} />
+        <MentalHealth onClose={handleMentalHealthButtonCloseClick} log={log} setLog={setLog}/>
       )}
       {showExerciseFrequencyPopUp && (
-        <ExerciseFrequency onClose={handleExerciseFrequencyButtonCloseClick} />
+        <ExerciseFrequency onClose={handleExerciseFrequencyButtonCloseClick} log={log} setLog={setLog}/>
       )}
       {showExerciseIntensityPopUp && (
-        <ExerciseIntensity onClose={handleExerciseIntensityButtonCloseClick} />
+        <ExerciseIntensity onClose={handleExerciseIntensityButtonCloseClick} log={log} setLog={setLog}/>
       )}
-      {showSleepPopUp && <Sleep onClose={handleSleepButtonCloseClick} />}
+      {showSleepPopUp && <Sleep onClose={handleSleepButtonCloseClick} log={log} setLog={setLog}/>}
       {showOtherLogPopup && (
-        <OtherLog onClose={handleOtherLogCloseButtonClick} />
+        <OtherLog onClose={handleOtherLogCloseButtonClick} log={log} setLog={setLog}/>
       )}
       {showBurgerMenu && <BurgerMenu HandleTestPressed={HandleTestPressed} HandleLearnPressed={HandleLearnPressed} HandleMakeALog={HandleMakeALog} HandleViewLogPressed={HandleViewLogPressed} HandleAnalyticsPressed={HandleAnalyticsPressed}/>}
       {showUserMenu && <UserMenu />}
