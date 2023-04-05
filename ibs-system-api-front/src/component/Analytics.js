@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Col, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Divide as Hamburger } from "hamburger-react";
 import BurgerMenu from "./BurgerMenu";
 import PhysicalSymptomsAnalytics from "./PhysicalSymptomsAnalytics";
+import UserMenu from "./UserMenu";
 
 const Analytics = () => {
   const [log, setLog] = useState({
@@ -111,7 +111,7 @@ const Analytics = () => {
   return (
     <div fluid className="loggingBox">
             {showBurgerMenu && <BurgerMenu HandleTestPressed={HandleTestPressed} HandleLearnPressed={HandleLearnPressed} HandleMakeALog={HandleMakeALog} HandleViewLogPressed={HandleViewLogPressed} HandleAnalyticsPressed={HandleAnalyticsPressed}/>}
-
+            {showUserMenu && <UserMenu />}
       <div style={{ display: "flex", justifyContent: "flex-start" }}>
         <div style={{ display: "flex" }}>
           <div style={{ zIndex: showBurgerMenu ? "999" : "auto" }}>

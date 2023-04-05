@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import Apetite from "./Appetite";
-import Reg from "./Reg";
 import ViewLoggingPhysicalSymptom from "./ViewLoggingPhysicalSymptom";
 import FoodAndSupplements from "./FoodAndSupplements";
 import Hydration from "./Hydration";
@@ -27,6 +26,7 @@ import ViewHunger from "./ViewHunger";
 import ViewSatiety from "./ViewSatiety";
 import ViewNumMeals from "./ViewNumMeals";
 import ViewReg from "./ViewReg";
+import ViewOtherLog from "./ViewOtherLog";
 const ViewLogging = () => {
   const [log, setLog] = useState({
     id: "",
@@ -332,7 +332,6 @@ const ViewLogging = () => {
   }
   function handleOtherLogCloseButtonClick() {
     setShowOtherLogPopup(false);
-    setButton6CloseClicked(true);
   }
 
   //get initials for bubble
@@ -439,26 +438,28 @@ const ViewLogging = () => {
 
   const [moreHungryButtonColour,setMoreHungryButtonColour] = useState("#8CD9CF");   //default colour is green
 
-    //satiety symtoms button colour
-    const [lowSatietyButtonColour,setLowSatietyButtonColour] = useState("#8CD9CF");   //default colour is green
+  //satiety symtoms button colour
+  const [lowSatietyButtonColour,setLowSatietyButtonColour] = useState("#8CD9CF");   //default colour is green
   
-    const [normalSatietyButtonColour,setNormalSatietyButtonColour] = useState("#8CD9CF");   //default colour is green
+  const [normalSatietyButtonColour,setNormalSatietyButtonColour] = useState("#8CD9CF");   //default colour is green
   
-    const [highSatietyButtonColour,setHighSatietyButtonColour] = useState("#8CD9CF");   //default colour is green
+  const [highSatietyButtonColour,setHighSatietyButtonColour] = useState("#8CD9CF");   //default colour is green
 
-        //satiety symtoms button colour
-        const [zeroThreeButtonColour,setZeroThreeButtonColour] = useState("#8CD9CF");   //default colour is green
+  //satiety symtoms button colour
+  const [zeroThreeButtonColour,setZeroThreeButtonColour] = useState("#8CD9CF");   //default colour is green
   
-        const [fourFiveButtonColour,setFourFiveButtonColour] = useState("#8CD9CF");   //default colour is green
+  const [fourFiveButtonColour,setFourFiveButtonColour] = useState("#8CD9CF");   //default colour is green
       
-        const [fivePlusButtonColour,setFivePlusButtonColour] = useState("#8CD9CF");   //default colour is green
+  const [fivePlusButtonColour,setFivePlusButtonColour] = useState("#8CD9CF");   //default colour is green
 
-                //Regularity symtoms button colour
-                const [inconsistentMealPatternsButtonColour,setInconsistentMealPatternsButtonColour] = useState("#8CD9CF");   //default colour is green
+  //Regularity symtoms button colour
+  const [inconsistentMealPatternsButtonColour,setInconsistentMealPatternsButtonColour] = useState("#8CD9CF");   //default colour is green
   
-                const [consistentMealPatternsButtonColour,setConsistentMealPatternsButtonColour] = useState("#8CD9CF");   //default colour is green
+  const [consistentMealPatternsButtonColour,setConsistentMealPatternsButtonColour] = useState("#8CD9CF");   //default colour is green
               
-    
+  //other log text
+  const[otherLogText, setOtherLogText]=useState("");
+
   async function HandleDateChange (date) {
     //reset all buttons to green
     setLessHungryButtonColour("#8CD9CF");
@@ -471,6 +472,8 @@ const ViewLogging = () => {
     setLowEnergyButtonColour("#8CD9CF");
     setStressButtonColour("#8CD9CF");
     setHeadachesButtonColour("#8CD9CF");
+
+    setOtherLogText("");
     
     setSelectedDate(date);
     console.log("selected date: "+date);
@@ -635,6 +638,17 @@ const ViewLogging = () => {
       }
   }
 
+  if(logsOnSpecificDay[i].logType==="Other log"){
+    if(logsOnSpecificDay[i].logDataEntities.length>0){
+    const physicalSymptomLogDataEntities = logsOnSpecificDay[i].logDataEntities;
+    //only one value to read
+    const text = physicalSymptomLogDataEntities[0].data;
+    console.log("text: "+text);
+    setOtherLogText(text);
+    }
+}
+
+
     }
       }
   }
@@ -740,7 +754,7 @@ const ViewLogging = () => {
       )}
       {showSleepPopUp && <Sleep onClose={handleSleepButtonCloseClick} />}
       {showOtherLogPopup && (
-        <OtherLog onClose={handleOtherLogCloseButtonClick} />
+        <ViewOtherLog onClose={handleOtherLogCloseButtonClick} otherLogText={otherLogText}/>
       )}
       {showBurgerMenu && <BurgerMenu HandleTestPressed={HandleTestPressed} HandleLearnPressed={HandleLearnPressed} HandleMakeALog={HandleMakeALog} HandleViewLogPressed={HandleViewLogPressed} HandleAnalyticsPressed={HandleAnalyticsPressed}/>}
       {showUserMenu && <UserMenu />}
@@ -922,7 +936,7 @@ const ViewLogging = () => {
 
               <span className="buttonSpace"></span>
 
-              <button disabled="true"
+              <button 
                 style={{
                   opacity: button6CloseClicked ? "60%" : "100%",
                 }}
